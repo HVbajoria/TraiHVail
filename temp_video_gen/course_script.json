@@ -1,0 +1,123 @@
+{
+  "slides": [
+    {
+      "content": "Welcome to the Quiz Module! Test your knowledge and reinforce your understanding of the concepts covered in this course. and heudefgvf",
+      "slideNumber": 1,
+      "title": "Quiz Module: Test Your Knowledgebjrfbrjhe",
+      "type": "title_slide",
+      "subtitle": "Reinforce Your Learning to do good",
+      "transition": "slide_up",
+      "voiceover": "Welcome to the Quiz module! Get ready to test your knowledge and reinforce what you've learned so far. Why stop lets start"
+    },
+    {
+      "options": [
+        "Descriptive, predictive, and prescriptive analytics",
+        "Data mining, data warehousing, and data visualization",
+        "Data collection, data cleaning, and data analysis",
+        "Reporting, monitoring, and alerting"
+      ],
+      "question": "Which of the following represents the three main types of business analytics?",
+      "slideNumber": 2,
+      "title": "Question 1: Types of Analytics",
+      "type": "quiz_slide",
+      "transition": "slide_down",
+      "voiceover": "Here's your first question: Which of the following represents the three main types of business analytics?"
+    },
+    {
+      "content": "The correct answer is: Descriptive, predictive, and prescriptive analytics. These represent the three main types of business analytics, each serving a different purpose in understanding and leveraging data.",
+      "slideNumber": 3,
+      "title": "Answer and Explanation",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "The correct answer is 'Descriptive, predictive, and prescriptive analytics'. These are the three main types, each with a unique role in business analytics."
+    },
+    {
+      "options": [
+        "To summarize past data",
+        "To predict future outcomes",
+        "To recommend actions",
+        "All of the above"
+      ],
+      "question": "What is the goal of prescriptive analytics?",
+      "slideNumber": 4,
+      "title": "Question 2: Prescriptive Analytics",
+      "type": "quiz_slide",
+      "transition": "slide_down",
+      "voiceover": "Next question: What is the primary goal of prescriptive analytics?"
+    },
+    {
+      "content": "The correct answer is: All of the above. Prescriptive analytics aims to recommend actions by analyzing data to determine the best course of action for future outcomes.",
+      "slideNumber": 5,
+      "title": "Answer and Explanation",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "The correct answer is 'All of the above'. Prescriptive analytics goes beyond prediction to recommend the best actions."
+    },
+    {
+      "options": [
+        "Data that has already been processed",
+        "Raw, unorganized facts",
+        "Information with context and meaning",
+        "A collection of databases"
+      ],
+      "question": "What is the definition of data?",
+      "slideNumber": 6,
+      "title": "Question 3: Definition of Data",
+      "type": "quiz_slide",
+      "transition": "slide_down",
+      "voiceover": "Here's another question: What is the definition of data?"
+    },
+    {
+      "content": "The correct answer is: Raw, unorganized facts. Data refers to raw, unorganized facts that need to be processed to become information.",
+      "slideNumber": 7,
+      "title": "Answer and Explanation",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "The correct answer is 'Raw, unorganized facts'. Data in its original form is unorganized and needs processing."
+    },
+    {
+      "options": [
+        "Data visualization",
+        "Data mining",
+        "Regression analysis",
+        "Machine learning"
+      ],
+      "question": "Which of the following techniques is most commonly used for predictive analytics?",
+      "slideNumber": 8,
+      "title": "Question 4: Predictive Analytics Techniques",
+      "type": "quiz_slide",
+      "transition": "slide_down",
+      "voiceover": "Which of the following techniques is most commonly used for predictive analytics?"
+    },
+    {
+      "content": "The correct answer is: Machine learning. Machine learning algorithms are widely used in predictive analytics to build models that can predict future outcomes based on historical data.",
+      "slideNumber": 9,
+      "title": "Answer and Explanation",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "The correct answer is 'Machine learning'. Machine learning algorithms are frequently used to create predictive models."
+    },
+    {
+      "options": [
+        "Extracting insights from data",
+        "Storing data",
+        "Cleaning data",
+        "Presenting data"
+      ],
+      "question": "What is the primary focus of data analysis?",
+      "slideNumber": 10,
+      "title": "Question 5: Focus of Data Analysis",
+      "type": "quiz_slide",
+      "transition": "slide_down",
+      "voiceover": "What is the primary focus of data analysis?"
+    },
+    {
+      "content": "The correct answer is: Extracting insights from data. Data analysis focuses on extracting meaningful insights and patterns from data to inform decision-making.",
+      "slideNumber": 11,
+      "title": "Answer and Explanation",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "The correct answer is 'Extracting insights from data'. The main goal is to find meaningful patterns and insights."
+    }
+  ]
+}

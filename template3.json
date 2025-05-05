@@ -1,0 +1,161 @@
+{
+  "title_slide": {
+    "slide_size": [1920, 1080],
+    "background_color": "#010315",
+    "title": {
+      "position": [100, 600],
+      "color": "#ECECEC",
+      "font_path": "Inter/Inter-Medium.ttf",
+      "font_size": 74,
+      "line_spacing": 100,
+      "alignment": "center"
+    },
+    "subtitle": {
+      "position": [340, 670],
+      "color": "#FFCC00",
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 54,
+      "line_spacing": 80,
+      "alignment": "center"
+    }
+  },
+  "content_slide": {
+    "slide_size": [1920, 1080],
+    "background_color": "#010315",
+    "title": {
+      "position": [100, 200],
+      "color": "#FFCC00",
+      "font_path": "Inter/Inter-Medium.ttf",
+      "font_size": 72
+    },
+    "content": {
+      "position": [120, 280],
+      "color": "#ECECEC",
+      "line_spacing": 70,
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 36
+    }
+  },
+  "quiz_slide": {
+    "slide_size": [1920, 1080],
+    "background_color": "#010315",
+    "title": {
+      "position": [100, 200],
+      "color": "#FFCC00",
+      "font_path": "Inter/Inter-Medium.ttf",
+      "font_size": 72
+    },
+    "question": {
+      "position": [120, 280],
+      "color": "#ffffff",
+      "line_spacing": 50,
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 36
+    },
+    "options": {
+      "position": [150, 350],
+      "color": "#b8b8b8",
+      "line_spacing": 50,
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 36
+    },
+    "answer": {
+      "position": [150, 550],
+      "scale": 1.0,
+      "color": "#00ff00",
+      "font_path": "Inter/Inter-Medium.ttf",
+      "font_size": 36
+    }
+  },
+  "unordered_list_slide": {
+    "slide_size": [1920, 1080],
+    "background_color": "#010315",
+    "title": {
+      "position": [100, 200],
+      "color": "#FFCC00",
+      "font_path": "Inter/Inter-Medium.ttf",
+      "font_size": 65
+    },
+    "points": {
+      "position": [150, 280],
+      "color": "#ffffff",
+      "line_spacing": 76,
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 36
+    }
+  },
+  "code_slide": {
+    "slide_size": [1920, 1080],
+    "background_color": "#010315",
+    "title": {
+      "position": [100, 200],
+      "color": "#ffffff",
+      "font_path": "Inter/Inter-Medium.ttf",
+      "font_size": 72
+    },
+    "code": {
+      "position": [100, 280],
+      "color": "#00ff9d",
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 36,
+      "line_spacing": 35
+    }
+  },
+  "chart_slide": {
+    "slide_size": [1920, 1080],
+    "background_color": "#010315",
+    "title": {
+        "position": [100, 100],
+        "color": "#ECECEC",
+        "font_path": "Inter/Inter-Medium.ttf",
+        "font_size": 72
+    },
+    "chart_area": {
+        "position": [200, 250],
+        "size": [1500, 700], 
+        "border_color": "#ECECEC",
+        "border_thickness": 3
+    },
+    "chart_style": {
+        "show_legend": false,
+        "show_data_points": true,
+        "figure_size": [10, 6],
+        "bar_color": "#FFCC00",
+        "line_color": "#FFCC00",
+        "pie_colors": [
+          "#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFD700",
+          "#8A2BE2", "#20B2AA", "#FF4500", "#6A5ACD", "#FF1493"
+      ],
+        "background_color": "None",
+        "tick_color": "#2A2A2A",
+        "spine_color": "#2A2A2A",
+        "title_color": "#2A2A2A",
+        "title_size": 14,
+        "label_color": "#2A2A2A",
+        "label_size": 16
+    }
+  },
+  "formula_slide": {
+    "slide_size": [1920, 1080],
+    "background_color": "#010315",
+    "title": {
+      "position": [100, 200],
+      "color": "#FFCC00",
+      "font_path": "Inter/Inter-Medium.ttf",
+      "font_size": 72
+    },
+    "formula": {
+      "position": [100, 280],
+      "color": "#FFFFFF",
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 48
+    },
+    "explanation": {
+      "position": [100, 320],
+      "color": "#ECECEC",
+      "font_path": "Inter/Inter-Regular.ttf",
+      "font_size": 36,
+      "line_spacing": 50
+    }
+  }
+}

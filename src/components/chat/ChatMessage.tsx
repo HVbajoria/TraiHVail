@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { User } from 'lucide-react'; // Keep User icon
@@ -189,19 +188,22 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.sender === 'user';
   const isAI = message.sender === 'ai';
 
-  // Unique animation delay for each message
-  const [animationDelay] = React.useState(`${Math.random() * 0.2 + 0.1}s`);
+  // Use React.useId for unique key generation if needed, but message.id should be unique
+  const id = React.useId(); // Example if message.id wasn't unique enough
+
+  // Unique animation delay for each message - This might cause hydration issues if not handled carefully
+  // const [animationDelay] = React.useState(`${Math.random() * 0.2 + 0.1}s`); // Potential hydration mismatch source
 
   return (
     <div
       className={cn(
-        'flex items-start gap-3 animate-fade-in', // Consistent base animation
+        'flex items-start gap-2 md:gap-3 animate-fade-in', // Consistent base animation, reduced gap on small screens
         isUser ? 'justify-end' : 'justify-start',
       )}
-      style={{ animationDelay }} // Apply unique delay
+      // style={{ animationDelay }} // Apply unique delay - removed due to potential hydration issues
     >
       {isAI && (
-        <Avatar className="w-9 h-9 border-2 border-primary/40 shadow-lg bg-gradient-to-br from-primary/30 to-background/80 backdrop-blur-sm flex-shrink-0 transform transition-transform duration-300 hover:scale-110">
+        <Avatar className="w-8 h-8 md:w-9 md:h-9 border-2 border-primary/40 shadow-lg bg-gradient-to-br from-primary/30 to-background/80 backdrop-blur-sm flex-shrink-0 transform transition-transform duration-300 hover:scale-110">
           <AvatarFallback className="text-primary bg-transparent">
             {/* Updated Icon to Gemini Logo */}
             <GeminiLogo />
@@ -210,7 +212,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       )}
       <div
         className={cn(
-          'max-w-[80%] rounded-xl px-4 py-2.5 shadow-lg transition-all duration-300 transform-gpu hover:scale-[1.02] hover:shadow-primary/20', // Enhanced hover shadow
+          'max-w-[85%] sm:max-w-[80%] rounded-xl px-3 py-2 md:px-4 md:py-2.5 shadow-lg transition-all duration-300 transform-gpu hover:scale-[1.02] hover:shadow-primary/20', // Adjusted padding and max-width
           isUser
             ? 'bg-primary text-primary-foreground rounded-br-sm'
             : 'bg-gradient-to-br from-secondary/90 to-card/80 text-card-foreground rounded-bl-sm border border-border/50 backdrop-blur-sm',
@@ -222,14 +224,12 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         </div>
       </div>
       {isUser && (
-        <Avatar className="w-9 h-9 border border-muted/50 shadow-md bg-background/80 backdrop-blur-sm flex-shrink-0 transform transition-transform duration-300 hover:scale-110">
+        <Avatar className="w-8 h-8 md:w-9 md:h-9 border border-muted/50 shadow-md bg-background/80 backdrop-blur-sm flex-shrink-0 transform transition-transform duration-300 hover:scale-110">
           <AvatarFallback className="text-muted-foreground bg-transparent">
-            <User className="w-5 h-5" />
+            <User className="w-4 h-4 md:w-5 md:h-5" />
           </AvatarFallback>
         </Avatar>
       )}
     </div>
   );
 }
-
-// No need for styled-jsx, remove the style tag

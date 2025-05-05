@@ -29,7 +29,6 @@ export default {
   			},
   			primary: {
                 DEFAULT: 'hsl(var(--primary))', // Use CSS var now
-                // DEFAULT: 'hsl(190 100% 55%)', // Direct primary color from dark mode in globals.css - REVERTED
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
@@ -58,7 +57,6 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
-            // Removed sidebar specific colors as they are not used
   		},
         fontFamily: {
           sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
@@ -81,7 +79,7 @@ export default {
   				to: { height: '0' }
   			},
             'fade-in': { // Adjusted fade-in
-                '0%': { opacity: '0', transform: 'translateY(15px) scale(0.97)' }, // Slightly more pronounced
+                '0%': { opacity: '0', transform: 'translateY(15px) scale(0.97)' },
                 '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
             },
             'fade-in-delay': { // Fade in with delay
@@ -90,7 +88,7 @@ export default {
                 '100%': { opacity: '1', transform: 'translateY(0)' },
             },
             'gradient-bg': { // Background animation
-                '0%': { backgroundPosition: '0% 80%, 0% 50%' }, // Adjusted starting position
+                '0%': { backgroundPosition: '0% 80%, 0% 50%' },
                 '50%': { backgroundPosition: '100% 50%, 100% 50%' },
                 '100%': { backgroundPosition: '0% 80%, 0% 50%' },
             },
@@ -113,11 +111,9 @@ export default {
                 '50%': { transform: 'translateY(-5px) rotate(-45deg)', opacity: '1' },
                 '100%': { transform: 'translateY(-30px) rotate(-45deg) scale(0.5)', opacity: '0' },
             },
-             // Added spin animation for button border/radar
              spin: {
                'to': { transform: 'rotate(360deg)' },
              },
-             // Floating elements animation
              float: {
                 '0%': { transform: 'translateY(0px) translateX(0px) rotate(0deg) scale(1)' },
                 '33%': { transform: 'translateY(-25px) translateX(20px) rotate(120deg) scale(1.05)' },
@@ -129,7 +125,6 @@ export default {
                 '50%': { transform: 'translateY(-15px) translateX(-10px) rotate(-180deg) scale(1.1)' },
                 '100%': { transform: 'translateY(0px) translateX(0px) rotate(-360deg) scale(1)' },
              },
-             // Radar animation Keyframes (Defined in globals.css, reference here for utility classes)
              'radar-pulse-spin': {
                 '0%, 100%': { transform: 'rotate(0deg) scale(1)', opacity: '0.7', borderWidth: '2px' },
                 '50%': { transform: 'rotate(180deg) scale(1.1)', opacity: '1', borderWidth: '2.5px' },
@@ -142,33 +137,67 @@ export default {
                 from: { transform: 'rotate(0deg)' },
                 to: { transform: 'rotate(360deg)' },
              },
+             orbit: { // Added orbit keyframe
+                 from: { transform: 'rotate(0deg) translateX(110px) rotate(0deg)' },
+                 to:   { transform: 'rotate(360deg) translateX(110px) rotate(-360deg)' },
+             },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
-            'fade-in': 'fade-in 0.7s ease-out forwards', // Adjusted duration
-            'fade-in-delay': 'fadeInDelay 1.5s ease-out forwards', // Added delayed fade-in
-            'gradient-bg': 'gradient-bg 45s ease infinite', // Adjusted duration
-            'grid-scroll': 'grid-scroll 10s linear infinite', // Grid animation (slower)
-            'pulse-glow': 'pulse-glow 3.5s infinite ease-in-out', // Pulse glow animation (slower)
-            'rocket-launch-fullscreen': 'rocket-launch-fullscreen 2s ease-in-out forwards', // Full screen rocket animation
-            'rocket-takeoff-button': 'rocket-takeoff-button 0.6s ease-in forwards', // Button rocket animation (apply on hover)
-            'spin': 'spin 3s linear infinite', // Generic spin animation
-            'float': 'float var(--float-duration, 15s) infinite ease-in-out', // Floating element animation base
-            'float-delay': 'float-alt var(--float-duration, 18s) infinite ease-in-out', // Floating element animation alternate
-            // Reference radar animations defined in globals.css
-            'radar-pulse-spin': 'radar-pulse-spin 3.5s ease-in-out infinite', // Default outer ring animation
-            'radar-inner-spin': 'radar-inner-spin 5s linear infinite', // Default inner ring animation
-            'radar-spin': 'radar-spin 1s linear infinite', // Faster pure spin for hover state (used via group-hover in CSS)
-  		}
+            'fade-in': 'fade-in 0.7s ease-out forwards',
+            'fade-in-delay': 'fadeInDelay 1.5s ease-out forwards',
+            'gradient-bg': 'gradient-bg 45s ease infinite',
+            'grid-scroll': 'grid-scroll 10s linear infinite',
+            'pulse-glow': 'pulse-glow 3.5s infinite ease-in-out',
+            'rocket-launch-fullscreen': 'rocket-launch-fullscreen 2s ease-in-out forwards',
+            'rocket-takeoff-button': 'rocket-takeoff-button 0.6s ease-in forwards',
+            'spin': 'spin 1s linear infinite', // Default spin speed
+            'spin-slow': 'spin 3s linear infinite', // Slower spin variant
+            'float': 'float var(--float-duration, 15s) infinite ease-in-out',
+            'float-delay': 'float-alt var(--float-duration, 18s) infinite ease-in-out',
+            'radar-pulse-spin': 'radar-pulse-spin 3.5s ease-in-out infinite',
+            'radar-inner-spin': 'radar-inner-spin 5s linear infinite',
+            'radar-spin': 'radar-spin 1s linear infinite',
+             orbit: 'orbit linear infinite', // Added orbit animation
+  		},
+        animationDelay: { // Added animation delay utilities
+            '100ms': '100ms',
+            '200ms': '200ms',
+            '300ms': '300ms',
+            '500ms': '500ms',
+            '700ms': '700ms',
+            '1000ms': '1000ms',
+        },
+        animationDuration: { // Added animation duration utilities
+             '2s': '2s',
+             '3s': '3s',
+             '5s': '5s',
+             '6s': '6s',
+             '8s': '8s',
+             '10s': '10s',
+        },
   	}
   },
   plugins: [
       require("tailwindcss-animate"),
-      function ({ addUtilities }: { addUtilities: any }) { // Plugin for 3D transforms
-        addUtilities({
+      function ({ addUtilities, theme }: { addUtilities: any, theme: any }) {
+        const delays = theme('animationDelay');
+        const delayUtilities = Object.entries(delays).map(([key, value]) => ({
+          [`.animation-delay-${key}`]: { 'animation-delay': value },
+        }));
+        addUtilities(delayUtilities);
+
+         const durations = theme('animationDuration');
+         const durationUtilities = Object.entries(durations).map(([key, value]) => ({
+            [`.animation-duration-${key}`]: { 'animation-duration': value },
+         }));
+         addUtilities(durationUtilities);
+
+
+        addUtilities({ // 3D transforms plugin
             '.perspective': {
-                perspective: '1200px', // Increased perspective
+                perspective: '1200px',
             },
             '.transform-style-3d': {
                 'transform-style': 'preserve-3d',
@@ -176,16 +205,16 @@ export default {
             '.backface-hidden': {
                 'backface-visibility': 'hidden',
             },
-            '.hover\\:rotate-x-2:hover': { // Added hover utilities
+            '.hover\\:rotate-x-2:hover': {
                  transform: 'rotateX(2deg)',
             },
             '.hover\\:rotate-y-1:hover': {
                  transform: 'rotateY(1deg)',
             },
-            '.hover\\:rotate-x-5:hover': { // Added explicit hover utility for chat interface
+            '.hover\\:rotate-x-5:hover': {
                 transform: 'rotateX(5deg)',
             },
-            '.hover\\:rotate-y-10:hover': { // Added explicit hover utility for chat interface
+            '.hover\\:rotate-y-10:hover': {
                 transform: 'rotateY(10deg)',
             },
         })

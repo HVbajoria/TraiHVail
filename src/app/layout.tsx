@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'; // Using Inter for a clean, modern loo
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster'; // Import Toaster
 import { cn } from '@/lib/utils';
+import { AuthProvider } from '@/context/AuthContext'; // Import AuthProvider
 
 const inter = Inter({
   subsets: ['latin'],
@@ -12,7 +13,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'TraiHVail', // Updated title
-  description: 'Unstop AI Learning Assistant', // Updated description
+  description: 'Interactive AI Learning Assistant', // Updated description
 };
 
 export default function RootLayout({
@@ -33,21 +34,23 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        {/* Background effects container */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-            <div className="absolute inset-0 opacity-20 bg-grid-pattern animate-grid-scroll"></div>
-            {/* Add more background elements here if needed, like stars */}
-             <div className="absolute inset-0 stars"></div>
-             <div className="absolute inset-0 stars2"></div>
-             <div className="absolute inset-0 stars3"></div>
-             {/* Floating elements */}
-             <div className="floating-element element-1 animate-float" style={{ animationDuration: '20s' }}></div>
-             <div className="floating-element element-2 animate-float-delay" style={{ animationDuration: '14s' }}></div>
-             <div className="floating-element element-3 animate-float" style={{ animationDuration: '22s', animationDelay: '-12s' }}></div>
-             <div className="floating-element element-4 animate-float-delay" style={{ animationDuration: '16s', animationDelay: '-3s' }}></div> {/* Added fourth element */}
-        </div>
-        {children}
-        <Toaster /> {/* Add Toaster */}
+        <AuthProvider> {/* Wrap with AuthProvider */}
+          {/* Background effects container */}
+          <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+              <div className="absolute inset-0 opacity-20 bg-grid-pattern animate-grid-scroll"></div>
+              {/* Add more background elements here if needed, like stars */}
+               <div className="absolute inset-0 stars"></div>
+               <div className="absolute inset-0 stars2"></div>
+               <div className="absolute inset-0 stars3"></div>
+               {/* Floating elements */}
+               <div className="floating-element element-1 animate-float" style={{ animationDuration: '20s' }}></div>
+               <div className="floating-element element-2 animate-float-delay" style={{ animationDuration: '14s' }}></div>
+               <div className="floating-element element-3 animate-float" style={{ animationDuration: '22s', animationDelay: '-12s' }}></div>
+               <div className="floating-element element-4 animate-float-delay" style={{ animationDuration: '16s', animationDelay: '-3s' }}></div> {/* Added fourth element */}
+          </div>
+          {children}
+          <Toaster /> {/* Add Toaster */}
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,0 +1,16 @@
+{
+  "packages": [
+    "python3",
+    "python310Packages.python-dotenv",
+    "python310Packages.wand",
+    "python310Packages.moviepy",
+    "python310Packages.azure-cognitiveservices-speech",
+    "python310Packages.pygments",
+    "python310Packages.opencv-python",
+    "python310Packages.google-generativeai",
+    "python310Packages.pillow"
+  ],
+  "shell": {
+      "init_hook": null
+  }
+}

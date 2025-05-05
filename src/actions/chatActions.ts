@@ -50,6 +50,7 @@ const TutorLearnerActionInputSchema = z.object({
     lessonName: z.string().min(1),
     learnerName: z.string().min(1),
     learningGoal: z.string().min(1),
+    contentSummary: z.string().min(1, "Lesson content summary is required."), // Added contentSummary validation
     userInput: z.string().min(1, "Your message cannot be empty."),
     // Add chatHistory matching the flow's input schema
     chatHistory: z.array(ActionChatHistoryMessageSchema).optional(),
@@ -70,14 +71,15 @@ export async function tutorLearnerAction(input: TutorLearnerInput): Promise<Tuto
     // Validate the input received by the action
     const validationResult = TutorLearnerActionInputSchema.safeParse(input);
     if (!validationResult.success) {
+        console.error("TutorLearner Action Input Validation Failed:", validationResult.error.issues); // Log validation errors
         return { success: false, errors: validationResult.error.issues };
     }
 
-    // The input structure now matches the flow's expected input, including chatHistory
+    // The input structure now matches the flow's expected input, including chatHistory and contentSummary
     const flowInput: TutorLearnerInput = validationResult.data;
 
     try {
-        const result = await tutorLearner(flowInput); // Pass the validated data (with history)
+        const result = await tutorLearner(flowInput); // Pass the validated data (with history and summary)
         return { success: true, data: result };
     } catch (error) {
         console.error("AI Action Error (tutorLearner):", error);
@@ -91,4 +93,3 @@ export async function tutorLearnerAction(input: TutorLearnerInput): Promise<Tuto
         return { success: false, error: errorMessage };
     }
 }
-

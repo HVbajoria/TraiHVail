@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -42,12 +41,12 @@ const ChatInput = React.forwardRef<HTMLInputElement, ChatInputProps>(
       return (
         <form
           onSubmit={handleSubmit}
-          className={cn("flex items-center gap-2 border-t border-border p-3 bg-background", className)}
+          className={cn("flex items-center gap-2 border-t border-border p-2 md:p-3 bg-background", className)} // Reduced padding
         >
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="ghost" size="icon" type="button" className="text-muted-foreground hover:text-primary" disabled={disabled}>
-                <Smile className="w-5 h-5" />
+              <Button variant="ghost" size="icon" type="button" className="text-muted-foreground hover:text-primary w-8 h-8 md:w-9 md:h-9" disabled={disabled}> {/* Adjusted size */}
+                <Smile className="w-4 h-4 md:w-5 md:h-5" /> {/* Adjusted icon size */}
                 <span className="sr-only">Add emoji</span>
               </Button>
             </PopoverTrigger>
@@ -58,7 +57,7 @@ const ChatInput = React.forwardRef<HTMLInputElement, ChatInputProps>(
                   variant="ghost"
                   size="icon"
                   onClick={() => handleEmojiSelect(emoji)}
-                  className="text-xl hover:bg-accent"
+                  className="text-lg md:text-xl hover:bg-accent w-8 h-8 md:w-9 md:h-9" // Adjusted size
                 >
                   {emoji}
                 </Button>
@@ -73,12 +72,12 @@ const ChatInput = React.forwardRef<HTMLInputElement, ChatInputProps>(
             onChange={(e) => setInput(e.target.value)}
             placeholder={placeholder}
             disabled={disabled}
-            className="flex-1 bg-input border-input focus-visible:ring-primary focus-visible:ring-offset-0"
+            className="flex-1 h-9 md:h-10 bg-input border-input focus-visible:ring-primary focus-visible:ring-offset-0" // Adjusted height
             aria-label="Chat message input"
             {...props}
           />
-          <Button type="submit" disabled={disabled || !input.trim()} size="icon" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <SendHorizonal className="w-5 h-5" />
+          <Button type="submit" disabled={disabled || !input.trim()} size="icon" className="bg-primary hover:bg-primary/90 text-primary-foreground w-8 h-8 md:w-9 md:h-9"> {/* Adjusted size */}
+            <SendHorizonal className="w-4 h-4 md:w-5 md:h-5" /> {/* Adjusted icon size */}
             <span className="sr-only">Send message</span>
           </Button>
         </form>
