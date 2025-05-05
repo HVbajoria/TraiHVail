@@ -1,123 +1,167 @@
 {
   "slides": [
     {
-      "content": "Welcome to the Quiz Module! Test your knowledge and reinforce your understanding of the concepts covered in this course. and heudefgvf",
+      "content": "In this module, we will explore the importance of version control and how Git revolutionizes software development.",
       "slideNumber": 1,
-      "title": "Quiz Module: Test Your Knowledgebjrfbrjhe",
+      "title": "Welcome to Version Control 101",
       "type": "title_slide",
-      "subtitle": "Reinforce Your Learning to do good",
+      "subtitle": "Explore the power of Git in Software Development",
       "transition": "slide_up",
-      "voiceover": "Welcome to the Quiz module! Get ready to test your knowledge and reinforce what you've learned so far. Why stop lets start"
+      "voiceover": "Welcome to Version Control 101! In this module, we will explore the importance of version control and how Git revolutionizes software development."
     },
     {
-      "options": [
-        "Descriptive, predictive, and prescriptive analytics",
-        "Data mining, data warehousing, and data visualization",
-        "Data collection, data cleaning, and data analysis",
-        "Reporting, monitoring, and alerting"
-      ],
-      "question": "Which of the following represents the three main types of business analytics?",
+      "content": "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later.",
       "slideNumber": 2,
-      "title": "Question 1: Types of Analytics",
-      "type": "quiz_slide",
-      "transition": "slide_down",
-      "voiceover": "Here's your first question: Which of the following represents the three main types of business analytics?"
+      "title": "What is Version Control?",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later."
     },
     {
-      "content": "The correct answer is: Descriptive, predictive, and prescriptive analytics. These represent the three main types of business analytics, each serving a different purpose in understanding and leveraging data.",
+      "points": [
+        "Track changes to code"
+      ],
       "slideNumber": 3,
-      "title": "Answer and Explanation",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "The correct answer is 'Descriptive, predictive, and prescriptive analytics'. These are the three main types, each with a unique role in business analytics."
+      "title": "Why Use Version Control?",
+      "type": "unordered_list_slide",
+      "transition": "slide_right",
+      "voiceover": "Version control helps to track changes to code."
     },
     {
-      "options": [
-        "To summarize past data",
-        "To predict future outcomes",
-        "To recommend actions",
-        "All of the above"
+      "points": [
+        "Track changes to code",
+        "Collaborate effectively"
       ],
-      "question": "What is the goal of prescriptive analytics?",
       "slideNumber": 4,
-      "title": "Question 2: Prescriptive Analytics",
-      "type": "quiz_slide",
-      "transition": "slide_down",
-      "voiceover": "Next question: What is the primary goal of prescriptive analytics?"
+      "title": "Why Use Version Control?",
+      "type": "unordered_list_slide",
+      "transition": "slide_right",
+      "voiceover": "It also enables you to collaborate effectively with others."
     },
     {
-      "content": "The correct answer is: All of the above. Prescriptive analytics aims to recommend actions by analyzing data to determine the best course of action for future outcomes.",
+      "points": [
+        "Track changes to code",
+        "Collaborate effectively",
+        "Revert to previous versions"
+      ],
       "slideNumber": 5,
-      "title": "Answer and Explanation",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "The correct answer is 'All of the above'. Prescriptive analytics goes beyond prediction to recommend the best actions."
+      "title": "Why Use Version Control?",
+      "type": "unordered_list_slide",
+      "transition": "slide_right",
+      "voiceover": "And, if needed, you can easily revert to previous versions of your work."
     },
     {
-      "options": [
-        "Data that has already been processed",
-        "Raw, unorganized facts",
-        "Information with context and meaning",
-        "A collection of databases"
-      ],
-      "question": "What is the definition of data?",
+      "content": "Git is a distributed version control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.",
       "slideNumber": 6,
-      "title": "Question 3: Definition of Data",
-      "type": "quiz_slide",
-      "transition": "slide_down",
-      "voiceover": "Here's another question: What is the definition of data?"
+      "title": "Introduction to Git",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "Git is a distributed version control system designed for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files."
     },
     {
-      "content": "The correct answer is: Raw, unorganized facts. Data refers to raw, unorganized facts that need to be processed to become information.",
+      "code": "# Initialize a new Git repository\ngit init\n\n# Add files to the staging area\ngit add .\n\n# Commit the changes with a message\ngit commit -m \"Initial commit\"",
       "slideNumber": 7,
-      "title": "Answer and Explanation",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "The correct answer is 'Raw, unorganized facts'. Data in its original form is unorganized and needs processing."
+      "title": "Basic Git Commands",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "slide_right",
+      "voiceover": "Here are some basic Git commands: git init to initialize a new repository, git add to add files to the staging area, and git commit to commit the changes with a message."
     },
     {
-      "options": [
-        "Data visualization",
-        "Data mining",
-        "Regression analysis",
-        "Machine learning"
-      ],
-      "question": "Which of the following techniques is most commonly used for predictive analytics?",
+      "code": "# Create a new branch\ngit branch <branch_name>\n\n# Switch to a branch\ngit checkout <branch_name>\n\n# Merge a branch into the current branch\ngit merge <branch_name>",
       "slideNumber": 8,
-      "title": "Question 4: Predictive Analytics Techniques",
-      "type": "quiz_slide",
-      "transition": "slide_down",
-      "voiceover": "Which of the following techniques is most commonly used for predictive analytics?"
+      "title": "Branching and Merging",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "slide_right",
+      "voiceover": "Here are some basic Git commands related to branching and merging: git branch to create a new branch, git checkout to switch to a branch, and git merge to merge a branch into the current branch."
     },
     {
-      "content": "The correct answer is: Machine learning. Machine learning algorithms are widely used in predictive analytics to build models that can predict future outcomes based on historical data.",
+      "content": "Git allows multiple developers to work on different features or bug fixes simultaneously without interfering with each other's work. This is achieved through branching and merging.",
       "slideNumber": 9,
-      "title": "Answer and Explanation",
+      "title": "Collaboration with Git",
       "type": "content_slide",
       "transition": "slide_left",
-      "voiceover": "The correct answer is 'Machine learning'. Machine learning algorithms are frequently used to create predictive models."
+      "voiceover": "Git allows multiple developers to work on different features or bug fixes simultaneously without interfering with each other's work. This is achieved through branching and merging."
+    },
+    {
+      "code": "# Clone a remote repository\ngit clone <remote_url>\n\n# Push local changes to a remote repository\ngit push origin <branch_name>\n\n# Pull changes from a remote repository\ngit pull origin <branch_name>",
+      "slideNumber": 10,
+      "title": "Remote Repositories",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "slide_right",
+      "voiceover": "Here are some basic Git commands related to remote repositories: git clone to clone a remote repository, git push to push local changes to a remote repository, and git pull to pull changes from a remote repository."
+    },
+    {
+      "content": "Remote repositories like GitHub, GitLab, and Bitbucket provide a centralized location for storing and collaborating on Git repositories.",
+      "slideNumber": 11,
+      "title": "Remote Repositories Explained",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "Remote repositories like GitHub, GitLab, and Bitbucket provide a centralized location for storing and collaborating on Git repositories."
+    },
+    {
+      "content": "What is the purpose of the 'git commit' command?",
+      "slideNumber": 12,
+      "title": "Quiz Time!",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "Let's test your knowledge about version control and Git."
     },
     {
       "options": [
-        "Extracting insights from data",
-        "Storing data",
-        "Cleaning data",
-        "Presenting data"
+        "To add files to the staging area",
+        "To save changes to the repository with a message",
+        "To create a new branch",
+        "To revert to a previous version"
       ],
-      "question": "What is the primary focus of data analysis?",
-      "slideNumber": 10,
-      "title": "Question 5: Focus of Data Analysis",
+      "question": "What is the purpose of the 'git commit' command?",
+      "slideNumber": 13,
+      "title": "Quiz: Git Commit",
       "type": "quiz_slide",
       "transition": "slide_down",
-      "voiceover": "What is the primary focus of data analysis?"
+      "voiceover": "What is the purpose of the 'git commit' command?"
     },
     {
-      "content": "The correct answer is: Extracting insights from data. Data analysis focuses on extracting meaningful insights and patterns from data to inform decision-making.",
-      "slideNumber": 11,
+      "content": "The correct answer is: To save changes to the repository with a message. The 'git commit' command saves the changes in the staging area to the repository with a descriptive message.",
+      "slideNumber": 14,
       "title": "Answer and Explanation",
       "type": "content_slide",
       "transition": "slide_left",
-      "voiceover": "The correct answer is 'Extracting insights from data'. The main goal is to find meaningful patterns and insights."
+      "voiceover": "The correct answer is 'To save changes to the repository with a message'. The 'git commit' command saves the changes in the staging area to the repository with a descriptive message."
+    },
+    {
+      "content": "Version control is essential for tracking changes and collaborating effectively in software development. Git is a powerful tool for managing code and working with teams.",
+      "slideNumber": 15,
+      "title": "Key Takeaways",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "To summarize, version control is essential for tracking changes and collaborating effectively in software development. Git is a powerful tool for managing code and working with teams."
+    },
+    {
+      "chartType": "bar",
+      "data": [
+        {
+          "label": "Commits",
+          "value": 50
+        },
+        {
+          "label": "Branches",
+          "value": 10
+        },
+        {
+          "label": "Releases",
+          "value": 5
+        }
+      ],
+      "slideNumber": 16,
+      "title": "Git Activity Metrics",
+      "type": "chart_slide",
+      "transition": "slide_left",
+      "voiceover": "This chart represents the activity metrics of a Git repository, including the number of commits, branches, and releases.",
+      "xLabel": "Metric",
+      "yLabel": "Count"
     }
   ]
 }

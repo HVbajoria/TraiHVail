@@ -493,7 +493,7 @@ export default function Home() {
                     console.log("Video Generation Successful:", videoResult.videoUrl ? 'URL received' : 'No URL');
                     setVideoUrl(videoResult.videoUrl);
                     setVideoPanelState('video_ready'); // Update state on success
-                    const completionMessage = "<<Unstop>> Video generation complete.";
+                    const completionMessage = "Video generation complete.";
                     if (chatInterfaceRef.current) {
                         chatInterfaceRef.current.simulateUserInput(completionMessage, true);
                     }
@@ -503,7 +503,7 @@ export default function Home() {
                     setVideoError(errorMsg);
                     setVideoPanelState('video_error'); // Update state on failure
                     toast({ title: 'Video Generation Failed', description: errorMsg, variant: 'destructive', duration: 10000 });
-                    const failureMessage = `<<Unstop>> Video generation failed: ${errorMsg}`;
+                    const failureMessage = `Video generation failed: ${errorMsg}`;
                     if (chatInterfaceRef.current) {
                         chatInterfaceRef.current.simulateUserInput(failureMessage, true);
                     }
@@ -518,14 +518,14 @@ export default function Home() {
                      const detailedError = "Could not find 'python3' command or required dependencies. Ensure Python 3 and necessary libraries (moviepy, Wand, etc.) are installed and in your system's PATH for video generation.";
                      setVideoError(detailedError);
                      toast({ title: 'Python/Dependency Error', description: detailedError, variant: 'destructive', duration: 10000 });
-                      const errorMessageText = `<<Unstop>> Video generation error: ${detailedError}`;
+                      const errorMessageText = `Video generation error: ${detailedError}`;
                       if (chatInterfaceRef.current) {
                           chatInterfaceRef.current.simulateUserInput(errorMessageText, true);
                       }
                  } else {
                     setVideoError(errorMsg);
                     toast({ title: 'Video Generation Error', description: errorMsg, variant: 'destructive', duration: 10000 });
-                      const errorMessageText = `<<Unstop>> Video generation error: ${errorMsg}`;
+                      const errorMessageText = `Video generation error: ${errorMsg}`;
                       if (chatInterfaceRef.current) {
                           chatInterfaceRef.current.simulateUserInput(errorMessageText, true);
                       }
