@@ -2,14 +2,14 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef, useContext, Suspense } from 'react';
-import { Loader2, LogIn, LogOut, ArrowLeft } from 'lucide-react';
+import { Loader2, LogIn, LogOut, ArrowLeft, Video, Bot, BookOpen, Rocket } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import * as XLSX from 'xlsx';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { SlidesOutput } from '@/ai/flows/generate-slides';
 import type { SummarizeLearningContentOutput } from '@/ai/flows/summarize-learning-content';
-import { AuthContext } from '@/context/AuthContext'; // Import Auth Context
+import { AuthContext } from '@/context/AuthContext';
 import type { Message, ChatInterfaceHandle } from '@/components/chat/ChatInterface';
 import { generateSlidesAction, summarizeSlidesAction } from '@/actions/courseActions';
 import { generateVideoAction } from '@/actions/videoActions';
@@ -24,14 +24,14 @@ import ParsingView from '@/components/views/ParsingView';
 import StructureView from '@/components/views/StructureView';
 import GeneratingSlidesView from '@/components/views/GeneratingSlidesView';
 import SlidesView from '@/components/views/SlidesView';
-import EditSlidesView from '@/components/views/EditSlidesView'; // Import EditSlidesView
+import EditSlidesView from '@/components/views/EditSlidesView';
 import SummarizingContentView from '@/components/views/SummarizingContentView';
 import LearningView from '@/components/views/LearningView';
 import ErrorView from '@/components/views/ErrorView';
 
 // Import type definitions
 import type { CourseModule } from '@/components/course/CourseStructureDisplay';
-import type { AppState, VideoPanelState } from '@/types/app'; // Import shared types
+import type { AppState, VideoPanelState } from '@/types/app';
 
 export default function Home() {
   const { user, logout } = useContext(AuthContext);
@@ -51,7 +51,7 @@ export default function Home() {
   const [videoError, setVideoError] = useState<string | null>(null);
   const [videoGenerationDuration, setVideoGenerationDuration] = useState<number | null>(null);
   const [isChatSetupComplete, setIsChatSetupComplete] = useState(false);
-  const isGeneratingVideoRef = useRef(false); // Use ref to track the process state without causing re-renders
+  const isGeneratingVideoRef = useRef(false);
   const [messages, setMessages] = useState<Message[]>([]);
   // --- End Learning View State ---
 
@@ -59,14 +59,12 @@ export default function Home() {
 
   useEffect(() => {
     setIsClient(true);
-    // Redirect to landing if user logs out while in an authenticated state
     if (!user && appState !== 'landing' && appState !== 'login' && appState !== 'launching') {
         setAppState('landing');
         resetAppState();
     }
-  }, [user, appState]); // Added appState dependency
+  }, [user, appState]);
 
-   // Reset relevant state when app state changes *away* from learning view
    useEffect(() => {
      if (appState !== 'learning_view') {
        setVideoPanelState('hidden');
@@ -75,24 +73,22 @@ export default function Home() {
        setVideoGenerationDuration(null);
        setIsChatSetupComplete(false);
        isGeneratingVideoRef.current = false;
-       setMessages([]); // Clear messages when leaving learning view
+       setMessages([]);
      }
    }, [appState]);
-
-   // --- Navigation and State Transition Handlers ---
 
    const handleStart = () => {
     if (user) {
        setAppState('launching');
-       setTimeout(() => setAppState('setup'), 2000); // Transition after animation
+       setTimeout(() => setAppState('setup'), 2000);
     } else {
         setAppState('login');
     }
   };
 
   const handleLoginSuccess = () => {
-    setAppState('launching'); // Show launching animation
-    setTimeout(() => setAppState('setup'), 2000); // Transition to setup after animation
+    setAppState('launching');
+    setTimeout(() => setAppState('setup'), 2000);
   }
 
   const handleLogout = () => {
@@ -107,7 +103,6 @@ export default function Home() {
     setSelectedLesson(null);
     setGeneratedSlides(null);
     setContentSummary(null);
-    // Reset LearningView specific state via useEffect based on appState change
   }
 
   const handleBackToLanding = () => {
@@ -120,15 +115,12 @@ export default function Home() {
     setSelectedLesson(null);
     setGeneratedSlides(null);
     setContentSummary(null);
-    // Message state reset is handled by useEffect
   }
 
    const handleBackFromLearningView = () => {
-     setAppState('slides'); // Go back to slides view from learning view
-     // Message state reset is handled by useEffect
+     setAppState('slides');
   }
 
-  // --- Slide Editing Handlers ---
   const handleEditSlides = () => {
       if (!generatedSlides) {
           toast({ title: "Error", description: "No slides available to edit.", variant: "destructive" });
@@ -139,19 +131,14 @@ export default function Home() {
 
   const handleSaveSlides = (editedSlides: SlidesOutput['slides']) => {
       setGeneratedSlides(editedSlides);
-      setAppState('slides'); // Go back to viewing slides after saving
+      setAppState('slides');
       toast({ title: "Success", description: "Slide structure updated.", variant: "default" });
   }
 
   const handleCancelEdit = () => {
-      setAppState('slides'); // Go back to viewing slides without saving
+      setAppState('slides');
   }
-  // --- End Slide Editing Handlers ---
 
-
-  // --- Data Processing and Action Handlers ---
-
-   // Function to add messages for the LearningView
    const addMessage = useCallback((sender: 'user' | 'ai' | 'system', text: string | React.ReactNode, hidden: boolean = false) => {
         setMessages((prev) => {
             const newMessage: Message = {
@@ -161,7 +148,6 @@ export default function Home() {
                 timestamp: Date.now(),
                 hidden,
             };
-            // Basic uniqueness check
             let uniqueId = newMessage.id;
             let attempts = 0;
             while (prev.some(msg => msg.id === uniqueId) && attempts < 10) {
@@ -171,7 +157,7 @@ export default function Home() {
             newMessage.id = uniqueId;
             return [...prev, newMessage];
         });
-    }, []); // No dependencies needed as setMessages updates based on previous state
+    }, []);
 
 
     const parseDataToStructure = (data: any[][]): CourseModule[] => {
@@ -203,7 +189,7 @@ export default function Home() {
         console.log(`Column indexes -> Content: ${contentIndex}, Type: ${typeIndex}, Details: ${detailsIndex !== -1 ? detailsIndex : 'Not Found'}`);
 
         const parsedStructure: CourseModule[] = data.slice(1).map((row: any[], index) => {
-            const rowIndex = index + 2; // Actual row number in the spreadsheet
+            const rowIndex = index + 2;
 
             if (!row || row.length === 0 || row.every(cell => cell === null || cell === undefined || cell === '')) {
                 console.warn(`[Row ${rowIndex}] Skipping: Row appears empty.`);
@@ -220,10 +206,10 @@ export default function Home() {
             const details = detailsIndex !== -1 ? (row[detailsIndex]?.toString().trim() || '') : '';
 
             let type: 'Module' | 'Sub Module' | null = null;
-            const normalizedType = typeRaw?.toLowerCase().replace(/[-\s]+/g, ''); // Normalize 'Sub Module' -> 'submodule'
+            const normalizedType = typeRaw?.toLowerCase().replace(/[-\s]+/g, '');
             if (normalizedType === 'module') {
                 type = 'Module';
-            } else if (normalizedType === 'submodule') { // Match normalized 'submodule'
+            } else if (normalizedType === 'submodule') {
                 type = 'Sub Module';
             }
 
@@ -258,7 +244,6 @@ export default function Home() {
              variant: 'destructive',
              duration: 8000,
            });
-            return [];
          }
         return parsedStructure;
     };
@@ -267,7 +252,7 @@ export default function Home() {
     const handleCourseSubmit = (name: string, file: File | null) => {
         setCourseName(name);
         setAppState('parsing');
-        setCourseStructure([]); // Reset structure before parsing
+        setCourseStructure([]);
 
         if (!file) {
           toast({ title: 'File Error', description: 'No file was selected.', variant: 'destructive' });
@@ -288,13 +273,11 @@ export default function Home() {
             if (fileType.includes('csv') || fileNameLower.endsWith('.csv')) {
               console.log("Parsing CSV file...");
               const text = new TextDecoder("utf-8").decode(fileData as ArrayBuffer);
-              // Handle potential BOM (Byte Order Mark) in CSV files
               const cleanText = text.charCodeAt(0) === 0xFEFF ? text.substring(1) : text;
               const workbook = XLSX.read(cleanText, { type: 'string', raw: false });
               const sheetName = workbook.SheetNames[0];
               if (!sheetName) throw new Error("Could not process CSV data (No sheet found).");
               const worksheet = workbook.Sheets[sheetName];
-              // Use sheet_to_json with header: 1 to get array of arrays, raw: false for formatted values
               const csvData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
               if (!csvData || csvData.length === 0) throw new Error("CSV file appears empty or could not be parsed.");
               parsedStructure = parseDataToStructure(csvData);
@@ -305,7 +288,6 @@ export default function Home() {
               if (!sheetName) throw new Error("Could not find any sheets in the Excel file.");
               const worksheet = workbook.Sheets[sheetName];
               if (!worksheet) throw new Error(`Sheet "${sheetName}" could not be accessed.`);
-              // Use sheet_to_json with header: 1 to get array of arrays, raw: false for formatted values
               const excelData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
               if (!excelData || excelData.length === 0) throw new Error("Excel sheet appears empty or could not be parsed.");
               parsedStructure = parseDataToStructure(excelData);
@@ -316,9 +298,8 @@ export default function Home() {
             if (parsedStructure.length > 0) {
               console.log(`Successfully parsed ${parsedStructure.length} modules/sub-modules.`);
               setCourseStructure(parsedStructure);
-              setTimeout(() => setAppState('structure'), 500); // Add slight delay for better UX
+              setTimeout(() => setAppState('structure'), 500);
             } else {
-               // Toast/Error already handled in parseDataToStructure if no valid rows found
                console.log("Parsing resulted in empty structure, returning to setup.");
                setTimeout(() => setAppState('setup'), 500);
             }
@@ -375,7 +356,7 @@ export default function Home() {
                 variant: 'destructive',
                 duration: 7000,
             });
-            setAppState('structure'); // Go back to structure on error
+            setAppState('structure');
         }
     };
 
@@ -400,7 +381,7 @@ export default function Home() {
           if (summaryResult.success && summaryResult.data?.summary) {
             console.log("Content summarized successfully.");
             setContentSummary(summaryResult.data.summary);
-            const learnerName = user?.fullName || ''; // Use empty string if no user name
+            const learnerName = user?.fullName || '';
             const initialMsgs = getInitialMessages(courseName, selectedLesson.name, summaryResult.data.summary, learnerName);
             setMessages(initialMsgs);
             setAppState('learning_view');
@@ -410,11 +391,10 @@ export default function Home() {
         } catch (error) {
           console.error('Error summarizing content:', error);
           toast({ title: 'Content Summarization Failed', description: error instanceof Error ? error.message : 'Unknown error.', variant: 'destructive' });
-          setAppState('slides'); // Go back to slides on error
+          setAppState('slides');
         }
     };
 
-    // Function to get initial messages for the chat
     const getInitialMessages = (course: string, lesson: string, summary: string, learnerName: string): Message[] => {
         const baseMessages: Message[] = [
             {
@@ -446,12 +426,14 @@ export default function Home() {
         return baseMessages;
     };
 
-    // --- LearningView Specific Handlers ---
-
     const handleChatSetupComplete = () => {
-        console.log("Chat setup complete, showing video panel.");
+        console.log("Chat setup complete, showing video/quiz panel.");
         setIsChatSetupComplete(true);
-        setVideoPanelState('idle');
+        if (selectedLesson && selectedLesson.name.toLowerCase().includes('quiz')) {
+            // No automatic video generation for quiz
+        } else {
+            setVideoPanelState('idle');
+        }
     };
 
      const handleGenerateVideo = async () => {
@@ -465,20 +447,16 @@ export default function Home() {
             return;
         }
 
-        // Set state for UI changes *first*
         setVideoPanelState('generating_video');
         setVideoUrl(null);
         setVideoError(null);
 
-        // Calculate estimated duration
-        const estimatedDuration = Math.max(10, generatedSlides.length * 4); // Minimum 10 seconds
+        const estimatedDuration = Math.max(10, generatedSlides.length * 4);
         setVideoGenerationDuration(estimatedDuration);
 
-        // Set ref *after* state updates to avoid race conditions if user clicks multiple times quickly
         isGeneratingVideoRef.current = true;
 
-        // Send hidden message to assistant *without* awaiting its response
-        const systemMessageText = `The video generation process has begun! It will take approximately ${estimatedDuration} seconds.`;
+        const systemMessageText = `<<Unstop>> The video generation process has begun! It will take approximately ${estimatedDuration} seconds.`;
         console.log("Simulating hidden system input for video generation start:", systemMessageText);
         if (chatInterfaceRef.current) {
             chatInterfaceRef.current.simulateUserInput(systemMessageText, true);
@@ -486,14 +464,13 @@ export default function Home() {
             console.warn("ChatInterface ref not available to send video generation system message.");
         }
 
-        // Run the video generation in the background (DO NOT await here)
         generateVideoAction({ slides: generatedSlides })
             .then(videoResult => {
                 if (videoResult.success && videoResult.videoUrl) {
                     console.log("Video Generation Successful:", videoResult.videoUrl ? 'URL received' : 'No URL');
                     setVideoUrl(videoResult.videoUrl);
-                    setVideoPanelState('video_ready'); // Update state on success
-                    const completionMessage = "Video generation complete.";
+                    setVideoPanelState('video_ready');
+                    const completionMessage = "<<Unstop>> Video generation complete.";
                     if (chatInterfaceRef.current) {
                         chatInterfaceRef.current.simulateUserInput(completionMessage, true);
                     }
@@ -501,16 +478,15 @@ export default function Home() {
                     console.error('Video Generation Action Error:', videoResult.error);
                     const errorMsg = videoResult.error || 'Failed to generate video. The process may have timed out or encountered an error.';
                     setVideoError(errorMsg);
-                    setVideoPanelState('video_error'); // Update state on failure
+                    setVideoPanelState('video_error');
                     toast({ title: 'Video Generation Failed', description: errorMsg, variant: 'destructive', duration: 10000 });
-                    const failureMessage = `Video generation failed: ${errorMsg}`;
+                    const failureMessage = `<<Unstop>> Video generation failed: ${errorMsg}`;
                     if (chatInterfaceRef.current) {
                         chatInterfaceRef.current.simulateUserInput(failureMessage, true);
                     }
                 }
             })
             .catch(error => {
-                // Handle unexpected errors during the action call itself
                 console.error('Exception during video generation process:', error);
                 const errorMsg = error instanceof Error ? error.message : 'An unknown error occurred during video generation.';
 
@@ -518,33 +494,29 @@ export default function Home() {
                      const detailedError = "Could not find 'python3' command or required dependencies. Ensure Python 3 and necessary libraries (moviepy, Wand, etc.) are installed and in your system's PATH for video generation.";
                      setVideoError(detailedError);
                      toast({ title: 'Python/Dependency Error', description: detailedError, variant: 'destructive', duration: 10000 });
-                      const errorMessageText = `Video generation error: ${detailedError}`;
+                      const errorMessageText = `<<Unstop>> Video generation error: ${detailedError}`;
                       if (chatInterfaceRef.current) {
                           chatInterfaceRef.current.simulateUserInput(errorMessageText, true);
                       }
                  } else {
                     setVideoError(errorMsg);
                     toast({ title: 'Video Generation Error', description: errorMsg, variant: 'destructive', duration: 10000 });
-                      const errorMessageText = `Video generation error: ${errorMsg}`;
+                      const errorMessageText = `<<Unstop>> Video generation error: ${errorMsg}`;
                       if (chatInterfaceRef.current) {
                           chatInterfaceRef.current.simulateUserInput(errorMessageText, true);
                       }
                  }
-                 setVideoPanelState('video_error'); // Update state on exception
+                 setVideoPanelState('video_error');
             })
             .finally(() => {
-                // Reset the ref and duration regardless of outcome
                 isGeneratingVideoRef.current = false;
                 setVideoGenerationDuration(null);
                 console.log("Video generation process finished (or failed).");
             });
 
-        // Return immediately after starting the process
         console.log("Video generation started in the background.");
     };
 
-
-    // --- Render Logic ---
 
     if (!isClient) {
         return (
@@ -554,28 +526,26 @@ export default function Home() {
         );
     }
 
-    // Adjust container classes based on state
     const isFullScreenState = ['learning_view', 'editing_slides'].includes(appState);
     const mainContainerClasses = cn(
         "flex flex-col items-center perspective overflow-hidden",
-        "pt-16", // Adjust for fixed header height
+        "pt-16",
         isFullScreenState
-            ? "w-full h-screen p-0 justify-start" // Full screen for specific views
+            ? "w-full h-screen p-0 justify-start"
             : "min-h-screen p-4 md:p-8 lg:p-12 justify-center",
-        appState === 'landing' ? "p-0 md:p-0 lg:p-0 pt-16" : "" // Specific padding for landing
+        appState === 'landing' ? "p-0 md:p-0 lg:p-0 pt-16" : ""
     );
     const contentWrapperClasses = cn(
         "relative w-full transition-all duration-700 ease-in-out",
         isFullScreenState
-            ? "h-full max-w-none" // Full width for specific views
-            : "max-w-lg", // Default max-width for forms
-        appState === 'landing' && "max-w-none", // Full width for landing
-        (appState === 'structure' || appState === 'slides' || appState === 'generating_slides' || appState === 'summarizing_content') && "max-w-4xl", // Wider for structure/slides
-        appState === 'parsing' && "max-w-2xl" // Medium for parsing
+            ? "h-full max-w-none"
+            : "max-w-lg",
+        appState === 'landing' && "max-w-none",
+        (appState === 'structure' || appState === 'slides' || appState === 'generating_slides' || appState === 'summarizing_content') && "max-w-4xl",
+        appState === 'parsing' && "max-w-2xl"
     );
 
     const renderContent = () => {
-        // Force login check for authenticated states
         if (!user && appState !== 'landing' && appState !== 'login' && appState !== 'launching') {
           return <LoginView onLoginSuccess={handleLoginSuccess} onBack={handleBackToLanding} />;
         }
@@ -609,7 +579,7 @@ export default function Home() {
                         lessonName={selectedLesson?.name}
                         slides={generatedSlides}
                         onBack={handleBackToStructure}
-                        onEdit={handleEditSlides} // Pass edit handler
+                        onEdit={handleEditSlides}
                         onLaunchLearning={handleLaunchLearningView}
                     />
                 );
@@ -629,19 +599,18 @@ export default function Home() {
              case 'learning_view':
                 if (!selectedLesson || !courseName || !contentSummary) {
                     console.error("Missing data for learning view, returning to structure.");
-                    // Attempt to recover gracefully
                     if (generatedSlides) setAppState('slides');
                     else if (courseStructure.length > 0) setAppState('structure');
                     else setAppState('setup');
                     toast({ title: "Error", description: "Could not load learning environment data.", variant: "destructive"});
-                    return null; // Or render an error component
+                    return null;
                 }
                 return (
                      <LearningView
                         courseName={courseName}
                         lessonName={selectedLesson.name}
                         contentSummary={contentSummary}
-                        learnerName={user?.fullName || ''} // Pass empty string if no name
+                        learnerName={user?.fullName || ''}
                         messages={messages}
                         setMessages={setMessages}
                         addMessage={addMessage}
@@ -655,7 +624,7 @@ export default function Home() {
                         videoGenerationDuration={videoGenerationDuration}
                         onBack={handleBackFromLearningView}
                         onGenerateVideo={handleGenerateVideo}
-                        generatedSlidesCount={generatedSlides?.length ?? 0}
+                        generatedSlides={generatedSlides} // Pass generatedSlides for quiz
                         onRegenerateVideo={() => setVideoPanelState('idle')}
                         onDownloadVideo={() => {
                              if (videoUrl && videoUrl.startsWith('data:')) {
@@ -668,11 +637,13 @@ export default function Home() {
                                 toast({ title: "Downloading...", description: "Video download started. Large files may take time." });
                             } else if (videoUrl) {
                                 window.open(videoUrl, '_blank');
+                            } else {
+                                toast({ title: "Download Error", description: "No video URL available to download.", variant: "destructive"});
                             }
                         }}
                     />
                 );
-            case 'error': // General error state if needed
+            case 'error':
             default:
                 return <ErrorView onBack={handleBackToLanding} message="An unexpected application error occurred." />;
         }
@@ -680,7 +651,6 @@ export default function Home() {
 
     return (
         <>
-          {/* Header */}
           <header className="fixed top-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-lg border-b border-border/30 z-50 flex items-center justify-between px-4 md:px-6 shadow-sm">
             <div className="flex items-center gap-2">
               <img src={logoUrl} alt="Unstop Logo" className="h-8 w-auto" />
@@ -703,7 +673,6 @@ export default function Home() {
             </div>
           </header>
 
-          {/* Main Content */}
           <main className={mainContainerClasses}>
             <div className={contentWrapperClasses}>
               <Suspense fallback={
