@@ -324,7 +324,7 @@ const generateSlidesFlow = ai.defineFlow(
     },
     async (input) => {
         // Optionally select a specific model variant if needed
-        const model = 'googleai/gemini-2.0-flash'; // Use 2.0 flash as requested
+        const model = 'googleai/gemini-2.0-flash-lite'; // Use 2.0 flash as requested
 
         const response = await slidesPrompt(input, { model }); // Pass input and optional model override
 
