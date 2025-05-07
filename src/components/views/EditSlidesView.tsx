@@ -33,7 +33,6 @@ export default function EditSlidesView({
   const [isValidJson, setIsValidJson] = useState(true);
   const { toast } = useToast();
 
-  // Initialize textarea with the current slide structure
   useEffect(() => {
     try {
       setJsonString(JSON.stringify({ slides: initialSlides }, null, 2));
@@ -47,15 +46,12 @@ export default function EditSlidesView({
     }
   }, [initialSlides]);
 
-  // Validate JSON as the user types
   const handleJsonChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newJsonString = event.target.value;
     setJsonString(newJsonString);
     try {
       const parsed = JSON.parse(newJsonString);
-      // Basic validation: check if it has a 'slides' array
       if (parsed && Array.isArray(parsed.slides)) {
-          // Further validation could be added here (e.g., using Zod schema if needed)
           setParseError(null);
           setIsValidJson(true);
       } else {
@@ -67,7 +63,6 @@ export default function EditSlidesView({
     }
   };
 
-  // Handle saving the edited JSON
   const handleSaveChanges = () => {
     if (!isValidJson) {
       toast({
@@ -80,7 +75,7 @@ export default function EditSlidesView({
     try {
       const parsedData = JSON.parse(jsonString);
       if (parsedData && Array.isArray(parsedData.slides)) {
-        onSave(parsedData.slides); // Pass the slides array back
+        onSave(parsedData.slides);
       } else {
         throw new Error("Invalid structure after parsing: Missing 'slides' array.");
       }
@@ -97,12 +92,12 @@ export default function EditSlidesView({
   const fullTitle = lessonName ? `${courseName} - ${lessonName}` : courseName;
 
   return (
-    <div className="w-full h-[calc(100vh-6rem)] flex flex-col animate-fade-in bg-card/70 backdrop-blur-md rounded-lg shadow-xl border border-primary/20 p-4">
+    // This div will now take the height from its parent, which is set by contentWrapperClasses in page.tsx
+    <div className="w-full h-full flex flex-col animate-fade-in bg-card/70 backdrop-blur-md rounded-lg shadow-xl border border-primary/20 p-4">
       <div className="flex items-center justify-between mb-4 px-2 pt-2 flex-shrink-0">
         <h1 className="text-xl md:text-2xl font-bold text-primary header-glow">
           Edit Slides: {fullTitle}
         </h1>
-        {/* Cancel button moved to footer */}
       </div>
       <Card className="flex-grow flex flex-col overflow-hidden border-none shadow-none bg-transparent">
         <CardContent className="flex-grow flex flex-col p-0 relative">
@@ -118,7 +113,7 @@ export default function EditSlidesView({
                 onChange={handleJsonChange}
                 placeholder="Enter or paste slide JSON here..."
                 className={cn(
-                  "w-full h-full min-h-[60vh] resize-none font-mono text-sm p-4 rounded-md",
+                  "w-full h-full min-h-[calc(100vh-16rem)] resize-none font-mono text-sm p-4 rounded-md", // Ensure textarea takes available height
                   "bg-muted/30 border focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50",
                   !isValidJson ? "border-destructive focus:ring-destructive/50 focus:border-destructive/50" : "border-border/50"
                 )}

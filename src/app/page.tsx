@@ -2,16 +2,16 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef, useContext, Suspense } from 'react';
-import { Loader2, LogIn, LogOut, ArrowLeft, Video, Bot, BookOpen, Rocket } from 'lucide-react';
+import { Loader2, LogIn, LogOut, ArrowLeft, Video, Bot, BookOpen, Rocket, ChevronRight, Edit3, FileSpreadsheet, CheckSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import * as XLSX from 'xlsx';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { SlidesOutput } from '@/ai/flows/generate-slides';
-import type { SummarizeLearningContentOutput } from '@/ai/flows/summarize-learning-content';
+// import type { SummarizeLearningContentOutput } from '@/ai/flows/summarize-learning-content'; // Not directly needed
 import { AuthContext } from '@/context/AuthContext';
 import type { Message, ChatInterfaceHandle } from '@/components/chat/ChatInterface';
-import { generateSlidesAction, summarizeSlidesAction } from '@/actions/courseActions';
+import { generateSlidesAction, summarizeContentAction, generateTextualContentAction } from '@/actions/courseActions';
 import { generateVideoAction } from '@/actions/videoActions';
 import { VideoPlayer } from '@/components/video/VideoPlayer';
 
@@ -26,6 +26,7 @@ import GeneratingSlidesView from '@/components/views/GeneratingSlidesView';
 import SlidesView from '@/components/views/SlidesView';
 import EditSlidesView from '@/components/views/EditSlidesView';
 import SummarizingContentView from '@/components/views/SummarizingContentView';
+import GeneratingTextualContentView from '@/components/views/GeneratingTextualContentView';
 import LearningView from '@/components/views/LearningView';
 import ErrorView from '@/components/views/ErrorView';
 
@@ -39,13 +40,17 @@ export default function Home() {
   const [isClient, setIsClient] = useState(false);
   const [courseName, setCourseName] = useState<string>('');
   const [courseStructure, setCourseStructure] = useState<CourseModule[]>([]);
-  const [selectedLesson, setSelectedLesson] = useState<{ name: string; type: 'Module' | 'Sub Module'; description?: string } | null>(null);
+  const [selectedLesson, setSelectedLesson] = useState<{ name: string; type: 'Module' | 'Sub Module'; description?: string; id?: string } | null>(null);
   const [generatedSlides, setGeneratedSlides] = useState<SlidesOutput['slides'] | null>(null);
-  const [contentSummary, setContentSummary] = useState<string | null>(null);
+  
+  // Store separate summaries
+  const [videoContentSummary, setVideoContentSummary] = useState<string | null>(null);
+  const [textContentSummary, setTextContentSummary] = useState<string | null>(null);
+  
+  const [textualLessonContent, setTextualLessonContent] = useState<string | null>(null);
   const chatInterfaceRef = useRef<ChatInterfaceHandle>(null);
   const { toast } = useToast();
 
-  // --- State specific to Learning View ---
   const [videoPanelState, setVideoPanelState] = useState<VideoPanelState>('hidden');
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [videoError, setVideoError] = useState<string | null>(null);
@@ -53,7 +58,8 @@ export default function Home() {
   const [isChatSetupComplete, setIsChatSetupComplete] = useState(false);
   const isGeneratingVideoRef = useRef(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  // --- End Learning View State ---
+  const [rightPanelDisplayMode, setRightPanelDisplayMode] = useState<'text' | 'video'>('text');
+
 
   const logoUrl = "https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/branding-guidelines/logos/white/Unstop-Logo-White-Large.png";
 
@@ -71,11 +77,28 @@ export default function Home() {
        setVideoUrl(null);
        setVideoError(null);
        setVideoGenerationDuration(null);
-       setIsChatSetupComplete(false);
        isGeneratingVideoRef.current = false;
-       setMessages([]);
      }
    }, [appState]);
+
+    useEffect(() => {
+        if (messages.length > 0) {
+            const lastMessage = messages[messages.length - 1];
+            if (lastMessage.sender === 'ai' && typeof lastMessage.text === 'string') {
+                // Check for AI message indicating video generation failure and suggesting to switch to notes
+                if (lastMessage.text.includes("Let's stick with the lesson notes for now; I'll make sure you're on the 'Read Lesson' tab.")) {
+                    setRightPanelDisplayMode('text');
+                    setVideoPanelState('idle'); // Reset video panel so user can try generating again if they wish
+                    toast({
+                        title: "Switched to Lesson Notes",
+                        description: "There was an issue with video generation. Please use the lesson notes.",
+                        variant: "default",
+                    });
+                }
+            }
+        }
+    }, [messages, toast]);
+
 
    const handleStart = () => {
     if (user) {
@@ -102,7 +125,12 @@ export default function Home() {
     setCourseStructure([]);
     setSelectedLesson(null);
     setGeneratedSlides(null);
-    setContentSummary(null);
+    setVideoContentSummary(null);
+    setTextContentSummary(null);
+    setTextualLessonContent(null);
+    setMessages([]);
+    setIsChatSetupComplete(false);
+    setRightPanelDisplayMode('text');
   }
 
   const handleBackToLanding = () => {
@@ -114,7 +142,9 @@ export default function Home() {
     setAppState('structure');
     setSelectedLesson(null);
     setGeneratedSlides(null);
-    setContentSummary(null);
+    setVideoContentSummary(null);
+    setTextContentSummary(null);
+    setTextualLessonContent(null);
   }
 
    const handleBackFromLearningView = () => {
@@ -133,6 +163,9 @@ export default function Home() {
       setGeneratedSlides(editedSlides);
       setAppState('slides');
       toast({ title: "Success", description: "Slide structure updated.", variant: "default" });
+      setVideoContentSummary(null); // Invalidate previous summaries
+      setTextContentSummary(null);
+      setTextualLessonContent(null);
   }
 
   const handleCancelEdit = () => {
@@ -197,7 +230,7 @@ export default function Home() {
             }
             const maxIndex = Math.max(contentIndex, typeIndex, detailsIndex === -1 ? -1 : detailsIndex);
             if (row.length <= maxIndex) {
-                 console.warn(`[Row ${rowIndex}] Skipping: Row has fewer columns (${row.length}) than required. Needs at least ${maxIndex + 1} columns for Content/Type${detailsIndex !== -1 ? '/Details' : ''}.`);
+                 console.warn(`[Row ${rowIndex}] Skipping: Row has fewer columns (${row.length}) than required for all specified headers. Content=${row[contentIndex]}, Type=${row[typeIndex]}, Details=${row[detailsIndex]}`);
                  return null;
             }
 
@@ -209,9 +242,10 @@ export default function Home() {
             const normalizedType = typeRaw?.toLowerCase().replace(/[-\s]+/g, '');
             if (normalizedType === 'module') {
                 type = 'Module';
-            } else if (normalizedType === 'submodule') {
+            } else if (normalizedType === 'submodule' || normalizedType === 'sub-module') {
                 type = 'Sub Module';
             }
+
 
             if (!content) {
                  console.warn(`[Row ${rowIndex}] Skipping: Missing or empty 'Content'. Value was: '${row[contentIndex]}'`);
@@ -240,7 +274,7 @@ export default function Home() {
            console.error("No valid Module or Sub Module rows found after parsing. Check data rows and headers.");
            toast({
              title: 'Parsing Issue',
-             description: "No valid 'Module' or 'Sub Module' rows found. Please check the 'Type' column and ensure 'Content' is not empty.",
+             description: "No valid 'Module' or 'Sub Module' rows found. Please check the 'Type' column (should be 'Module' or 'Sub Module') and ensure 'Content' is not empty.",
              variant: 'destructive',
              duration: 8000,
            });
@@ -252,7 +286,7 @@ export default function Home() {
     const handleCourseSubmit = (name: string, file: File | null) => {
         setCourseName(name);
         setAppState('parsing');
-        setCourseStructure([]);
+        setCourseStructure([]); 
 
         if (!file) {
           toast({ title: 'File Error', description: 'No file was selected.', variant: 'destructive' });
@@ -274,7 +308,7 @@ export default function Home() {
               console.log("Parsing CSV file...");
               const text = new TextDecoder("utf-8").decode(fileData as ArrayBuffer);
               const cleanText = text.charCodeAt(0) === 0xFEFF ? text.substring(1) : text;
-              const workbook = XLSX.read(cleanText, { type: 'string', raw: false });
+              const workbook = XLSX.read(cleanText, { type: 'string', raw: false }); 
               const sheetName = workbook.SheetNames[0];
               if (!sheetName) throw new Error("Could not process CSV data (No sheet found).");
               const worksheet = workbook.Sheets[sheetName];
@@ -288,7 +322,7 @@ export default function Home() {
               if (!sheetName) throw new Error("Could not find any sheets in the Excel file.");
               const worksheet = workbook.Sheets[sheetName];
               if (!worksheet) throw new Error(`Sheet "${sheetName}" could not be accessed.`);
-              const excelData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
+              const excelData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false }); 
               if (!excelData || excelData.length === 0) throw new Error("Excel sheet appears empty or could not be parsed.");
               parsedStructure = parseDataToStructure(excelData);
             } else {
@@ -298,7 +332,7 @@ export default function Home() {
             if (parsedStructure.length > 0) {
               console.log(`Successfully parsed ${parsedStructure.length} modules/sub-modules.`);
               setCourseStructure(parsedStructure);
-              setTimeout(() => setAppState('structure'), 500);
+              setTimeout(() => setAppState('structure'), 500); 
             } else {
                console.log("Parsing resulted in empty structure, returning to setup.");
                setTimeout(() => setAppState('setup'), 500);
@@ -312,7 +346,7 @@ export default function Home() {
               variant: 'destructive',
               duration: 7000,
             });
-            setAppState('setup');
+            setAppState('setup'); 
           }
         };
         reader.onerror = (error) => {
@@ -320,7 +354,7 @@ export default function Home() {
           toast({ title: 'File Reading Error', description: 'Could not read the selected file.', variant: 'destructive' });
           setAppState('setup');
         };
-        reader.readAsArrayBuffer(file);
+        reader.readAsArrayBuffer(file); 
     };
 
     const handleStartLesson = async (module: CourseModule) => {
@@ -328,9 +362,13 @@ export default function Home() {
           toast({ title: "Information", description: "AI features are available for Sub Modules.", variant: "default" });
           return;
         }
-        setSelectedLesson({ name: module.content, type: module.type, description: module.details });
-        setGeneratedSlides(null);
-        setContentSummary(null);
+        setSelectedLesson({ name: module.content, type: module.type, description: module.details, id: module.id });
+        setGeneratedSlides(null); 
+        setVideoContentSummary(null);
+        setTextContentSummary(null);
+        setTextualLessonContent(null);
+        setMessages([]); 
+        setIsChatSetupComplete(false); 
         setAppState('generating_slides');
 
         try {
@@ -356,7 +394,7 @@ export default function Home() {
                 variant: 'destructive',
                 duration: 7000,
             });
-            setAppState('structure');
+            setAppState('structure'); 
         }
     };
 
@@ -370,55 +408,84 @@ export default function Home() {
           return;
         }
 
-        setAppState('summarizing_content');
+        setAppState('summarizing_content'); // This state now covers all summary and content generation
 
         try {
-          const summaryResult = await summarizeSlidesAction({
+          // 1. Generate Textual Content (Markdown) from Slides
+          setAppState('generating_textual_content'); // Indicate textual content generation
+          const textualContentResult = await generateTextualContentAction({
+            slides: generatedSlides,
+            lessonName: selectedLesson.name,
+          });
+
+          if (!textualContentResult.success || !textualContentResult.data?.markdownContent) {
+             throw new Error(textualContentResult.error || 'Textual lesson content generation failed.');
+          }
+          const currentTextualLessonContent = textualContentResult.data.markdownContent;
+          setTextualLessonContent(currentTextualLessonContent);
+          console.log("Displayable textual lesson content generated successfully.");
+
+          // 2. Summarize Slides for Video Context
+          setAppState('summarizing_content'); // Switch back to summarizing for UI text
+          const slideSummaryResult = await summarizeContentAction({
             slides: generatedSlides,
             submoduleName: selectedLesson.name,
           });
 
-          if (summaryResult.success && summaryResult.data?.summary) {
-            console.log("Content summarized successfully.");
-            setContentSummary(summaryResult.data.summary);
-            const learnerName = user?.fullName || '';
-            const initialMsgs = getInitialMessages(courseName, selectedLesson.name, summaryResult.data.summary, learnerName);
-            setMessages(initialMsgs);
-            setAppState('learning_view');
-          } else {
-            throw new Error(summaryResult.error || 'Content summarization failed or returned empty summary.');
+          if (!slideSummaryResult.success || !slideSummaryResult.data?.summary) {
+            throw new Error(slideSummaryResult.error || 'Content summarization for video context failed.');
           }
+          setVideoContentSummary(slideSummaryResult.data.summary);
+          console.log("AI Tutor content summary for video/slides generated successfully.");
+
+          // 3. Summarize Textual Content for Text Context
+          const textSummaryResult = await summarizeContentAction({
+            textualLessonContent: currentTextualLessonContent,
+            submoduleName: selectedLesson.name,
+          });
+           if (!textSummaryResult.success || !textSummaryResult.data?.summary) {
+            throw new Error(textSummaryResult.error || 'Content summarization for textual lesson failed.');
+          }
+          setTextContentSummary(textSummaryResult.data.summary);
+          console.log("AI Tutor content summary for textual lesson generated successfully.");
+
+
+          const learnerNameForChat = user?.fullName || '';
+          // Initialize with textual content summary as "Read Lesson" is default
+          const initialMsgs = getInitialMessages(courseName, selectedLesson.name, textSummaryResult.data.summary, learnerNameForChat);
+          setMessages(initialMsgs);
+
+          setAppState('learning_view');
+          setRightPanelDisplayMode('text'); // Default to text view
+
         } catch (error) {
-          console.error('Error summarizing content:', error);
-          toast({ title: 'Content Summarization Failed', description: error instanceof Error ? error.message : 'Unknown error.', variant: 'destructive' });
-          setAppState('slides');
+          console.error('Error during pre-learning setup:', error);
+          toast({ title: 'Learning Environment Setup Failed', description: error instanceof Error ? error.message : 'Unknown error.', variant: "destructive" });
+          setAppState('slides'); 
         }
     };
 
-    const getInitialMessages = (course: string, lesson: string, summary: string, learnerName: string): Message[] => {
+    const getInitialMessages = (course: string, lesson: string, summaryForTutor: string, learnerName: string): Message[] => {
         const baseMessages: Message[] = [
             {
                 id: `system-summary-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
                 sender: 'system',
-                text: summary,
+                text: summaryForTutor,
                 timestamp: Date.now(),
-                hidden: true,
+                hidden: true, 
             },
         ];
 
         if (learnerName) {
+             const isQuizLesson = lesson.toLowerCase().includes('quiz');
+             const introText = isQuizLesson
+                ? `Hey ${learnerName.split(' ')[0]}! I'm Rookie & Pookie. We're about to start the quiz for **${lesson}** in **${course}**. You can ask me any questions before you begin or during the quiz! Ready?`
+                : `Hey ${learnerName.split(' ')[0]}! I'm Rookie & Pookie, ready to help with **${lesson}** in **${course}**. What are you curious about first? You can read the lesson content on the right, or click 'Generate Video' for an overview! ✨`;
+
             baseMessages.push({
-                id: `ai-intro-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+                id: `ai-initial-intro-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
                 sender: 'ai',
-                text: `Hey ${learnerName.split(' ')[0]}! I'm Rookie & Pookie, ready to help with **${lesson}** in **${course}**. What's your main goal or question for this lesson? 🤔`,
-                timestamp: Date.now(),
-                hidden: false,
-            });
-        } else {
-             baseMessages.push({
-                id: `ai-intro-name-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
-                sender: 'ai',
-                text: `Hey there! I'm Rookie & Pookie, ready to help with **${lesson}** in **${course}**. What name do you go by? 🧑‍🎓`,
+                text: introText,
                 timestamp: Date.now(),
                 hidden: false,
             });
@@ -426,20 +493,16 @@ export default function Home() {
         return baseMessages;
     };
 
+
     const handleChatSetupComplete = () => {
-        console.log("Chat setup complete, showing video/quiz panel.");
+        console.log("Chat setup complete, showing video/quiz/text panel.");
         setIsChatSetupComplete(true);
-        if (selectedLesson && selectedLesson.name.toLowerCase().includes('quiz')) {
-            // No automatic video generation for quiz
-        } else {
-            setVideoPanelState('idle');
-        }
     };
 
      const handleGenerateVideo = async () => {
         if (!generatedSlides || generatedSlides.length === 0) {
             toast({ title: "Error", description: "Slide data is not available to generate video.", variant: "destructive" });
-            setVideoPanelState('idle');
+            setVideoPanelState('idle'); 
             return;
         }
         if (isGeneratingVideoRef.current) {
@@ -448,73 +511,105 @@ export default function Home() {
         }
 
         setVideoPanelState('generating_video');
-        setVideoUrl(null);
+        setVideoUrl(null); 
         setVideoError(null);
 
-        const estimatedDuration = Math.max(10, generatedSlides.length * 4);
+        const estimatedDuration = Math.max(10, generatedSlides.length * 4); 
         setVideoGenerationDuration(estimatedDuration);
-
         isGeneratingVideoRef.current = true;
 
         const systemMessageText = `<<Unstop>> The video generation process has begun! It will take approximately ${estimatedDuration} seconds.`;
-        console.log("Simulating hidden system input for video generation start:", systemMessageText);
         if (chatInterfaceRef.current) {
-            chatInterfaceRef.current.simulateUserInput(systemMessageText, true);
+            chatInterfaceRef.current.simulateUserInput(systemMessageText, true); 
         } else {
             console.warn("ChatInterface ref not available to send video generation system message.");
         }
 
-        generateVideoAction({ slides: generatedSlides })
-            .then(videoResult => {
-                if (videoResult.success && videoResult.videoUrl) {
-                    console.log("Video Generation Successful:", videoResult.videoUrl ? 'URL received' : 'No URL');
-                    setVideoUrl(videoResult.videoUrl);
-                    setVideoPanelState('video_ready');
-                    const completionMessage = "<<Unstop>> Video generation complete.";
-                    if (chatInterfaceRef.current) {
-                        chatInterfaceRef.current.simulateUserInput(completionMessage, true);
-                    }
-                } else {
-                    console.error('Video Generation Action Error:', videoResult.error);
-                    const errorMsg = videoResult.error || 'Failed to generate video. The process may have timed out or encountered an error.';
-                    setVideoError(errorMsg);
-                    setVideoPanelState('video_error');
-                    toast({ title: 'Video Generation Failed', description: errorMsg, variant: 'destructive', duration: 10000 });
-                    const failureMessage = `<<Unstop>> Video generation failed: ${errorMsg}`;
-                    if (chatInterfaceRef.current) {
-                        chatInterfaceRef.current.simulateUserInput(failureMessage, true);
-                    }
+        try {
+            const videoResult = await generateVideoAction({ slides: generatedSlides });
+            if (videoResult.success && videoResult.videoUrl) {
+                console.log("Video Generation Successful:", videoResult.videoUrl ? 'URL received' : 'No URL');
+                setVideoUrl(videoResult.videoUrl);
+                setVideoPanelState('video_ready');
+                const completionMessage = "<<Unstop>> Video generation complete.";
+                if (chatInterfaceRef.current) {
+                    chatInterfaceRef.current.simulateUserInput(completionMessage, true);
                 }
-            })
-            .catch(error => {
-                console.error('Exception during video generation process:', error);
-                const errorMsg = error instanceof Error ? error.message : 'An unknown error occurred during video generation.';
+            } else {
+                console.error('Video Generation Action Error:', videoResult.error, videoResult.errors);
+                const errorMsg = videoResult.error || (videoResult.errors?.[0]?.message) || 'Failed to generate video. The process may have timed out or encountered an error.';
+                setVideoError(errorMsg); // Not used directly by user, but good for debugging
+                // The AI will handle telling the user to switch to notes.
+                const failureMessage = `<<Unstop>> Video generation failed: ${errorMsg}`;
+                if (chatInterfaceRef.current) {
+                    chatInterfaceRef.current.simulateUserInput(failureMessage, true);
+                }
+                // UI will switch based on AI's response via useEffect
+            }
+        } catch (error) {
+            console.error('Exception during video generation process:', error);
+            const errorMsg = error instanceof Error ? error.message : 'An unknown error occurred during video generation.';
+            const detailedError = errorMsg.includes('python3: not found') || errorMsg.includes('/usr/bin/env: ‘python3’: No such file or directory') || errorMsg.includes('python: command not found')
+                ? "Could not find 'python3' command. Ensure Python 3 and necessary libraries (moviepy, Wand, etc.) are installed and in your system's PATH for video generation."
+                : errorMsg;
+            setVideoError(detailedError); // For debugging
+            // The AI will handle telling the user to switch to notes.
+            const errorMessageText = `<<Unstop>> Video generation error: ${detailedError}`;
+            if (chatInterfaceRef.current) {
+                chatInterfaceRef.current.simulateUserInput(errorMessageText, true);
+            }
+             // UI will switch based on AI's response via useEffect
+        } finally {
+            isGeneratingVideoRef.current = false;
+            setVideoGenerationDuration(null); 
+            console.log("Video generation process finished (or failed).");
+        }
+    };
 
-                 if (errorMsg.includes('command not found') || errorMsg.includes('/usr/bin/env: python3:') || errorMsg.includes('no such file or directory')) {
-                     const detailedError = "Could not find 'python3' command or required dependencies. Ensure Python 3 and necessary libraries (moviepy, Wand, etc.) are installed and in your system's PATH for video generation.";
-                     setVideoError(detailedError);
-                     toast({ title: 'Python/Dependency Error', description: detailedError, variant: 'destructive', duration: 10000 });
-                      const errorMessageText = `<<Unstop>> Video generation error: ${detailedError}`;
-                      if (chatInterfaceRef.current) {
-                          chatInterfaceRef.current.simulateUserInput(errorMessageText, true);
-                      }
-                 } else {
-                    setVideoError(errorMsg);
-                    toast({ title: 'Video Generation Error', description: errorMsg, variant: 'destructive', duration: 10000 });
-                      const errorMessageText = `<<Unstop>> Video generation error: ${errorMsg}`;
-                      if (chatInterfaceRef.current) {
-                          chatInterfaceRef.current.simulateUserInput(errorMessageText, true);
-                      }
-                 }
-                 setVideoPanelState('video_error');
-            })
-            .finally(() => {
-                isGeneratingVideoRef.current = false;
-                setVideoGenerationDuration(null);
-                console.log("Video generation process finished (or failed).");
+    const handleGoToNextSubmodule = (markCurrentCompleted: boolean = true) => {
+        if (!selectedLesson || !courseStructure) {
+            toast({ title: "Error", description: "Cannot determine the next submodule.", variant: "destructive" });
+            setAppState('structure'); 
+            return;
+        }
+        
+        if (markCurrentCompleted) {
+            const updatedStructure = courseStructure.map(mod => {
+                if (mod.id === selectedLesson.id && mod.type === 'Sub Module') {
+                    return { ...mod, completed: true };
+                }
+                return mod;
             });
+            setCourseStructure(updatedStructure);
+             console.log(`Marked submodule ${selectedLesson.name} (ID: ${selectedLesson.id}) as completed.`);
+        }
 
-        console.log("Video generation started in the background.");
+
+        const currentIndex = courseStructure.findIndex(
+            (mod) => mod.type === 'Sub Module' && mod.id === selectedLesson.id
+        );
+
+        if (currentIndex === -1) {
+            toast({ title: "Error", description: "Current submodule not found in course structure.", variant: "destructive" });
+            setAppState('structure');
+            return;
+        }
+
+        let nextSubmodule: CourseModule | null = null;
+        for (let i = currentIndex + 1; i < courseStructure.length; i++) {
+            if (courseStructure[i].type === 'Sub Module') {
+                nextSubmodule = courseStructure[i];
+                break;
+            }
+        }
+
+        if (nextSubmodule) {
+            toast({ title: "Moving to Next Submodule", description: `Loading: ${nextSubmodule.content}`, variant: "default" });
+            handleStartLesson(nextSubmodule); 
+        } else {
+            toast({ title: "Course Complete!", description: "You've finished all submodules in this course.", variant: "default" });
+            setAppState('structure'); 
+        }
     };
 
 
@@ -526,24 +621,37 @@ export default function Home() {
         );
     }
 
-    const isFullScreenState = ['learning_view', 'editing_slides'].includes(appState);
+    const isPageLikeFullScreenHeight = [
+        'structure', 'slides', 'editing_slides',
+        'generating_slides', 'summarizing_content', 'generating_textual_content'
+    ].includes(appState);
+
+    const isTrueFullScreenState = ['learning_view'].includes(appState);
+
+
     const mainContainerClasses = cn(
-        "flex flex-col items-center perspective overflow-hidden",
-        "pt-16",
-        isFullScreenState
-            ? "w-full h-screen p-0 justify-start"
-            : "min-h-screen p-4 md:p-8 lg:p-12 justify-center",
-        appState === 'landing' ? "p-0 md:p-0 lg:p-0 pt-16" : ""
+        "flex flex-col items-center perspective overflow-hidden w-full",
+        "pt-16", 
+        (isTrueFullScreenState || isPageLikeFullScreenHeight)
+            ? "h-[calc(100vh-4rem)] justify-start" 
+            : "min-h-[calc(100vh-4rem)] justify-center", 
+        (isTrueFullScreenState || appState === 'landing')
+            ? "px-0 pb-0" 
+            : "px-4 pb-4 md:px-8 md:pb-8 lg:px-12 lg:pb-12" 
     );
+
     const contentWrapperClasses = cn(
         "relative w-full transition-all duration-700 ease-in-out",
-        isFullScreenState
-            ? "h-full max-w-none"
-            : "max-w-lg",
-        appState === 'landing' && "max-w-none",
-        (appState === 'structure' || appState === 'slides' || appState === 'generating_slides' || appState === 'summarizing_content') && "max-w-4xl",
-        appState === 'parsing' && "max-w-2xl"
+        (isTrueFullScreenState || isPageLikeFullScreenHeight) ? "h-full" : "", 
+        (isTrueFullScreenState || appState === 'landing')
+            ? "max-w-none" 
+            : (appState === 'structure' || appState === 'slides' || appState === 'editing_slides' || appState === 'generating_slides' || appState === 'summarizing_content' || appState === 'generating_textual_content')
+                ? "max-w-4xl" 
+                : (appState === 'parsing')
+                    ? "max-w-2xl" 
+                    : "max-w-lg" 
     );
+
 
     const renderContent = () => {
         if (!user && appState !== 'landing' && appState !== 'login' && appState !== 'launching') {
@@ -567,7 +675,7 @@ export default function Home() {
                         courseName={courseName}
                         modules={courseStructure}
                         onStartLesson={handleStartLesson}
-                        onBack={handleBackToLanding}
+                        onBack={handleBackToLanding} 
                      />
                  );
             case 'generating_slides':
@@ -596,21 +704,31 @@ export default function Home() {
                 );
             case 'summarizing_content':
                  return <SummarizingContentView courseName={courseName} lessonName={selectedLesson?.name} />;
+            case 'generating_textual_content':
+                 return <GeneratingTextualContentView courseName={courseName} lessonName={selectedLesson?.name} />;
              case 'learning_view':
-                if (!selectedLesson || !courseName || !contentSummary) {
-                    console.error("Missing data for learning view, returning to structure.");
+                if (!selectedLesson || !courseName || !textContentSummary || !videoContentSummary || textualLessonContent === null) {
+                    console.error("Missing data for learning view, returning to structure.", {
+                        selectedLesson: !!selectedLesson,
+                        courseName: !!courseName,
+                        textContentSummary: !!textContentSummary,
+                        videoContentSummary: !!videoContentSummary,
+                        textualLessonContent: textualLessonContent !== null,
+                    });
                     if (generatedSlides) setAppState('slides');
                     else if (courseStructure.length > 0) setAppState('structure');
                     else setAppState('setup');
                     toast({ title: "Error", description: "Could not load learning environment data.", variant: "destructive"});
-                    return null;
+                    return null; 
                 }
                 return (
                      <LearningView
                         courseName={courseName}
                         lessonName={selectedLesson.name}
-                        contentSummary={contentSummary}
-                        learnerName={user?.fullName || ''}
+                        textContentSummary={textContentSummary}
+                        videoContentSummary={videoContentSummary}
+                        textualLessonContent={textualLessonContent}
+                        learnerName={user?.fullName || ''} 
                         messages={messages}
                         setMessages={setMessages}
                         addMessage={addMessage}
@@ -624,10 +742,10 @@ export default function Home() {
                         videoGenerationDuration={videoGenerationDuration}
                         onBack={handleBackFromLearningView}
                         onGenerateVideo={handleGenerateVideo}
-                        generatedSlides={generatedSlides} // Pass generatedSlides for quiz
-                        onRegenerateVideo={() => setVideoPanelState('idle')}
+                        generatedSlides={generatedSlides} 
+                        onRegenerateVideo={() => setVideoPanelState('idle')} 
                         onDownloadVideo={() => {
-                             if (videoUrl && videoUrl.startsWith('data:')) {
+                             if (videoUrl && videoUrl.startsWith('data:')) { 
                                 const link = document.createElement('a');
                                 link.href = videoUrl;
                                 link.download = `${courseName.replace(/[^a-zA-Z0-9]/g, '_')}_${selectedLesson.name.replace(/[^a-zA-Z0-9]/g, '_')}_video.mp4`;
@@ -635,15 +753,18 @@ export default function Home() {
                                 link.click();
                                 document.body.removeChild(link);
                                 toast({ title: "Downloading...", description: "Video download started. Large files may take time." });
-                            } else if (videoUrl) {
+                            } else if (videoUrl) { 
                                 window.open(videoUrl, '_blank');
                             } else {
                                 toast({ title: "Download Error", description: "No video URL available to download.", variant: "destructive"});
                             }
                         }}
+                        onNextSubmodule={handleGoToNextSubmodule}
+                        rightPanelDisplayMode={rightPanelDisplayMode}
+                        setRightPanelDisplayMode={setRightPanelDisplayMode}
                     />
                 );
-            case 'error':
+            case 'error': 
             default:
                 return <ErrorView onBack={handleBackToLanding} message="An unexpected application error occurred." />;
         }
@@ -653,7 +774,7 @@ export default function Home() {
         <>
           <header className="fixed top-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-lg border-b border-border/30 z-50 flex items-center justify-between px-4 md:px-6 shadow-sm">
             <div className="flex items-center gap-2">
-              <img src={logoUrl} alt="Unstop Logo" className="h-8 w-auto" />
+              <img src={logoUrl} alt="Unstop Logo" className="h-8 w-auto" /> 
             </div>
             <div className="flex items-center gap-3">
               {user ? (
@@ -675,8 +796,8 @@ export default function Home() {
 
           <main className={mainContainerClasses}>
             <div className={contentWrapperClasses}>
-              <Suspense fallback={
-                <div className="flex items-center justify-center h-[85vh]">
+              <Suspense fallback={ 
+                <div className={cn("flex items-center justify-center", (isTrueFullScreenState || isPageLikeFullScreenHeight) ? "h-full" : "h-[calc(100vh-8rem)]")}>
                   <Loader2 className="h-16 w-16 animate-spin text-primary" />
                 </div>
               }>
@@ -687,3 +808,4 @@ export default function Home() {
         </>
     );
 }
+

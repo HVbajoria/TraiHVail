@@ -4,7 +4,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import SlideDisplay from '@/components/slides/SlideDisplay';
-import { ArrowLeft, Bot, Pencil } from 'lucide-react'; // Added Pencil icon
+import { ArrowLeft, Bot, Pencil } from 'lucide-react';
 import type { SlidesOutput } from '@/ai/flows/generate-slides';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -13,7 +13,7 @@ interface SlidesViewProps {
   lessonName?: string;
   slides: SlidesOutput['slides'] | null;
   onBack: () => void;
-  onEdit: () => void; // Add edit handler prop
+  onEdit: () => void;
   onLaunchLearning: () => void;
 }
 
@@ -22,13 +22,14 @@ export default function SlidesView({
   lessonName,
   slides,
   onBack,
-  onEdit, // Receive edit handler
+  onEdit,
   onLaunchLearning,
 }: SlidesViewProps) {
   const fullTitle = lessonName ? `${courseName} - ${lessonName}` : courseName;
 
   return (
-    <div className="w-full h-[calc(100vh-6rem)] flex flex-col animate-fade-in bg-card/70 backdrop-blur-md rounded-lg shadow-xl border border-primary/20 p-4">
+    // This div will now take the height from its parent, which is set by contentWrapperClasses in page.tsx
+    <div className="w-full h-full flex flex-col animate-fade-in bg-card/70 backdrop-blur-md rounded-lg shadow-xl border border-primary/20 p-4">
       <div className="flex items-center justify-between mb-4 px-2 pt-2 flex-shrink-0">
         <h1 className="text-xl md:text-2xl font-bold text-primary header-glow">
           {fullTitle}
@@ -41,7 +42,6 @@ export default function SlidesView({
         {slides ? <SlideDisplay slides={slides} /> : <p>Loading slides...</p>}
       </ScrollArea>
       <div className="flex justify-center items-center gap-4 mt-auto pt-4 border-t border-border/30">
-        {/* Edit Button */}
         <Button
           onClick={onEdit}
           size="lg"
@@ -55,7 +55,6 @@ export default function SlidesView({
           </span>
         </Button>
 
-        {/* Launch Learning Button */}
         <Button
           onClick={onLaunchLearning}
           size="lg"

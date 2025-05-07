@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -13,7 +14,8 @@ interface StructureViewProps {
 
 export default function StructureView({ courseName, modules, onStartLesson, onBack }: StructureViewProps) {
   return (
-    <div className="h-[calc(100vh-6rem)] w-full">
+    // This div will now take the height from its parent, which is set by contentWrapperClasses in page.tsx
+    <div className="h-full w-full"> 
       <ScrollArea className="h-full w-full rounded-lg border border-border/30 bg-card/50 backdrop-blur-sm p-1 shadow-lg">
         <CourseStructureDisplay
           courseName={courseName}

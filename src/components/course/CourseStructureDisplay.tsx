@@ -8,71 +8,63 @@ import { BookOpen, CheckCircle, Circle, Rocket, ArrowLeft, ChevronDown, Bot } fr
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from '@/lib/utils';
 
-// Update CourseModule type definition
 export type CourseModule = {
   id: string;
   type: 'Module' | 'Sub Module';
-  content: string; // Module or Sub Module name
-  details?: string; // Description
+  content: string; 
+  details?: string; 
   completed: boolean;
 };
 
-// Grouped structure type
 type GroupedModule = CourseModule & { subModules: CourseModule[] };
 
 interface CourseStructureDisplayProps {
   courseName: string;
   modules: CourseModule[];
-  onStartLesson: (module: CourseModule) => void; // Callback for starting the assistant for a sub-module
+  onStartLesson: (module: CourseModule) => void; 
   onBack: () => void;
 }
 
 export default function CourseStructureDisplay({ courseName, modules, onStartLesson, onBack }: CourseStructureDisplayProps) {
-    // Open first module by default, if available
     const defaultOpenModule = useMemo(() => {
         const firstModule = modules.find(m => m.type === 'Module');
         return firstModule ? [firstModule.id] : [];
     }, [modules]);
     const [openModules, setOpenModules] = useState<string[]>(defaultOpenModule);
 
-    // Group modules and sub-modules
     const groupedStructure: GroupedModule[] = useMemo(() => {
         const mainModules: GroupedModule[] = [];
         let currentModule: GroupedModule | null = null;
 
         modules.forEach((item) => {
             if (item.type === 'Module') {
-                // Push previous module if exists
                 if (currentModule) {
                     mainModules.push(currentModule);
                 }
-                // Start new module group
                 currentModule = { ...item, subModules: [] };
             } else if (item.type === 'Sub Module' && currentModule) {
-                // Add sub-module to current module group
                 currentModule.subModules.push(item);
             } else if (item.type === 'Sub Module' && !currentModule) {
-                 // Handle orphaned sub-modules (optional: could create a default 'Misc' module)
                  console.warn(`Orphaned Sub Module found: ${item.content}. Place it under a 'Module' type.`);
-                 // Example: Create a default module if none exists
-                 // if (mainModules.length === 0) {
-                 //     currentModule = { id: 'default-module', type: 'Module', content: 'General Topics', details: '', completed: false, subModules: [] };
-                 //     mainModules.push(currentModule);
-                 // }
-                 // mainModules[mainModules.length - 1].subModules.push(item);
+                 // Optionally create a default module or assign to the last one if any
+                 if (mainModules.length > 0) {
+                     mainModules[mainModules.length -1].subModules.push(item);
+                 } else {
+                     // Create a default module if none exists to house orphaned sub-modules
+                     const defaultMod: GroupedModule = {id: 'default-module-orphans', type: 'Module', content: "Other Topics", completed: false, subModules: [item]};
+                     mainModules.push(defaultMod);
+                     currentModule = defaultMod; // Set currentModule to this new default
+                 }
             }
         });
 
-        // Push the last module group
         if (currentModule) {
             mainModules.push(currentModule);
         }
 
-         console.log("Grouped Structure:", mainModules); // Debug log
         return mainModules;
     }, [modules]);
 
-    // Function to render individual sub-module item
     const renderSubModuleItem = (item: CourseModule) => (
          <div className="p-4 space-y-2">
             <div className="flex items-start justify-between gap-4">
@@ -80,17 +72,15 @@ export default function CourseStructureDisplay({ courseName, modules, onStartLes
                     <div className="flex items-center gap-3">
                         <Rocket className="w-5 h-5 text-primary/80 flex-shrink-0 mt-0.5" />
                         <p className="font-semibold text-foreground text-base">
-                            {item.content} {/* Display Sub Module Name */}
+                            {item.content} 
                         </p>
                     </div>
-                    {/* Display Details (Description) if available */}
                     {item.details && (
                       <p className="text-sm text-muted-foreground pl-8">{item.details}</p>
                     )}
                 </div>
 
-                 {/* Status and Button Column */}
-                 <div className="flex flex-col items-end gap-2 flex-shrink-0 w-32"> {/* Adjusted width */}
+                 <div className="flex flex-col items-end gap-2 flex-shrink-0 w-32">
                      {item.completed ? (
                         <div className="flex items-center gap-1.5 text-green-500 text-xs font-medium">
                             <CheckCircle className="w-4 h-4" />
@@ -103,7 +93,7 @@ export default function CourseStructureDisplay({ courseName, modules, onStartLes
                          </div>
                     )}
                      <Button
-                         onClick={() => onStartLesson(item)} // Launch Slides/Assistant flow for this Sub Module
+                         onClick={() => onStartLesson(item)} 
                          variant={item.completed ? "outline" : "default"}
                          size="sm"
                          className={cn(
@@ -112,8 +102,8 @@ export default function CourseStructureDisplay({ courseName, modules, onStartLes
                          )}
                       >
                           <span className="relative z-10 flex items-center justify-center">
-                              <Bot className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" /> {/* Assistant Icon */}
-                              {item.completed ? 'Review' : 'Start'} {/* Changed text */}
+                              <Bot className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" /> 
+                              {item.completed ? 'Review' : 'Start'}
                           </span>
                       </Button>
                 </div>
@@ -123,8 +113,7 @@ export default function CourseStructureDisplay({ courseName, modules, onStartLes
 
 
   return (
-    // Container is now within a ScrollArea in the parent component (page.tsx)
-    <div className="w-full max-w-3xl animate-fade-in p-4"> {/* Reduced padding to fit better in scroll area */}
+    <div className="w-full max-w-3xl animate-fade-in p-4"> 
         <div className="flex items-center justify-between mb-6 sticky top-0 bg-card/80 backdrop-blur-md py-3 px-4 z-10 rounded-t-lg border-b border-border/30">
              <h1 className="text-2xl font-bold text-primary header-glow">{courseName}</h1>
              <div className="flex items-center gap-2">
@@ -138,27 +127,25 @@ export default function CourseStructureDisplay({ courseName, modules, onStartLes
             type="multiple"
             value={openModules}
             onValueChange={setOpenModules}
-            className="w-full space-y-4 px-2 pb-4" // Add some padding inside the scroll area
+            className="w-full space-y-4 px-2 pb-4" 
         >
             {groupedStructure.map((moduleGroup) => (
                 <AccordionItem key={moduleGroup.id} value={moduleGroup.id} className="border-none">
                     <Card className={cn(
                         "bg-card/80 backdrop-blur-lg border shadow-lg transition-all duration-300 hover:shadow-primary/20 transform hover:-translate-y-px",
-                        moduleGroup.completed ? 'border-primary/40' : 'border-border/30', // Example styling for completed modules
-                        !moduleGroup.completed && 'hover:border-primary/50'
+                        moduleGroup.subModules.every(sm => sm.completed) ? 'border-green-500/40' : 'border-border/30', 
+                        !moduleGroup.subModules.every(sm => sm.completed) && 'hover:border-primary/50'
                     )}>
                         <AccordionTrigger className="w-full p-0 hover:no-underline rounded-t-lg focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                              <CardHeader className={cn(
                                 "flex flex-row items-center justify-between p-4 rounded-t-lg w-full cursor-pointer",
-                                moduleGroup.completed ? 'bg-primary/5 border-b border-primary/15' : 'bg-muted/20 border-b border-border/20'
+                                moduleGroup.subModules.every(sm => sm.completed) ? 'bg-green-500/5 border-b border-green-500/15' : 'bg-muted/20 border-b border-border/20'
                              )}>
                                 <div className="flex items-center gap-3">
                                     <BookOpen className="w-5 h-5 text-primary flex-shrink-0" />
-                                    <span className="text-lg font-semibold text-foreground text-left">{moduleGroup.content}</span> {/* Module Name */}
+                                    <span className="text-lg font-semibold text-foreground text-left">{moduleGroup.content}</span> 
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    {/* Module Status (You might want to calculate this based on sub-modules) */}
-                                    {/* {moduleGroup.completed ? ( ... ) : ( ... )} */}
                                      <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 accordion-chevron" />
                                 </div>
                             </CardHeader>
@@ -169,30 +156,26 @@ export default function CourseStructureDisplay({ courseName, modules, onStartLes
                                 moduleGroup.subModules.map((subModule, index) => (
                                     <div key={subModule.id} className={cn(
                                         "border-t border-border/20",
-                                        index === 0 && "border-t-0" // Remove top border for the first sub-module
+                                        index === 0 && "border-t-0" 
                                         )}>
-                                        {renderSubModuleItem(subModule)} {/* Render sub-module item */}
+                                        {renderSubModuleItem(subModule)} 
                                     </div>
                                 ))
                              ) : (
-                                 // If a Module has no Sub Modules, maybe show a message or make the Module itself actionable?
-                                 // Currently, only Sub Modules have the 'Start' button.
                                  <div className="p-4 text-center text-sm text-muted-foreground border-t border-border/20">
                                      No sub-modules defined for this module.
-                                     {/* Optionally, add a button for the module itself if needed */}
-                                     {/* {renderLessonItem(moduleGroup, false)} */}
                                  </div>
                              )}
                         </AccordionContent>
                     </Card>
                 </AccordionItem>
             ))}
-            {groupedStructure.length === 0 && modules.length > 0 && ( // Show if parsing happened but resulted in no groups
+            {groupedStructure.length === 0 && modules.length > 0 && ( 
                 <Card className="bg-card/70 backdrop-blur-lg border border-border/30 shadow-lg p-6 text-center">
                     <p className="text-muted-foreground">No modules found. Ensure the 'Type' column contains 'Module'.</p>
                 </Card>
             )}
-             {modules.length === 0 && ( // Show if initial modules array is empty (before/after parsing error)
+             {modules.length === 0 && ( 
                 <Card className="bg-card/70 backdrop-blur-lg border border-border/30 shadow-lg p-6 text-center">
                     <p className="text-muted-foreground">Course structure is empty or could not be parsed.</p>
                 </Card>
@@ -201,3 +184,4 @@ export default function CourseStructureDisplay({ courseName, modules, onStartLes
     </div>
   );
 }
+

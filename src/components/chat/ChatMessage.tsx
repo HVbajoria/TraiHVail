@@ -45,7 +45,7 @@ const parseText = (text: string | React.ReactNode): React.ReactNode => {
             const mathContent = segment.slice(2, -2).trim();
             elements.push(
                  <div key={index} className="block my-2 p-2 border border-border/30 rounded bg-muted/20 overflow-x-auto text-center text-sm">
-                    <span>{mathContent}</span> {/* Placeholder */}
+                    <span className="text-2xs">{mathContent}</span> {/* Placeholder */}
                  </div>
             );
         }
@@ -54,7 +54,7 @@ const parseText = (text: string | React.ReactNode): React.ReactNode => {
              if (currentList) { elements.push(<ul key={`list-${index-1}`} className="list-disc pl-5 space-y-1 my-1">{currentList}</ul>); currentList = null; }
             const mathContent = segment.slice(1, -1).trim();
             elements.push(<span key={index} className="mx-1 px-1 py-0.5 bg-muted/30 rounded text-sm font-mono">{mathContent}</span>);
-        }
+        } // Retain text-sm for inline math
         // Match code blocks (```...```)
         else if (segment.startsWith('```') && segment.endsWith('```')) {
              if (currentList) { elements.push(<ul key={`list-${index-1}`} className="list-disc pl-5 space-y-1 my-1">{currentList}</ul>); currentList = null; }

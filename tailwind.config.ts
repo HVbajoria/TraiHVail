@@ -10,10 +10,10 @@ export default {
   ],
   theme: {
   	extend: {
-        backgroundImage: { // Add utility for grid pattern
+        backgroundImage: { 
           'grid-pattern': 'linear-gradient(to right, var(--grid-color, hsl(var(--primary)/0.08)) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color, hsl(var(--primary)/0.08)) 1px, transparent 1px)',
         },
-        backgroundSize: { // Add utility for grid size
+        backgroundSize: { 
           'grid-size': 'var(--grid-size, 60px) var(--grid-size, 60px)',
         },
   		colors: {
@@ -28,7 +28,7 @@ export default {
   				foreground: 'hsl(var(--popover-foreground))'
   			},
   			primary: {
-                DEFAULT: 'hsl(var(--primary))', // Use CSS var now
+                DEFAULT: 'hsl(var(--primary))', 
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
@@ -49,7 +49,7 @@ export default {
   			},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))', // Keep ring variable
+  			ring: 'hsl(var(--ring))', 
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
@@ -60,13 +60,13 @@ export default {
   		},
         fontFamily: {
           sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
-           mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'], // Added mono font stack
+           mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'], 
         },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)',
-            xl: 'calc(var(--radius) + 4px)', // Added xl for chat messages
+            xl: 'calc(var(--radius) + 4px)', 
             '2xl': 'calc(var(--radius) + 8px)',
   		},
   		keyframes: {
@@ -78,35 +78,35 @@ export default {
   				from: { height: 'var(--radix-accordion-content-height)' },
   				to: { height: '0' }
   			},
-            'fade-in': { // Adjusted fade-in
+            'fade-in': { 
                 '0%': { opacity: '0', transform: 'translateY(15px) scale(0.97)' },
                 '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
             },
-            'fade-in-delay': { // Fade in with delay
+            'fade-in-delay': { 
                 '0%': { opacity: '0', transform: 'translateY(10px)' },
                 '50%': { opacity: '0', transform: 'translateY(10px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
             },
-            'gradient-bg': { // Background animation
+            'gradient-bg': { 
                 '0%': { backgroundPosition: '0% 80%, 0% 50%' },
                 '50%': { backgroundPosition: '100% 50%, 100% 50%' },
                 '100%': { backgroundPosition: '0% 80%, 0% 50%' },
             },
-            'grid-scroll': { // Grid background scroll
+            'grid-scroll': { 
                '0%': { backgroundPosition: '0 0' },
-               '100%': { backgroundPosition: 'var(--grid-size, 60px) var(--grid-size, 60px)' }, // Use CSS var
+               '100%': { backgroundPosition: 'var(--grid-size, 60px) var(--grid-size, 60px)' }, 
             },
-            'pulse-glow': { // Subtle pulse glow
+            'pulse-glow': { 
                  '0%, 100%': { filter: 'drop-shadow(0 0 5px hsl(var(--primary) / calc(var(--glow-intensity) * 0.7)))', transform: 'scale(1)' },
                  '50%': { filter: 'drop-shadow(0 0 12px hsl(var(--primary) / calc(var(--glow-intensity) * 1.0)))', transform: 'scale(1.03)' },
             },
-             'rocket-launch-fullscreen': { // Full screen rocket launch
+             'rocket-launch-fullscreen': { 
                 '0%': { transform: 'translateY(50px) rotate(-45deg) scale(0.8)', opacity: '0' },
                 '20%': { transform: 'translateY(0) rotate(-45deg) scale(1)', opacity: '1' },
                 '60%': { transform: 'translateY(-20px) rotate(-45deg) scale(1.1)', opacity: '1' },
                 '100%': { transform: 'translateY(-100vh) rotate(-45deg) scale(1.5)', opacity: '0' },
             },
-            'rocket-takeoff-button': { // Rocket icon animation for button
+            'rocket-takeoff-button': { 
                 '0%': { transform: 'translateY(0) rotate(-45deg)', opacity: '1' },
                 '50%': { transform: 'translateY(-5px) rotate(-45deg)', opacity: '1' },
                 '100%': { transform: 'translateY(-30px) rotate(-45deg) scale(0.5)', opacity: '0' },
@@ -133,11 +133,11 @@ export default {
                 from: { transform: 'rotate(0deg)' },
                 to: { transform: 'rotate(-360deg)' },
              },
-             'radar-spin': { /* Pure spin for hover state */
+             'radar-spin': { 
                 from: { transform: 'rotate(0deg)' },
                 to: { transform: 'rotate(360deg)' },
              },
-             orbit: { // Added orbit keyframe
+             orbit: { 
                  from: { transform: 'rotate(0deg) translateX(110px) rotate(0deg)' },
                  to:   { transform: 'rotate(360deg) translateX(110px) rotate(-360deg)' },
              },
@@ -152,16 +152,16 @@ export default {
             'pulse-glow': 'pulse-glow 3.5s infinite ease-in-out',
             'rocket-launch-fullscreen': 'rocket-launch-fullscreen 2s ease-in-out forwards',
             'rocket-takeoff-button': 'rocket-takeoff-button 0.6s ease-in forwards',
-            'spin': 'spin 1s linear infinite', // Default spin speed
-            'spin-slow': 'spin 3s linear infinite', // Slower spin variant
+            'spin': 'spin 1s linear infinite', 
+            'spin-slow': 'spin 3s linear infinite', 
             'float': 'float var(--float-duration, 15s) infinite ease-in-out',
             'float-delay': 'float-alt var(--float-duration, 18s) infinite ease-in-out',
             'radar-pulse-spin': 'radar-pulse-spin 3.5s ease-in-out infinite',
             'radar-inner-spin': 'radar-inner-spin 5s linear infinite',
             'radar-spin': 'radar-spin 1s linear infinite',
-             orbit: 'orbit linear infinite', // Added orbit animation
+             orbit: 'orbit linear infinite', 
   		},
-        animationDelay: { // Added animation delay utilities
+        animationDelay: { 
             '100ms': '100ms',
             '200ms': '200ms',
             '300ms': '300ms',
@@ -169,7 +169,7 @@ export default {
             '700ms': '700ms',
             '1000ms': '1000ms',
         },
-        animationDuration: { // Added animation duration utilities
+        animationDuration: { 
              '2s': '2s',
              '3s': '3s',
              '5s': '5s',
@@ -177,10 +177,37 @@ export default {
              '8s': '8s',
              '10s': '10s',
         },
+        typography: ({ theme }: { theme: any }) => ({ // Add typography plugin configuration
+          DEFAULT: {
+            css: {
+              '--tw-prose-body': theme('colors.foreground / 0.9'),
+              '--tw-prose-headings': theme('colors.primary / 0.9'),
+              '--tw-prose-lead': theme('colors.foreground / 0.8'),
+              '--tw-prose-links': theme('colors.primary'),
+              '--tw-prose-bold': theme('colors.foreground'),
+              '--tw-prose-counters': theme('colors.primary / 0.8'),
+              '--tw-prose-bullets': theme('colors.primary / 0.7'),
+              '--tw-prose-hr': theme('colors.border / 0.5'),
+              '--tw-prose-quotes': theme('colors.primary / 0.8'),
+              '--tw-prose-quote-borders': theme('colors.primary / 0.4'),
+              '--tw-prose-captions': theme('colors.muted.foreground'),
+              '--tw-prose-code': theme('colors.foreground'), // For inline code
+              '--tw-prose-pre-code': theme('colors.foreground'), // For code blocks (text inside)
+              '--tw-prose-pre-bg': theme('colors.muted / 0.5'), // For code blocks (background)
+              '--tw-prose-th-borders': theme('colors.border / 0.7'),
+              '--tw-prose-td-borders': theme('colors.border / 0.4'),
+              // Dark mode specific (already handled by prose-invert from globals.css potentially)
+              '--tw-prose-invert-body': theme('colors.foreground / 0.9'),
+              '--tw-prose-invert-headings': theme('colors.primary / 0.9'),
+              // ... add more customizations as needed
+            },
+          },
+        }),
   	}
   },
   plugins: [
       require("tailwindcss-animate"),
+      require('@tailwindcss/typography'), // Add typography plugin
       function ({ addUtilities, theme }: { addUtilities: any, theme: any }) {
         const delays = theme('animationDelay');
         const delayUtilities = Object.entries(delays).map(([key, value]) => ({
@@ -195,7 +222,7 @@ export default {
          addUtilities(durationUtilities);
 
 
-        addUtilities({ // 3D transforms plugin
+        addUtilities({ 
             '.perspective': {
                 perspective: '1200px',
             },

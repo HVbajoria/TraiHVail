@@ -1,143 +1,144 @@
 {
   "slides": [
     {
-      "content": "Explore the importance of version control and how Git revolutionizes software development.",
+      "content": "Explore GitHub's foundational concepts and its impact on collaborative software development.",
       "slideNumber": 1,
-      "title": "Welcome to Version Control 101",
+      "title": "Welcome to GitHub Overview",
       "type": "title_slide",
-      "subtitle": "Mastering Git for Collaborative Development",
+      "subtitle": "Understanding GitHub's Role in Modern Software Development",
       "transition": "slide_up",
-      "voiceover": "Welcome to Version Control 101! In this module, you'll learn about version control systems and how Git revolutionizes software development."
+      "voiceover": "Welcome to the GitHub Overview module. In this module, you'll learn about GitHub's role in modern software development and how it facilitates collaboration."
     },
     {
-      "content": "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later.",
+      "content": "GitHub is a web-based platform for version control and collaboration. It is used for tracking changes in source code during software development. It offers the distributed version control and source code management functionality of Git, plus its own features.",
       "slideNumber": 2,
-      "title": "What is Version Control?",
+      "title": "What is GitHub?",
       "type": "content_slide",
       "transition": "slide_left",
-      "voiceover": "Version control is a system that records changes to a file or set of files over time. It allows you to recall specific versions later, which is crucial for collaboration and managing code."
+      "voiceover": "GitHub is a web-based platform for version control and collaboration. It is used for tracking changes in source code during software development."
     },
     {
       "points": [
-        "Collaboration"
+        "Version Control"
       ],
       "slideNumber": 3,
-      "title": "Benefits of Version Control",
+      "title": "Key Features of GitHub",
       "type": "unordered_list_slide",
       "transition": "slide_right",
-      "voiceover": "Version control enables seamless collaboration among developers."
+      "voiceover": "GitHub offers several key features, including version control"
     },
     {
       "points": [
-        "Collaboration",
-        "Backup and Restore"
+        "Version Control",
+        "Collaboration"
       ],
       "slideNumber": 4,
-      "title": "Benefits of Version Control",
+      "title": "Key Features of GitHub",
       "type": "unordered_list_slide",
       "transition": "slide_right",
-      "voiceover": "It also acts as a backup, allowing you to restore previous versions of your code."
+      "voiceover": "collaboration"
     },
     {
       "points": [
+        "Version Control",
         "Collaboration",
-        "Backup and Restore",
-        "Change Tracking"
+        "Issue Tracking"
       ],
       "slideNumber": 5,
-      "title": "Benefits of Version Control",
+      "title": "Key Features of GitHub",
       "type": "unordered_list_slide",
       "transition": "slide_right",
-      "voiceover": "Furthermore, version control provides clear change tracking, making it easy to identify who made what changes and when."
+      "voiceover": "issue tracking"
     },
     {
-      "content": "Git is a distributed version control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.",
+      "points": [
+        "Version Control",
+        "Collaboration",
+        "Issue Tracking",
+        "Pull Requests"
+      ],
       "slideNumber": 6,
-      "title": "Introduction to Git",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "Git is a distributed version control system widely used for tracking changes in source code and coordinating work among programmers."
+      "title": "Key Features of GitHub",
+      "type": "unordered_list_slide",
+      "transition": "slide_right",
+      "voiceover": "and pull requests."
     },
     {
       "code": "# Initialize a new Git repository\ngit init\n\n# Add files to the staging area\ngit add .\n\n# Commit the changes with a message\ngit commit -m \"Initial commit\"",
       "slideNumber": 7,
-      "title": "Basic Git Commands",
+      "title": "Basic Git Commands - Part 1",
       "type": "code_slide",
       "lexer": "bash",
       "transition": "slide_right",
-      "voiceover": "Here are some basic Git commands to get you started: git init initializes a new repository, git add adds files to the staging area, and git commit saves the changes with a descriptive message."
+      "voiceover": "Here are some basic Git commands to get you started. First, we initialize a new Git repository, add files to the staging area, and commit the changes with a message."
     },
     {
-      "code": "# Create a new branch\ngit branch feature/new-feature\n\n# Switch to the new branch\ngit checkout feature/new-feature\n\n# Merge changes from feature branch to main\ngit checkout main\ngit merge feature/new-feature",
+      "code": "# Create a new branch\ngit branch feature/new-feature\n\n# Switch to the new branch\ngit checkout feature/new-feature\n\n# Push the branch to GitHub\ngit push origin feature/new-feature",
       "slideNumber": 8,
-      "title": "Branching and Merging",
+      "title": "Basic Git Commands - Part 2",
       "type": "code_slide",
       "lexer": "bash",
       "transition": "slide_right",
-      "voiceover": "Branching allows you to work on new features or bug fixes in isolation. Use git branch to create a new branch, git checkout to switch to it, and git merge to integrate the changes back into the main branch."
-    },
-    {
-      "code": "# Clone a remote repository\ngit clone <repository_url>\n\n# Push local changes to remote repository\ngit push origin <branch_name>\n\n# Pull latest changes from remote repository\ngit pull origin <branch_name>",
-      "slideNumber": 9,
-      "title": "Remote Repositories",
-      "type": "code_slide",
-      "lexer": "bash",
-      "transition": "slide_right",
-      "voiceover": "Git also supports remote repositories, allowing you to collaborate with others. Use git clone to copy a remote repository, git push to upload your local changes, and git pull to download the latest updates."
+      "voiceover": "Next, we create a new branch, switch to the new branch, and push the branch to GitHub."
     },
     {
       "options": [
-        "To track changes to files over time",
-        "To compile code",
-        "To run tests",
-        "To deploy applications"
+        "A social media platform for developers.",
+        "A code editor.",
+        "A web-based platform for version control and collaboration.",
+        "An operating system."
       ],
-      "question": "What is the primary purpose of version control?",
-      "slideNumber": 10,
-      "title": "Quiz Time!",
+      "question": "What is GitHub?",
+      "slideNumber": 9,
+      "title": "Quiz: What is GitHub?",
       "type": "quiz_slide",
       "transition": "slide_down",
-      "voiceover": "Let's check your understanding. What is the primary purpose of version control?"
+      "voiceover": "Let's test your understanding. What is GitHub?"
     },
     {
-      "content": "The correct answer is: To track changes to files over time. Version control systems are designed to record changes to a file or set of files over time so that you can recall specific versions later.",
-      "slideNumber": 11,
+      "content": "The correct answer is: A web-based platform for version control and collaboration. GitHub provides tools for version control using Git, enabling multiple developers to work together on projects.",
+      "slideNumber": 10,
       "title": "Answer and Explanation",
       "type": "content_slide",
       "transition": "slide_left",
-      "voiceover": "The primary purpose of version control is to track changes to files over time, enabling you to revert to previous versions and collaborate effectively."
+      "voiceover": "The correct answer is 'A web-based platform for version control and collaboration.' GitHub is not just a social media platform or a code editor; it's a comprehensive tool for managing and collaborating on code."
     },
     {
-      "content": "Git simplifies collaboration and enables efficient management of code changes. Understanding Git is essential for modern software development.",
-      "slideNumber": 12,
+      "content": "GitHub facilitates collaborative software development through version control, issue tracking, and pull requests.",
+      "slideNumber": 11,
       "title": "Key Takeaways",
       "type": "content_slide",
       "transition": "slide_left",
-      "voiceover": "In summary, Git simplifies collaboration and enables efficient management of code changes. Mastering Git is crucial for modern software development."
+      "voiceover": "To summarize, GitHub facilitates collaborative software development through version control, issue tracking, and pull requests."
     },
     {
       "chartType": "bar",
       "data": [
         {
-          "label": "Commits",
-          "value": 50
+          "label": "Open Source",
+          "value": 60
         },
         {
-          "label": "Branches",
-          "value": 10
-        },
-        {
-          "label": "Merges",
-          "value": 5
+          "label": "Private",
+          "value": 40
         }
       ],
-      "slideNumber": 13,
-      "title": "Git Activity Metrics",
+      "slideNumber": 12,
+      "title": "Repository Type Distribution",
       "type": "chart_slide",
       "transition": "slide_left",
-      "voiceover": "This chart illustrates typical Git activity metrics, showing the number of commits, branches, and merges in a project.",
-      "xLabel": "Activity",
-      "yLabel": "Count"
+      "voiceover": "This chart shows the distribution of repository types on GitHub, with open-source repositories making up a significant portion.",
+      "xLabel": "Repository Type",
+      "yLabel": "Percentage"
+    },
+    {
+      "formula": "Contribution Score = Commits + Issues + Pull Requests",
+      "slideNumber": 13,
+      "title": "GitHub Contribution Score",
+      "type": "formula_slide",
+      "explanation": "This formula represents a simplified way to calculate a user's contribution score on GitHub, based on their commits, opened issues, and pull requests.",
+      "transition": "slide_up",
+      "voiceover": "This formula represents a simplified way to calculate a user's contribution score on GitHub."
     }
   ]
 }

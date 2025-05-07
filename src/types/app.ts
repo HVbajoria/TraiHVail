@@ -9,9 +9,10 @@ export type AppState =
     | 'generating_slides'
     | 'slides'
     | 'editing_slides'
-    | 'summarizing_content'
+    | 'summarizing_content' // For AI Tutor context summary
+    | 'generating_textual_content' // For displayable Markdown lesson content
     | 'learning_view'
-    | 'quiz_view' // Added for quiz-specific view state within learning
+    | 'quiz_view' 
     | 'error';
 
 export type VideoPanelState = 'hidden' | 'idle' | 'generating_video' | 'video_ready' | 'video_error';

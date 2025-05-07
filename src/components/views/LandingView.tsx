@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -19,7 +20,9 @@ const FeatureCard = ({ icon: Icon, title, description }: { icon: React.ElementTy
 
 export default function LandingView({ onStart }: LandingViewProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center w-full min-h-[calc(100vh-4rem)] text-center p-4 md:p-6 lg:p-8 animate-fade-in">
+    // Container styling is now primarily handled by page.tsx's mainContainerClasses and contentWrapperClasses
+    // This div focuses on the content arrangement and animations.
+    <div className="relative flex flex-col items-center justify-center w-full h-full text-center p-4 md:p-6 lg:p-8 animate-fade-in">
       {/* Content Wrapper */}
       <div className="relative z-10 max-w-4xl w-full">
          <Sparkles className="w-12 md:w-16 h-12 md:h-16 text-primary mb-4 mx-auto animate-pulse-glow" />
