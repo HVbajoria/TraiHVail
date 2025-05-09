@@ -1,8 +1,9 @@
 python-dotenv
 Wand
 moviepy==1.0.3
-azure-cognitiveservices-speech==1.28.0
 pygments
 opencv-python
-google-generativeai
 pillow==9.5.0
+azure-cognitiveservices-speech==1.28.0
+google-genai
+matplotlib

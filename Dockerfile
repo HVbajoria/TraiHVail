@@ -1,8 +1,28 @@
-# Use the official Node.js image as the base image
-FROM node:16-alpine
+# Use the official Node.js 20 image as the base image
+FROM --platform=linux/arm64 node:20
 
-# Install Python and pip
-RUN apk add --no-cache python3 py3-pip
+# Update and install build dependencies and sudo
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    zlib1g-dev \
+    bzip2 \
+    xz-utils \
+    wget \
+    imagemagick \
+    sudo && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Download and build Python 3.9.22 from source
+RUN wget https://www.python.org/ftp/python/3.9.22/Python-3.9.22.tgz && \
+    tar xzf Python-3.9.22.tgz && \
+    cd Python-3.9.22 && \
+    ./configure --enable-optimizations && \
+    make && make install && \
+    cd .. && rm -rf Python-3.9.22 Python-3.9.22.tgz
+
+RUN pip3 install --upgrade pip
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -17,7 +37,9 @@ RUN npm install
 COPY requirements.txt ./
 
 # Install Python dependencies
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+
 
 # Copy the rest of the application code
 COPY . .
@@ -25,8 +47,5 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Expose the port your app runs on
-EXPOSE 3000
-
 # Start the application
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
