@@ -373,6 +373,7 @@ def process_slide(slide_data, template, output_dir):
     Process an individual slide: create image, generate audio, and combine them into a video clip.
     """
     slide_number = slide_data.get("slideNumber", 1)
+    slide_type = slide_data.get("type", "content_slide")
 
     image_path = os.path.join(output_dir, f"slide_{slide_number}.png")
     audio_path = os.path.join(output_dir, f"audio_{slide_number}.mp3")
@@ -404,10 +405,71 @@ def process_slide(slide_data, template, output_dir):
     video_clip = slide_clip.set_audio(audio_clip)
 
     # If a generative image was created, overlay it on the base slide
-    if os.path.exists(generated_image_path):
-        gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration)
-        video_clip = CompositeVideoClip([slide_clip, gen_image_clip]).set_duration(clip_duration).set_audio(audio_clip)
+    if os.path.exists(generated_image_path):  # Check if the generative image exists
+        if slide_type == "title_slide":
+            # Set the generated image as the background for title slides
+            gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration).resize(newsize=slide_clip.size)
+            video_clip = CompositeVideoClip([gen_image_clip, slide_clip]).set_duration(clip_duration).set_audio(audio_clip)
+        else:
+            # Resize and position the generated image below all text content for other slide types
+            with WandImage(filename=generated_image_path) as gen_image:
+                # Get slide dimensions
+                slide_width, slide_height = slide_clip.size
+                
+                # We need to calculate the total height of the text content to place the image below it.
+                # This requires re-parsing the slide content and calculating heights similar to generate_slide_image
+                # For simplicity in this diff, we'll use a fixed offset after a calculated approximate text height.
+                # A more robust solution would re-use the text rendering logic to get the exact final Y position.
+                approx_text_height = 100
 
+                # Debugging: Print slide_data to verify the content key
+                print("slide_data:", slide_data)
+
+                for key in ["title", "subtitle", "content", "question", "options", "points", "explanation"]:
+                    if key in slide_data and key in template[slide_type]:
+                        text_conf = template[slide_type][key]
+                        fontsize = text_conf.get("font_size", int(text_conf.get("scale", 1.0) * 30))
+                        line_spacing = text_conf.get("line_spacing", fontsize + 5)
+                        
+                        # Debugging: Print the key and its calculated height
+                        print(f"Processing key: {key}, fontsize: {fontsize}, line_spacing: {line_spacing}")
+                        
+                        if isinstance(slide_data[key], list):
+                            # Join the list into a single string with newline separators
+                            text_content = "\n".join(slide_data[key])
+                        elif isinstance(slide_data[key], str):
+                            # Use the string as-is
+                            text_content = slide_data[key]
+                        else:
+                            # Handle unexpected types
+                            raise TypeError(f"Unexpected type for slide_data[{key}]: {type(slide_data[key])}")
+
+                        # Calculate the approximate text height
+                        approx_text_height += line_spacing * len(text_content.split("\n")) + 20
+                # Add some buffer space
+                approx_text_height += 20  # Add some spacing before the image
+
+                # Debugging: Print the final calculated height
+                print("Final approx_text_height:", approx_text_height)
+              
+                image_y_pos = approx_text_height + 100 # Position below approximate text content
+                gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration).resize(width=slide_clip.w * 0.6).set_position(('center', image_y_pos)) # Resize and center horizontally
+                video_clip = CompositeVideoClip([slide_clip, gen_image_clip]).set_duration(clip_duration).set_audio(audio_clip)
+                
+                # Calculate available vertical space for the image below the text
+                available_height = slide_height - image_y_pos
+                
+                # Resize the image to fit within the available space while maintaining aspect ratio
+                original_aspect_ratio = gen_image.width / gen_image.height
+                
+                if gen_image.height > available_height:
+                    new_height = available_height
+                    new_width = int(new_height * original_aspect_ratio)
+                    gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration).resize(height=new_height)
+                
+                # Position the resized image below the text with a gap, centered horizontally
+                gen_image_clip = gen_image_clip.set_position(('center', image_y_pos))
+                video_clip = CompositeVideoClip([slide_clip, gen_image_clip]).set_duration(clip_duration).set_audio(audio_clip)
     return video_clip
 
 # --- Main Execution ---

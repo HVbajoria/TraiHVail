@@ -40,7 +40,7 @@ async function generateImage(imagePrompt, imageRatio, slideNumber) {
   }
 }
 if (process.argv[2] === '--generate-image') {
-  const imagePrompt = process.argv[3] + "\nMake sure that all the text in the image are correctly spelled and grammatically correct.";
+  const imagePrompt = process.argv[3] + "\nKeep very less 1-2 words maxmimum text while making sure that all the text in the image are correctly spelled and grammatically correct. ";
   const imageRatio = process.argv[4];
   const slideNumber = process.argv[5];
 

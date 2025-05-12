@@ -1,80 +1,135 @@
 {
   "slides": [
     {
-      "content": "Welcome to Version Control 101! In this module, we'll explore why version control is essential for modern software development and how Git simplifies the process.",
+      "content": "Welcome to Git Commands Demystified! In this module, you'll learn essential Git commands with practical examples to boost your version control skills.",
       "slideNumber": 1,
-      "title": "Version Control 101",
+      "title": "Git Commands Demystified",
       "type": "title_slide",
-      "imagePrompt": "A visual representation of version control, showing different branches of code merging and diverging, with the text \"Version Control\" prominently displayed.",
+      "imagePrompt": "A stylized image depicting a computer screen with the Git logo and various command-line prompts, along with version control flow diagrams.",
       "imageRatio": "16:9",
-      "subtitle": "Mastering Git for Software Development",
+      "subtitle": "Mastering Version Control",
       "transition": "slide_up",
-      "voiceover": "Hello and welcome! In this module, we'll learn about version control and Git, essential tools for any software developer."
+      "voiceover": "Hello and welcome! This module is designed to make learning Git easy and practical."
     },
     {
-      "content": "Version control systems (VCS) track changes to your code over time. They allow you to revert to previous versions, compare changes, and collaborate efficiently with others.",
+      "content": "Git is a powerful version control system. It tracks changes to your files over time, allowing you to revert to specific versions, collaborate effectively, and manage your projects seamlessly.",
       "slideNumber": 2,
-      "title": "Why Version Control?",
+      "title": "What is Git?",
       "type": "content_slide",
-      "imagePrompt": "An image illustrating the benefits of version control, such as code history, collaboration, and the ability to revert to previous versions. The image should have texts like \"Track Changes\", \"Collaboration\", \"Revert\".",
+      "imagePrompt": "A diagram illustrating the basic Git workflow: working directory, staging area, and repository, with arrows showing the flow of files between these areas.",
       "imageRatio": "3:4",
       "transition": "slide_left",
-      "voiceover": "Version control is critical for tracking changes, enabling collaboration, and preventing data loss."
+      "voiceover": "Let's start with the basics. Git helps you manage and track changes to your code."
     },
     {
       "points": [
-        "Tracking changes over time",
-        "Collaboration with multiple developers",
-        "Preventing data loss and enabling recovery"
+        "git init: Initializes a new Git repository.",
+        "git clone: Clones an existing repository."
       ],
       "slideNumber": 3,
-      "title": "Key Benefits of Version Control",
+      "title": "Essential Commands - Part 1",
       "type": "unordered_list_slide",
       "transition": "slide_right",
-      "voiceover": "Version control provides several key benefits, including change tracking, collaboration, and data safety."
+      "voiceover": "Here are some essential Git commands to get you started."
     },
     {
       "points": [
-        "Tracking changes over time",
-        "Collaboration with multiple developers",
-        "Preventing data loss and enabling recovery",
-        "Enabling experimentation and branching"
+        "git init: Initializes a new Git repository.",
+        "git clone: Clones an existing repository.",
+        "git status: Shows the status of the working directory."
       ],
       "slideNumber": 4,
-      "title": "Key Benefits of Version Control",
+      "title": "Essential Commands - Part 2",
       "type": "unordered_list_slide",
       "transition": "slide_right",
-      "voiceover": "Version control also allows developers to experiment with new features and manage different versions of their code through branching."
-    },
-    {
-      "content": "Git is a distributed version control system that tracks changes to any set of files. It's the most widely used VCS in the world.",
-      "slideNumber": 5,
-      "title": "Introducing Git",
-      "type": "content_slide",
-      "imagePrompt": "A logo of Git with a simple diagram showing how Git tracks changes with text like \"Git\", \"Repository\", \"Commits\", \"Branches\".",
-      "imageRatio": "3:4",
-      "transition": "slide_left",
-      "voiceover": "Git is a powerful and flexible version control system."
+      "voiceover": "Next up are commands to check the status of your repository."
     },
     {
       "points": [
-        "Local repository on your computer",
-        "Commits represent snapshots of your project",
-        "Branches for parallel development"
+        "git init: Initializes a new Git repository.",
+        "git clone: Clones an existing repository.",
+        "git status: Shows the status of the working directory.",
+        "git add: Adds changes to the staging area."
       ],
-      "slideNumber": 6,
-      "title": "Git Core Concepts",
+      "slideNumber": 5,
+      "title": "Essential Commands - Part 3",
       "type": "unordered_list_slide",
       "transition": "slide_right",
-      "voiceover": "Git uses local repositories, commits to save changes, and branches for parallel development."
+      "voiceover": "Now let's look at how to add the changes."
     },
     {
-      "code": "git init\ngit add .\ngit commit -m \"Initial commit\"\ngit branch development\ngit checkout development",
-      "slideNumber": 7,
-      "title": "Basic Git Commands",
+      "code": "git init  # Initialize a new repository\ngit clone <repository_url>  # Clone a repository\ngit status  # Check the status of your files\ngit add .  # Stage all changes in the current directory",
+      "slideNumber": 6,
+      "title": "Command Examples - Part 1",
       "type": "code_slide",
       "lexer": "bash",
-      "voiceover": "Here are some fundamental Git commands to get you started. These commands initialize a repository, add files, commit changes, create a development branch, and switch to it."
+      "transition": "slide_right",
+      "voiceover": "Here are some examples of how to use these commands."
+    },
+    {
+      "code": "git commit -m \"Initial commit\"  # Commit staged changes\ngit log  # View commit history\ngit diff  # See the changes you've made",
+      "slideNumber": 7,
+      "title": "Command Examples - Part 2",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "slide_right",
+      "voiceover": "More examples of Git commands to commit and view the changes."
+    },
+    {
+      "code": "git branch  # List branches\ngit branch <branch_name>  # Create a branch\ngit checkout <branch_name>  # Switch to a branch",
+      "slideNumber": 8,
+      "title": "Branching Commands",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "slide_right",
+      "voiceover": "Let's explore branching."
+    },
+    {
+      "code": "git merge <branch_name>  # Merge a branch into the current branch\ngit push origin <branch_name>  # Push a branch to a remote repository\ngit pull  # Fetch and merge changes from the remote repository",
+      "slideNumber": 9,
+      "title": "Merging & Remote Commands",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "slide_right",
+      "voiceover": "And finally, commands for merging and working with remote repositories."
+    },
+    {
+      "content": "What command is used to stage all changes in the current directory?",
+      "slideNumber": 10,
+      "title": "Quiz: Git Commands",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "Time for a quick quiz."
+    },
+    {
+      "options": [
+        "git commit",
+        "git push",
+        "git add .",
+        "git status"
+      ],
+      "question": "What command is used to stage all changes in the current directory?",
+      "slideNumber": 11,
+      "title": "Question 1",
+      "type": "quiz_slide",
+      "transition": "slide_down",
+      "voiceover": "Select the correct answer."
+    },
+    {
+      "content": "The correct answer is: git add . This command stages all modified and new files in the current directory to be included in the next commit.",
+      "slideNumber": 12,
+      "title": "Answer and Explanation",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "The correct answer is git add . This command stages all modified and new files in the current directory for the next commit."
+    },
+    {
+      "content": "Git is fundamental for modern software development. Understanding these commands will significantly enhance your ability to manage projects and collaborate effectively.",
+      "slideNumber": 13,
+      "title": "Key Takeaways",
+      "type": "content_slide",
+      "transition": "slide_left",
+      "voiceover": "In summary, Git is a powerful tool that every developer should master."
     }
   ]
 }
