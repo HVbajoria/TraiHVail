@@ -25,6 +25,8 @@ const BaseSlideSchema = z.object({
   title: z.string().describe('The main title of the slide.'),
   voiceover: z.string().optional().describe('Suggested voiceover text for the slide.'),
   transition: z.string().optional().describe('Suggested transition effect for the slide (e.g., slide_up, slide_left).'),
+  imagePrompt: z.string().optional().describe('An optional prompt for generating an image related to the slide content.'),
+  imageRatio: z.string().optional().describe('An optional aspect ratio for the generated image (e.g., 16:9, 4:3).'),
 });
 
 // Updated Schemas: Use z.enum instead of z.literal for the 'type' field
@@ -89,51 +91,54 @@ export type SlidesOutput = z.infer<typeof SlidesOutputSchema>;
 
 
 // --- System Instruction ---
-const systemInstruction = `Create a comprehensive course module script designed to be both engaging and easy to understand. The script should be informative, insightful, and visually dynamic to aid learning. The module should be suitable for students and professionals in business, MBA, engineering, or coding disciplines. It should include a mix of explanatory content, real-world examples, interactive exercises, and dynamic visualizations (e.g., charts, formulas, code snippets).
+const systemInstruction = `## Objective:
+Produce a JSON-formatted course module script (10–20 slides) that is engaging, easy to understand, and suitable for business, MBA, engineering or coding audiences. Each slide should combine clear instructional content with real-world examples, interactive exercises and dynamic visuals (charts, formulas, code snippets).
 
-                                        Each course module section should consist of clear content slides that introduce and break down topics, followed by interactive and demonstration slides to keep learners engaged.
+## Overall Structure:
+- Slides must use only these types: title_slide, content_slide, unordered_list_slide, code_slide, quiz_slide, chart_slide, formula_slide.
+- Slide order should flow logically: introduction → core concepts → examples/exercises → assessment → summary.
+- Slides can have images which are generated using imagen3 model so for that give the imagePrompt and imageRatio also. 
+- The image prompt should be very clear, detailed, well explained and should have all the text clearly defined that are to be present in the image. 
+- Make sure if you talk about each of the aspect of the image all the small details in imagePrompt and have it in range of 50 - 200 words.
 
-                                        ### Slide Types:
+## Transitions:
+- slide_up for intros and formulas
+- slide_left for content and charts
+- slide_right for lists and code
+- slide_down for quiz questions
 
-                                        1. Title Slide: 
-                                        - Use an introductory slide to set the tone and welcome students to the course.
-                                        - Content includes the course title, a brief subtitle, and an engaging description of the module content.
-                                        - Transition: Use \`slide_up\` for an engaging entrance.
+## Slide Specifications:
+#### Title Slide (title_slide)
+- Fields: title, subtitle, content, voiceover, transition
+- Purpose: Welcome learners & outline module goals.
 
-                                        2. Content Slides: 
-                                        - Explains core concepts in a structured way, includes descriptions, and may incorporate images or diagrams.
-                                        - Transition: Use \`slide_left\` to introduce each concept smoothly.
+#### Content Slide (content_slide)
+- Fields: title, content, voiceover, transition
+- Optional: imagePrompt + imageRatio (only if a visual is necessary to explain the concept or to make the video engaging).
 
-                                        3. Unordered List Slide:
-                                        - Used to highlight key points or concepts in a list format.
-                                        - This slide is best for summarizing multiple key concepts.
-                                        - Transition: Use \`slide_right\` for a dynamic entry.
-                                        - Note: Make sure that the points are listed as strings.
+#### Unordered List Slide (unordered_list_slide)
+- Fields: title, points (array of strings), voiceover, transition
+- Build cumulatively: each slide adds one new bullet while recapping previous ones.
+- Optional: imagePrompt + imageRatio (if it clarifies multiple points).
 
-                                        4. Code Slides: 
-                                        - Contains code snippets (if applicable) to demonstrate programming concepts or examples.
-                                        - Transition: Use \`slide_right\` for showing the code smoothly.
-                                        - If the code exceeds 20 lines, break it into parts and spread them across different slides, ensuring no slide contains more than 20 lines of code.
+#### Code Slide (code_slide)
+- Fields: title, code, lexer (language), voiceover, transition
+- Limit ≤ 20 lines per slide; split long examples across sequential slides.
 
-                                        5. Quiz Slides: 
-                                        - Includes questions and multiple-choice options to test learners' understanding.
-                                        - Transition: Use \`slide_down\` for the question slide to offer a shift in focus.
-                                        - After the question slide, use a \`content_slide\` to explain the answer and provide an explanation.
+#### Quiz Slide (quiz_slide)
+- Fields: title, question, options (array), voiceover, transition
+- Follow immediately with a content_slide that states the correct answer and explanation.
 
-                                        6. Chart Slides:
-                                        - Visualize data using charts like bar graphs, pie charts, or line graphs to support conceptual learning. These slides help visualize complex concepts in a simple and engaging way.
-                                        - Transition: Use \`slide_left\` for smooth entry of data charts.
-                                        - The charts can be of the type line, bar or pie and have two labels one for x and one for y axis.
+#### Chart Slide (chart_slide)
+- Fields: title, chartType (line / bar / pie), data (array of {label, value}), voiceover, transition
+- Axes must have clear labels (x, y).
 
-                                        7. Formula Slides:
-                                        - Used for mathematical or statistical concepts. These slides show a formula and provide an explanation of how it is used in the context of the topic.
-                                        - Transition: Use \`slide_up\` for the formula to keep it engaging.
+#### Formula Slide (formula_slide)
+- Fields: title, formula, explanation, voiceover, transition
+- Use for mathematical/statistical concepts only.
 
-                                        ---
-
-                                        ### JSON Format Example:
-
-                                        This JSON structure outlines how the course content should be formatted, with different slide types and their respective content.
+## JSON Output Structure:
+ This JSON structure outlines how the course content should be formatted, with different slide types and their respective content.
                                         {
                                             \"slides\": [
                                                 {
@@ -143,7 +148,9 @@ const systemInstruction = `Create a comprehensive course module script designed 
                                                     \"subtitle\": \"A Practical Introduction to Data-Driven Decision Making\",
                                                     \"content\": \"In this module, we will explore the foundations of Business Analytics, with a focus on real-world applications and hands-on learning.\",
                                                     \"voiceover\": \"Welcome to this Business Analytics course, where you'll learn the fundamentals and practical applications of data analysis to drive business decisions.\",
-                                                    \"transition\": \"slide_up\"
+                                                    \"transition\": \"slide_up\",
+                                                    \"imagePrompt\": \"A visually appealing image representing Business Analytics, such as data charts or graphs.\",
+                                                    \"imageRatio\": \"16:9\"
                                                 },
                                                 {
                                                     \"slideNumber\": 2,
@@ -151,7 +158,9 @@ const systemInstruction = `Create a comprehensive course module script designed 
                                                     \"title\": \"What is Business Analytics?\",
                                                     \"content\": \"Business analytics refers to the process of using data to make informed business decisions. It involves statistical analysis, predictive modeling, and data visualization.\",
                                                     \"voiceover\": \"In this section, we'll dive into the concept of Business Analytics, its importance, and the tools commonly used in the field.\",
-                                                    \"transition\": \"slide_left\"
+                                                    \"transition\": \"slide_left\",
+                                                    \"imagePrompt\": \"A diagram illustrating the components of Business Analytics, such as data collection, analysis, and decision-making. Use the exact text: "data collection, analysis and decsion-making". Do not use any other text.\",
+                                                    \"imageRatio\": \"3:4\"
                                                 },
                                                 {
                                                     \"slideNumber\": 3,
@@ -184,7 +193,7 @@ const systemInstruction = `Create a comprehensive course module script designed 
                                                         \"Data Visualization\"
                                                     ],
                                                     \"voiceover\": \" data visualization, and supporting decision making.\",
-                                                    \"transition\": \"slide_right\"
+                                                    \"transition\": \"slide_right\",
                                                 },
                                                 {
                                                     \"slideNumber\": 6,
@@ -232,7 +241,7 @@ const systemInstruction = `Create a comprehensive course module script designed 
                                                     \"title\": \"Key Takeaways\",
                                                     \"content\": \"Business analytics enables data-driven decision making through techniques like statistical analysis and predictive modeling.\",
                                                     \"voiceover\": \"To summarize, Business Analytics helps organizations make informed decisions using data analysis techniques like statistical analysis, predictive modeling, and data visualization.\",
-                                                    \"transition\": \"slide_left\"
+                                                    \"transition\": \"slide_left\",
                                                 },
                                                 {
                                                     \"slideNumber\": 11,
@@ -259,13 +268,14 @@ const systemInstruction = `Create a comprehensive course module script designed 
                                             ]
                                         }
 
-                                        ### Notes:
-                                        - Make sure that only in case of technical topics a code snippet in respective required language like Java, Python, HTML, CPP is added. Else only use the formula slide.
-                                        - Make sure that the unordered slides are divided so that each slides get one point added while showing the rest of the points with voiceover explaining the new point in each slide.
-                                        - Ensure that each slide has a title.
-                                        - We only have this types of slides: title_slide, content_slide, quiz_slide, unordered_list_slide, code_slide, chart_slide, formula_slide
-                                        - If it's a long code having. more than 20 lines then break it into parts in different slides so that each slide contains at the maximum 20 lines of code
-                                        - Also, in case of quiz make two slides one containig just options and giving questions and options and the other slide giving answer and explaining it which would be content_slide where the content would be the answer and the explaination of the answer.
+## Notes & Best Practices:
+- Keep language concise and free of unnecessary jargon.
+- Use voice-over text to reinforce what’s on screen, not to repeat verbatim.
+- Only include imagePrompt when a visual adds clear pedagogical value.
+- Ensure each slide has a unique title.
+- Code examples only for technical topics; otherwise, use formula slides.
+- Quizzes always split into question slide + answer/explanation slide.
+- Maintain consistent transition effects to signal content changes.
 `;
 
 

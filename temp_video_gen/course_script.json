@@ -1,210 +1,80 @@
 {
   "slides": [
     {
-      "content": "Welcome to Version Control 101! In this module, we'll explore the importance of version control and how Git revolutionizes software development.",
+      "content": "Welcome to Version Control 101! In this module, we'll explore why version control is essential for modern software development and how Git simplifies the process.",
       "slideNumber": 1,
       "title": "Version Control 101",
       "type": "title_slide",
-      "subtitle": "Understanding Git for Software Development",
+      "imagePrompt": "A visual representation of version control, showing different branches of code merging and diverging, with the text \"Version Control\" prominently displayed.",
+      "imageRatio": "16:9",
+      "subtitle": "Mastering Git for Software Development",
       "transition": "slide_up",
-      "voiceover": "Hello and welcome to Version Control 101. This module will introduce you to version control and Git, essential tools for any software developer."
+      "voiceover": "Hello and welcome! In this module, we'll learn about version control and Git, essential tools for any software developer."
     },
     {
-      "content": "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later. It allows you to track modifications, revert to previous states, and collaborate effectively.",
+      "content": "Version control systems (VCS) track changes to your code over time. They allow you to revert to previous versions, compare changes, and collaborate efficiently with others.",
       "slideNumber": 2,
-      "title": "What is Version Control?",
+      "title": "Why Version Control?",
       "type": "content_slide",
+      "imagePrompt": "An image illustrating the benefits of version control, such as code history, collaboration, and the ability to revert to previous versions. The image should have texts like \"Track Changes\", \"Collaboration\", \"Revert\".",
+      "imageRatio": "3:4",
       "transition": "slide_left",
-      "voiceover": "Version control is all about tracking changes to your files. It's like having a time machine for your code, allowing you to go back to previous versions and see the evolution of your project."
-    },
-    {
-      "content": "Without version control, managing code changes can be chaotic. Imagine multiple developers making changes to the same files without a way to merge their work or revert mistakes. This often leads to lost work and confusion.",
-      "slideNumber": 3,
-      "title": "Why is Version Control Important?",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "Without version control, managing changes becomes a nightmare. It's essential for collaboration, tracking changes, and preventing data loss."
+      "voiceover": "Version control is critical for tracking changes, enabling collaboration, and preventing data loss."
     },
     {
       "points": [
-        "Track changes to your code",
-        "Collaborate effectively with others",
-        "Revert to previous versions",
-        "Experiment without fear of breaking things"
+        "Tracking changes over time",
+        "Collaboration with multiple developers",
+        "Preventing data loss and enabling recovery"
+      ],
+      "slideNumber": 3,
+      "title": "Key Benefits of Version Control",
+      "type": "unordered_list_slide",
+      "transition": "slide_right",
+      "voiceover": "Version control provides several key benefits, including change tracking, collaboration, and data safety."
+    },
+    {
+      "points": [
+        "Tracking changes over time",
+        "Collaboration with multiple developers",
+        "Preventing data loss and enabling recovery",
+        "Enabling experimentation and branching"
       ],
       "slideNumber": 4,
-      "title": "Benefits of Version Control",
+      "title": "Key Benefits of Version Control",
       "type": "unordered_list_slide",
       "transition": "slide_right",
-      "voiceover": "Version control offers several key benefits, including the ability to track changes, collaborate effectively, revert to previous versions, and experiment without fear."
+      "voiceover": "Version control also allows developers to experiment with new features and manage different versions of their code through branching."
     },
     {
-      "points": [
-        "Track changes to your code",
-        "Collaborate effectively with others",
-        "Revert to previous versions",
-        "Experiment without fear of breaking things",
-        "Maintain a complete history of your project"
-      ],
+      "content": "Git is a distributed version control system that tracks changes to any set of files. It's the most widely used VCS in the world.",
       "slideNumber": 5,
-      "title": "Benefits of Version Control",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "It also helps in maintaining a complete history of your project."
-    },
-    {
-      "content": "Git is a distributed version control system that tracks changes to any set of files. It is the most widely used version control system in modern software development.",
-      "slideNumber": 6,
       "title": "Introducing Git",
       "type": "content_slide",
+      "imagePrompt": "A logo of Git with a simple diagram showing how Git tracks changes with text like \"Git\", \"Repository\", \"Commits\", \"Branches\".",
+      "imageRatio": "3:4",
       "transition": "slide_left",
-      "voiceover": "Now, let's talk about Git. Git is a powerful and flexible version control system that's used by developers worldwide."
+      "voiceover": "Git is a powerful and flexible version control system."
     },
     {
-      "content": "Git allows developers to work on the same project simultaneously, merge changes, and manage different versions of the codebase efficiently.",
+      "points": [
+        "Local repository on your computer",
+        "Commits represent snapshots of your project",
+        "Branches for parallel development"
+      ],
+      "slideNumber": 6,
+      "title": "Git Core Concepts",
+      "type": "unordered_list_slide",
+      "transition": "slide_right",
+      "voiceover": "Git uses local repositories, commits to save changes, and branches for parallel development."
+    },
+    {
+      "code": "git init\ngit add .\ngit commit -m \"Initial commit\"\ngit branch development\ngit checkout development",
       "slideNumber": 7,
-      "title": "How Git Works",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "Git enables seamless collaboration, allowing multiple developers to work on the same project at the same time."
-    },
-    {
-      "content": "Key Git concepts include: repository, commit, branch, merge, and pull/push.",
-      "slideNumber": 8,
-      "title": "Key Git Concepts",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "Let's delve into some essential Git concepts."
-    },
-    {
-      "points": [
-        "Repository: The central storage for your project's files and their history.",
-        "Commit: A snapshot of your project at a specific point in time."
-      ],
-      "slideNumber": 9,
-      "title": "Key Git Concepts",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "A repository is where all your project files and their history are stored. A commit is a snapshot of your project at a specific time."
-    },
-    {
-      "points": [
-        "Repository: The central storage for your project's files and their history.",
-        "Commit: A snapshot of your project at a specific point in time.",
-        "Branch: A separate line of development."
-      ],
-      "slideNumber": 10,
-      "title": "Key Git Concepts",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "A branch is a separate line of development, allowing you to work on new features or bug fixes without affecting the main codebase."
-    },
-    {
-      "points": [
-        "Repository: The central storage for your project's files and their history.",
-        "Commit: A snapshot of your project at a specific point in time.",
-        "Branch: A separate line of development.",
-        "Merge: Combining changes from one branch into another."
-      ],
-      "slideNumber": 11,
-      "title": "Key Git Concepts",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "Merging combines changes from one branch into another. This is how you integrate new features or bug fixes into your main branch."
-    },
-    {
-      "points": [
-        "Repository: The central storage for your project's files and their history.",
-        "Commit: A snapshot of your project at a specific point in time.",
-        "Branch: A separate line of development.",
-        "Merge: Combining changes from one branch into another.",
-        "Pull/Push: Syncing your local repository with a remote repository."
-      ],
-      "slideNumber": 12,
-      "title": "Key Git Concepts",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "Pull and push are used to synchronize your local repository with a remote repository, like GitHub or GitLab."
-    },
-    {
-      "code": "git init\ngit add .\ngit commit -m \"Initial commit\"\ngit branch feature-branch\ngit checkout feature-branch",
-      "slideNumber": 13,
       "title": "Basic Git Commands",
       "type": "code_slide",
       "lexer": "bash",
-      "transition": "slide_right",
-      "voiceover": "Here are some basic Git commands to get you started."
-    },
-    {
-      "code": "git merge feature-branch\ngit push origin main\ngit pull origin main",
-      "slideNumber": 14,
-      "title": "Basic Git Commands",
-      "type": "code_slide",
-      "lexer": "bash",
-      "transition": "slide_right",
-      "voiceover": "These commands cover initializing a repository, adding and committing changes, creating and switching branches, merging, and pushing and pulling changes."
-    },
-    {
-      "content": "GitHub, GitLab, and Bitbucket are popular platforms that host Git repositories, enabling collaboration and providing additional features like issue tracking and continuous integration.",
-      "slideNumber": 15,
-      "title": "Git Hosting Platforms",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "Git hosting platforms such as GitHub, GitLab, and Bitbucket provide a central place to store your Git repositories and collaborate with others."
-    },
-    {
-      "content": "These platforms provide a user-friendly interface for managing repositories, collaborating with others, and integrating with other tools.",
-      "slideNumber": 16,
-      "title": "Git Hosting Platforms",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "They offer a range of features to streamline your development workflow."
-    },
-    {
-      "content": "Version control is a fundamental practice in software development. Git is the most widely used version control system, enabling effective collaboration and project management.",
-      "slideNumber": 17,
-      "title": "Conclusion",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "In conclusion, version control is essential for any software project, and Git is the tool of choice for most developers."
-    },
-    {
-      "content": "By mastering Git, you will significantly improve your ability to manage code, collaborate with others, and contribute to software projects effectively.",
-      "slideNumber": 18,
-      "title": "Conclusion",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "By mastering Git, you'll be well-equipped to contribute effectively to any software project."
-    },
-    {
-      "content": "What is the purpose of the 'git commit' command?",
-      "slideNumber": 19,
-      "title": "Quiz: Git Basics",
-      "type": "content_slide",
-      "transition": "slide_down",
-      "voiceover": "Let's test your understanding with a quick quiz."
-    },
-    {
-      "options": [
-        "To create a new branch",
-        "To save changes to the staging area",
-        "To record changes to the repository",
-        "To merge branches"
-      ],
-      "question": "What is the purpose of the 'git commit' command?",
-      "slideNumber": 20,
-      "title": "Quiz: Git Basics",
-      "type": "quiz_slide",
-      "transition": "slide_down",
-      "voiceover": "What do you think the git commit command is used for?"
-    },
-    {
-      "content": "The correct answer is: To record changes to the repository. The 'git commit' command saves the staged changes to the local repository, creating a new commit.",
-      "slideNumber": 21,
-      "title": "Answer and Explanation",
-      "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "The correct answer is to record changes to the repository."
+      "voiceover": "Here are some fundamental Git commands to get you started. These commands initialize a repository, add files, commit changes, create a development branch, and switch to it."
     }
   ]
 }

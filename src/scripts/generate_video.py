@@ -10,6 +10,7 @@ import azure.cognitiveservices.speech as speechsdk
 from pygments import highlight
 from pygments.lexers import PythonLexer, JavaLexer, MathematicaLexer, CppLexer, CSharpLexer, HtmlLexer, CssLexer, JavascriptLexer, JsonLexer, YamlLexer, BashLexer, PerlLexer, PhpLexer, RubyLexer, SqlLexer, SwiftLexer, ObjectiveCLexer, MatlabLexer
 from pygments.formatters import ImageFormatter
+import subprocess
 # import cv2 # Not used directly, can remove if not needed elsewhere
 from google import genai # If needed for other tasks, keep; otherwise remove if only used for API key
 from google.genai import types # If needed for other tasks, keep
@@ -298,7 +299,7 @@ def generate_slide_image(slide_data, template, output_path):
                     if len(code_text) > 200:
                         formatter.font_size = 22
                     code_snippet_path = "code.png"
-                    lexer = slide_data["lexer"]
+                    lexer = slide_data.get("lexer", 'bash')  # Replace None with a default value if needed
                     if lexer == "python":
                         highlight(code_text, PythonLexer(), formatter, outfile=code_snippet_path)
                     elif lexer == "java":
@@ -372,11 +373,28 @@ def process_slide(slide_data, template, output_dir):
     Process an individual slide: create image, generate audio, and combine them into a video clip.
     """
     slide_number = slide_data.get("slideNumber", 1)
-    
+
     image_path = os.path.join(output_dir, f"slide_{slide_number}.png")
     audio_path = os.path.join(output_dir, f"audio_{slide_number}.mp3")
-    
-    generate_slide_image(slide_data, template, image_path)
+
+    generated_image_path = os.path.join(output_dir, f"gemini-native-image_slide{slide_number}.png")
+
+    # Check if imagePrompt and imageRatio are present for image generation
+    image_prompt = slide_data.get("imagePrompt")
+    image_ratio = slide_data.get("imageRatio")
+
+    if image_prompt and image_ratio:
+        logging.info(f"Generating image for slide {slide_number} with prompt: '{image_prompt}' and ratio: {image_ratio}")
+        command = ["node", "src/ai/flows/generate-image.js", "--generate-image", f"'{image_prompt}'", image_ratio, str(slide_number)]
+        print(command)
+        try:
+            subprocess.run(command, check=True, capture_output=True, text=True)
+            logging.info(f"Successfully generated image for slide {slide_number}.")
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Error generating image for slide {slide_number}: {e.stderr}")
+
+    # Generate the base slide image (text, code, charts etc.)
+    generate_slide_image(slide_data, template, image_path) # This still generates the base image
     voice_text = slide_data.get("voiceover", slide_data.get("content", ""))
     generate_audio(voice_text, audio_path)
 
@@ -384,7 +402,12 @@ def process_slide(slide_data, template, output_dir):
     clip_duration = audio_clip.duration
     slide_clip = ImageClip(image_path).set_duration(clip_duration)
     video_clip = slide_clip.set_audio(audio_clip)
-    print("Created slide video clip for slide %s (duration: %.2f seconds)", slide_number, clip_duration)
+
+    # If a generative image was created, overlay it on the base slide
+    if os.path.exists(generated_image_path):
+        gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration)
+        video_clip = CompositeVideoClip([slide_clip, gen_image_clip]).set_duration(clip_duration).set_audio(audio_clip)
+
     return video_clip
 
 # --- Main Execution ---
