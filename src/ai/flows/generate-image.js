@@ -17,7 +17,7 @@ async function generateImage(imagePrompt, imageRatio, slideNumber) {
       output_mime_type: "image/png",
       person_generation: "ALLOW_ADULT",
       aspect_ratio: imageRatio,
-      temperature: 0.1,
+      temperature: 0.5,
     },
   });
   for (const part of response.candidates[0].content.parts) {
@@ -40,7 +40,29 @@ async function generateImage(imagePrompt, imageRatio, slideNumber) {
   }
 }
 if (process.argv[2] === '--generate-image') {
-  const imagePrompt = process.argv[3] + "\nKeep very less 1-2 words maxmimum text while making sure that all the text in the image are correctly spelled and grammatically correct. ";
+  const imagePrompt = `Generate an image based on the given prompt while adhering to the specified visual and textual guidelines.
+
+  - The image should be visually appealing and prioritize clarity in its theme. Ensure a dark blue or white background to enhance the color contrast and visibility.
+  - Maintain a coherent and visible color theme throughout the image.
+  - Limit textual content to a maximum of 1-2 words in the overall slide. All included text must be correctly spelled and grammatically accurate, even for short labels or descriptions.
+  - Inlude text data only when mentioned explicitly in the prompt. Otherwise, the image should have no text at all everything should be made of shapes, grapohics, or illustrations.
+  
+  # Steps
+  1. Analyze the given prompt string and determine the primary themes, objects, or concepts specified.
+  2. Interpret and select visual elements to align with the prompt's theme. Ensure the design maintains elegance and clarity.
+  3. Use either a dark blue or white background to enhance the design's visual impact.
+  4. Add minimal text if necessary (1-2 words), ensuring each word is correctly spelled and contextually suitable.
+  5. Ensure visual harmony by implementing a consistent and visible color theme.
+  
+  # Output Format
+  - A visually generated image.
+  - Dark blue or white backgrounds only.
+  - Minimal text content (1-2 words maximum) if applicable, with perfect spelling.
+    
+  # The given prompt is: ` +process.argv[3]+`
+  
+  Note: The design should primarily interpret the prompt's theme into visuals, providing not more than 1-2 words of text only when necessary. Avoid extensive text or content unrelated to the prompt.`;
+
   const imageRatio = process.argv[4];
   const slideNumber = process.argv[5];
 

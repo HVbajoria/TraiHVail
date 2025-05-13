@@ -33,7 +33,7 @@ try:
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
     # Configure voice - Use environment variables or defaults
     speech_config.speech_synthesis_language = os.getenv('SPEECH_LANGUAGE', "en-IN")
-    speech_config.speech_synthesis_voice_name = os.getenv('SPEECH_VOICE', "en-US-AlloyTurboMultilingualNeural")
+    speech_config.speech_synthesis_voice_name = os.getenv('SPEECH_VOICE', "en-IN-ArjunNeural")
     logging.info(f"Azure Speech configured for region: {speech_region}, language: {speech_config.speech_synthesis_language}, voice: {speech_config.speech_synthesis_voice_name}")
 except Exception as e:
     logging.error(f"Failed to configure Azure Speech SDK: {e}")
@@ -242,7 +242,7 @@ def generate_slide_image(slide_data, template, output_path):
                                 text = "<break>".join(sanitize_text(item) for item in slide_data[key])
 
                         if key == "title":
-                            fixed_pos = text_conf.get("position", [100, 200])  # Default if missing
+                            fixed_pos = text_conf.get("position", [100, 100])  # Default if missing
                             _unused, y_offset = fixed_pos  # Keep title's fixed Y position
 
                             y_offset += 20  # Add some spacing before the next element
@@ -358,7 +358,7 @@ def generate_audio(text, filename):
         # Initialize the Azure client
         # Set either the `SpeechSynthesisVoiceName` or `SpeechSynthesisLanguage`.
         speech_config.speech_synthesis_language = "en-IN" 
-        speech_config.speech_synthesis_voice_name ="en-US-AlloyTurboMultilingualNeural"
+        speech_config.speech_synthesis_voice_name ="en-IN-ArjunNeural"
         audio_config = speechsdk.audio.AudioOutputConfig(filename=filename)
         speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
         speech_synthesis_result = speech_synthesizer.speak_text_async(clean_text).get()
@@ -409,6 +409,10 @@ def process_slide(slide_data, template, output_dir):
         if slide_type == "title_slide":
             # Set the generated image as the background for title slides
             gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration).resize(newsize=slide_clip.size)
+            gen_image_clip = gen_image_clip.set_position(('center', 'center'))  # Center the image
+            # Overlay the title slide textual content on top of the generated image
+            slide_clip = slide_clip.set_position(('center', 'center'))  # Center the text
+            slide_clip = slide_clip.set_opacity(0.9)  # Make the text slightly transparent
             video_clip = CompositeVideoClip([gen_image_clip, slide_clip]).set_duration(clip_duration).set_audio(audio_clip)
         else:
             # Resize and position the generated image below all text content for other slide types
@@ -424,6 +428,8 @@ def process_slide(slide_data, template, output_dir):
 
                 # Debugging: Print slide_data to verify the content key
                 print("slide_data:", slide_data)
+
+                from PIL import Image
 
                 for key in ["title", "subtitle", "content", "question", "options", "points", "explanation"]:
                     if key in slide_data and key in template[slide_type]:
@@ -445,14 +451,25 @@ def process_slide(slide_data, template, output_dir):
                             raise TypeError(f"Unexpected type for slide_data[{key}]: {type(slide_data[key])}")
 
                         # Calculate the approximate text height
-                        approx_text_height += line_spacing * len(text_content.split("\n")) + 20
-                # Add some buffer space
-                approx_text_height += 20  # Add some spacing before the image
+                        for line in text_content.split("\n"):
+                            if line.endswith(".png"):  # Check if the line contains an image reference
+                                try:
+                                    # Open the image and get its height
+                                    with Image.open(line) as img:
+                                        image_height = img.height
+                                        approx_text_height += image_height
+                                        print(f"Adding image height for {line}: {image_height}")
+                                except FileNotFoundError:
+                                    print(f"Image file not found: {line}")
+                                    raise
+                            else:
+                                # Add height for text
+                                approx_text_height += line_spacing + 20
 
                 # Debugging: Print the final calculated height
                 print("Final approx_text_height:", approx_text_height)
               
-                image_y_pos = approx_text_height + 100 # Position below approximate text content
+                image_y_pos = approx_text_height + 60 # Position below approximate text content
                 gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration).resize(width=slide_clip.w * 0.6).set_position(('center', image_y_pos)) # Resize and center horizontally
                 video_clip = CompositeVideoClip([slide_clip, gen_image_clip]).set_duration(clip_duration).set_audio(audio_clip)
                 
@@ -463,7 +480,7 @@ def process_slide(slide_data, template, output_dir):
                 original_aspect_ratio = gen_image.width / gen_image.height
                 
                 if gen_image.height > available_height:
-                    new_height = available_height
+                    new_height = available_height * 0.7
                     new_width = int(new_height * original_aspect_ratio)
                     gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration).resize(height=new_height)
                 
@@ -540,6 +557,20 @@ def main(script_input_path, video_output_path, assets_dir):
     logging.info(f"Writing final video to {video_output_path}...")
     final_video.write_videofile(output_path, fps=24, logger=None)
     logging.info("Final video written successfully!")
+
+    # Remove the temp_assets folder if present
+    if os.path.exists(assets_dir):
+        for filename in os.listdir(assets_dir):
+            if filename =='final_course.mp4':
+                continue
+            file_path = os.path.join(assets_dir, filename)
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                logging.error(f"Error deleting {file_path}: {e}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

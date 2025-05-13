@@ -23,7 +23,7 @@
     "slide_size": [1920, 1080],
     "background_color": "#010315",
     "title": {
-      "position": [100, 200],
+      "position": [100, 100],
       "color": "#FFCC00",
       "font_path": "Inter/Inter-Medium.ttf",
       "font_size": 72
@@ -40,7 +40,7 @@
     "slide_size": [1920, 1080],
     "background_color": "#010315",
     "title": {
-      "position": [100, 200],
+      "position": [100, 100],
       "color": "#FFCC00",
       "font_path": "Inter/Inter-Medium.ttf",
       "font_size": 72
@@ -71,7 +71,7 @@
     "slide_size": [1920, 1080],
     "background_color": "#010315",
     "title": {
-      "position": [100, 200],
+      "position": [100, 100],
       "color": "#FFCC00",
       "font_path": "Inter/Inter-Medium.ttf",
       "font_size": 65
@@ -88,7 +88,7 @@
     "slide_size": [1920, 1080],
     "background_color": "#010315",
     "title": {
-      "position": [100, 200],
+      "position": [100, 100],
       "color": "#ffffff",
       "font_path": "Inter/Inter-Medium.ttf",
       "font_size": 72
@@ -139,7 +139,7 @@
     "slide_size": [1920, 1080],
     "background_color": "#010315",
     "title": {
-      "position": [100, 200],
+      "position": [100, 100],
       "color": "#FFCC00",
       "font_path": "Inter/Inter-Medium.ttf",
       "font_size": 72
