@@ -105,7 +105,7 @@ const systemInstruction = `## Objective:
                                         - Content includes the course title, a brief subtitle, and an engaging description of the module content.
                                         - ImagePrompt includes the prompt to generate the background image for the title slide which should be visually appealing and modern, representing the course topic and no text. It should have prompt, background, elements and no text mentioned clearly.
                                         - ImageRation: 9:16
-                                        - Transition: Use \`slide_up\` for an engaging entrance.
+                                        - Transition: Use \`dissolve\` for an engaging entrance.
                                         - Should always have the imagePrompt and ImageRatio mentioned.
 
                                         2. Content Slides: 
@@ -113,32 +113,32 @@ const systemInstruction = `## Objective:
                                         - These slides should be informative and provide a clear understanding of the topic while being concise.
                                         - ImagePrompt includes a detailed, effective and accurate prompt to generate a relevant and related image that can be used to explain the concept in the content slide in an effective way. It should have very minimal text which should be mentioned seprately in the prompt clearly. It should have prompt, background, elements and text that needs to be included mentioned clearly.
                                         - ImageRatio: 9:16 / 1:1 / 3:4
-                                        - Transition: Use \`slide_left\` to introduce each concept smoothly.
+                                        - Transition: Use \`fade_in\` to introduce each concept smoothly.
 
                                         3. Unordered List Slide:
                                         - Used to highlight key points or concepts in a list format.
                                         - This slide is best for summarizing multiple key concepts.
-                                        - Transition: Use \`slide_right\` for a dynamic entry.
+                                        - Transition: Use \`fade_out\` for a dynamic entry.
                                         - Note: Make sure that the points are listed as strings.
 
                                         4. Code Slides: 
                                         - Contains code snippets (if applicable) to demonstrate programming concepts or examples.
-                                        - Transition: Use \`slide_right\` for showing the code smoothly.
+                                        - Transition: Use \`dissolve\` for showing the code smoothly.
                                         - If the code exceeds 20 lines, break it into parts and spread them across different slides, ensuring no slide contains more than 20 lines of code.
 
                                         5. Quiz Slides: 
                                         - Includes questions and multiple-choice options to test learners' understanding.
-                                        - Transition: Use \`slide_down\` for the question slide to offer a shift in focus.
+                                        - Transition: Use \`fade_in\` for the question slide to offer a shift in focus.
                                         - After the question slide, use a \`content_slide\` to explain the answer and provide an explanation.
 
                                         6. Chart Slides:
                                         - Visualize data using charts like bar graphs, pie charts, or line graphs to support conceptual learning. These slides help visualize complex concepts in a simple and engaging way.
-                                        - Transition: Use \`slide_left\` for smooth entry of data charts.
+                                        - Transition: Use \`fade_out\` for smooth entry of data charts.
                                         - The charts can be of the type line, bar or pie and have two labels one for x and one for y axis.
 
                                         7. Formula Slides:
                                         - Used for mathematical or statistical concepts. These slides show a formula and provide an explanation of how it is used in the context of the topic.
-                                        - Transition: Use \`slide_up\` for the formula to keep it engaging.
+                                        - Transition: Use \`fade_out\` for the formula to keep it engaging.
 
                                         ---
 
@@ -154,7 +154,7 @@ const systemInstruction = `## Objective:
                                                     \"subtitle\": \"A Practical Introduction to Data-Driven Decision Making\",
                                                     \"content\": \"In this module, we will explore the foundations of Business Analytics, with a focus on real-world applications and hands-on learning.\",
                                                     \"voiceover\": \"Welcome to this Business Analytics course, where you'll learn the fundamentals and practical applications of data analysis to drive business decisions.\",
-                                                    \"transition\": \"slide_up\",
+                                                    \"transition\": \"dissolve\",
                                                     \"imagePrompt\": \"Prompt: A visually appealing and modern background image representing Business Analytics, featuring graphs, charts, and data visualizations. No text.\nImage Description:\nBackground: Dark blue.\nElements: The image should feature a dynamic and modern visual representation of business analytics. This includes a variety of graphs (line, bar, pie), charts, and data visualizations (e.g., heatmaps, dashboards). The visualizations should be clean, with a professional aesthetic, and incorporate a cohesive color scheme (e.g., using shades of blue, green, and orange for data differentiation). The overall composition should suggest data flow, connections, and insights.\nText: None. The focus is entirely on the visual representation of data.\",
                                                     \"imageRatio\": \"9:16\"
                                                 },
@@ -164,7 +164,7 @@ const systemInstruction = `## Objective:
                                                     \"title\": \"What is Business Analytics?\",
                                                     \"content\": \"Business analytics refers to the process of using data to make informed business decisions. It involves statistical analysis, predictive modeling, and data visualization.\",
                                                     \"voiceover\": \"In this section, we'll dive into the concept of Business Analytics, its importance, and the tools commonly used in the field.\",
-                                                    \"transition\": \"slide_left\",
+                                                    \"transition\": \"fade_in\",
                                                     \"imagePrompt\": \"Prompt: An infographic showing the process of Business Analytics, including data collection, analysis, and decision-making. No text should be there at all. \nImage Description:\nBackground: Light grey.\nElements: The infographic should visually represent the process of Business Analytics. It should include elements like data collection (e.g., databases, spreadsheets), analysis (e.g., charts, graphs), and decision-making (e.g., business strategy, reports). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow.\nText: None. The focus is entirely on the visual representation of the process.\",
                                                     \"imageRatio\": \"1:1\"
                                                 },
@@ -176,7 +176,7 @@ const systemInstruction = `## Objective:
                                                         \"Statistical Analysis\"
                                                     ],
                                                     \"voiceover\": \"Business analytics involves several key areas, such as statistical analysis.\",
-                                                    \"transition\": \"slide_right\"
+                                                    \"transition\": \"fade_out\"
                                                 },
                                                 {
                                                     \"slideNumber\": 4,
@@ -187,7 +187,7 @@ const systemInstruction = `## Objective:
                                                         \"Predictive Modeling\"
                                                     ],
                                                     \"voiceover\": \"predictive modeling\",
-                                                    \"transition\": \"slide_right\"
+                                                    \"transition\": \"fade_out\"
                                                 },
                                                 {
                                                     \"slideNumber\": 5,
@@ -199,7 +199,7 @@ const systemInstruction = `## Objective:
                                                         \"Data Visualization\"
                                                     ],
                                                     \"voiceover\": \" data visualization, and supporting decision making.\",
-                                                    \"transition\": \"slide_right\"
+                                                    \"transition\": \"fade_out\"
                                                 },
                                                 {
                                                     \"slideNumber\": 6,
@@ -208,7 +208,7 @@ const systemInstruction = `## Objective:
                                                     \"code\": \"import pandas as pd\\nfrom sklearn.linear_model import LinearRegression\\n\\n# Load data\\ndata = pd.read_csv('business_data.csv')\",
                                                     \"lexer\": \"python\",
                                                     \"voiceover\": \"In this part of the example, we begin by importing the necessary libraries and loading the business data.\",
-                                                    \"transition\": \"slide_right\"
+                                                    \"transition\": \"fade_in\"
                                                 },
                                                 {
                                                     \"slideNumber\": 7,
@@ -217,7 +217,7 @@ const systemInstruction = `## Objective:
                                                     \"code\": \"model = LinearRegression()\\nmodel.fit(data[['feature1', 'feature2']], data['target'])\",
                                                     \"lexer\": \"python\",
                                                     \"voiceover\": \"Here we create a linear regression model and fit it to the data for predicting business outcomes.\",
-                                                    \"transition\": \"slide_right\"
+                                                    \"transition\": \"fade_in\"
                                                 },
                                                 {
                                                     \"slideNumber\": 8,
@@ -231,7 +231,7 @@ const systemInstruction = `## Objective:
                                                         \"To train employees\"
                                                     ],
                                                     \"voiceover\": \"Let’s test your understanding. What do you think is the primary goal of Business Analytics?\",
-                                                    \"transition\": \"slide_down\"
+                                                    \"transition\": \"fade_in\"
                                                 },
                                                 {
                                                     \"slideNumber\": 9,
@@ -239,7 +239,7 @@ const systemInstruction = `## Objective:
                                                     \"title\": \"Answer and Explanation\",
                                                     \"content\": \"The correct answer is: To analyze data for better business decisions. Business analytics focuses on analyzing data to extract actionable insights that help businesses make informed decisions.\",
                                                     \"voiceover\": \"The correct answer is 'To analyze data for better business decisions.' Business analytics is not just about collecting data; it's about transforming that data into meaningful insights for decision-making.\",
-                                                    \"transition\": \"slide_left\",
+                                                    \"transition\": \"fade_in\",
                                                     \"imagePrompt\": \"Prompt: A visual representation of data analysis leading to business decisions, with charts and graphs. No text should be there at all. \nImage Description:\nBackground: Light blue.\nElements: The image should depict the process of data analysis leading to business decisions. This includes elements like charts, graphs, and decision-making icons (e.g., lightbulb, checkmark). The design should be modern and professional, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow.\nText: None. The focus is entirely on the visual representation of the process.\",
                                                     \"imageRatio\": \"4:3\"
                                                 },
@@ -249,7 +249,7 @@ const systemInstruction = `## Objective:
                                                     \"title\": \"Key Takeaways\",
                                                     \"content\": \"Business analytics enables data-driven decision making through techniques like statistical analysis and predictive modeling.\",
                                                     \"voiceover\": \"To summarize, Business Analytics helps organizations make informed decisions using data analysis techniques like statistical analysis, predictive modeling, and data visualization.\",
-                                                    \"transition\": \"slide_left\"
+                                                    \"transition\": \"fade_in\"
                                                 },
                                                 {
                                                     \"slideNumber\": 11,
@@ -262,7 +262,7 @@ const systemInstruction = `## Objective:
                                                         {\"label\": \"Category 3\", \"value\": 30}
                                                     ],
                                                     \"voiceover\": \"This chart represents sales data over the last quarter. The colors indicate different product categories.\",
-                                                    \"transition\": \"slide_left\"
+                                                    \"transition\": \"fade_out\"
                                                 },
                                                 {
                                                     \"slideNumber\": 12,
@@ -271,7 +271,7 @@ const systemInstruction = `## Objective:
                                                     \"formula\": \"y = mx + b\",
                                                     \"explanation\": \"The formula represents a straight line where 'm' is the slope and 'b' is the y-intercept. It's used in linear regression to model relationships between variables.\"
                                                     \"voiceover\": \"The equation 'y = mx + b' is the basis for linear regression, where 'm' determines the slope of the line, and 'b' represents the y-intercept.\",
-                                                    \"transition\": \"slide_up\"
+                                                    \"transition\": \"fade_out\"
                                                 }
                                             ]
                                         }

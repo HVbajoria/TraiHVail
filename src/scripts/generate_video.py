@@ -5,20 +5,21 @@ from dotenv import load_dotenv
 from wand.image import Image as WandImage
 from wand.drawing import Drawing
 from wand.color import Color
-from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips, CompositeVideoClip, vfx, ColorClip # Added ColorClip
+from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips, CompositeVideoClip, vfx, ColorClip
 import azure.cognitiveservices.speech as speechsdk
 from pygments import highlight
 from pygments.lexers import PythonLexer, JavaLexer, MathematicaLexer, CppLexer, CSharpLexer, HtmlLexer, CssLexer, JavascriptLexer, JsonLexer, YamlLexer, BashLexer, PerlLexer, PhpLexer, RubyLexer, SqlLexer, SwiftLexer, ObjectiveCLexer, MatlabLexer
 from pygments.formatters import ImageFormatter
 import subprocess
-# import cv2 # Not used directly, can remove if not needed elsewhere
-from google import genai # If needed for other tasks, keep; otherwise remove if only used for API key
-from google.genai import types # If needed for other tasks, keep
+from moviepy.video.fx.fadein import fadein
+from moviepy.video.fx.fadeout import fadeout
+from google import genai
+from google.genai import types 
 import re
-import base64 # Not used in this script's core logic unless sending data
+import base64 
 import asyncio
 import matplotlib.pyplot as plt
-import logging # Use logging for better output management
+import logging 
 
 # --- Configuration & Setup ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -98,7 +99,12 @@ def slide_transition(clip1, clip2, direction, duration):
     
     return concatenate_videoclips([clip1, transition, clip2.set_start(duration)])
 
-def apply_transition(clip1, clip2, transition_type="slide_left", duration=1):
+def dissolve_transition(clip1, clip2, duration):
+    clip1 = fadeout(clip1,duration)
+    clip2 = fadein(clip2,duration)
+    return concatenate_videoclips([clip1, clip2])
+
+def apply_transition(clip1, clip2, transition_type="slide_left", duration=2):
     if transition_type == "slide_left":
         return slide_transition(clip1, clip2, direction="left", duration=duration)
     elif transition_type == "slide_right":
@@ -107,6 +113,14 @@ def apply_transition(clip1, clip2, transition_type="slide_left", duration=1):
         return slide_transition(clip1, clip2, direction="top", duration=duration)
     elif transition_type == "slide_down":
         return slide_transition(clip1, clip2, direction="bottom", duration=duration)
+    elif transition_type == "fade_in":
+        clip2 = fadein(clip2, duration)
+        return concatenate_videoclips([clip1, clip2])
+    elif transition_type == "fade_out":
+        clip1 = fadeout(clip1, duration)
+        return concatenate_videoclips([clip1, clip2])
+    elif transition_type == "dissolve":
+        return dissolve_transition(clip1, clip2, duration)
     return concatenate_videoclips([clip1, clip2])
 
 def wrap_text(draw, text, max_width, font_size, line_spacing):
@@ -385,14 +399,18 @@ def process_slide(slide_data, template, output_dir):
     image_ratio = slide_data.get("imageRatio")
 
     if image_prompt and image_ratio:
-        logging.info(f"Generating image for slide {slide_number} with prompt: '{image_prompt}' and ratio: {image_ratio}")
-        command = ["node", "src/ai/flows/generate-image.js", "--generate-image", f"'{image_prompt}'", image_ratio, str(slide_number)]
-        print(command)
-        try:
-            subprocess.run(command, check=True, capture_output=True, text=True)
-            logging.info(f"Successfully generated image for slide {slide_number}.")
-        except subprocess.CalledProcessError as e:
-            logging.error(f"Error generating image for slide {slide_number}: {e.stderr}")
+        # Donot generate image if the image is already present
+        if os.path.exists(generated_image_path):
+            logging.info(f"Image for slide {slide_number} already exists. Skipping generation.")
+        else:
+            logging.info(f"Generating image for slide {slide_number} with prompt: '{image_prompt}' and ratio: {image_ratio}")
+            command = ["node", "src/ai/flows/generate-image.js", "--generate-image", f"'{image_prompt}'", image_ratio, str(slide_number)]
+            print(command)
+            try:
+                subprocess.run(command, check=True, capture_output=True, text=True)
+                logging.info(f"Successfully generated image for slide {slide_number}.")
+            except subprocess.CalledProcessError as e:
+                logging.error(f"Error generating image for slide {slide_number}: {e.stderr}")
 
     # Generate the base slide image (text, code, charts etc.)
     generate_slide_image(slide_data, template, image_path) # This still generates the base image
@@ -540,7 +558,7 @@ def main(script_input_path, video_output_path, assets_dir):
     length = len(clips)
     
     for i in range(length-1, 0, -1):
-        clip = apply_transition(clips[i-1], clips[i], transition_type=transitions[i-1], duration=1.3)
+        clip = apply_transition(clips[i-1], clips[i], transition_type=transitions[i-1], duration=1.7)
         if slide_type[i] == "unordered_list_slide" and slide_type[i-1] == "unordered_list_slide":
             clip = concatenate_videoclips([clips[i-1], clips[i]])
         clips.pop()

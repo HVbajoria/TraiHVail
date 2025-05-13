@@ -1,216 +1,202 @@
 {
   "slides": [
     {
-      "content": "Welcome to Version Control 101! This module will introduce you to the world of version control and Git, essential tools for modern software development.",
+      "content": "Welcome to Git Commands Demystified! In this module, we'll explore essential Git commands with practical examples to boost your version control skills.",
       "slideNumber": 1,
-      "title": "Version Control 101",
+      "title": "Git Commands Demystified",
       "type": "title_slide",
-      "imagePrompt": "Prompt: A visually appealing and modern background image representing version control and Git, featuring code snippets, branching diagrams, and a clean, professional aesthetic. No text. Image Description: Background: Dark, abstract design with flowing lines. Elements: Code snippets in various languages (e.g., Python, JavaScript), branching diagrams illustrating the Git workflow, and icons representing common version control actions (commit, push, pull). The overall composition should suggest collaboration, tracking, and the evolution of code. Text: None.",
+      "imagePrompt": "Prompt: A visually appealing and modern background image representing Git and version control, featuring interconnected nodes, branches, and a central repository. No text. \nImage Description:\nBackground: Dark, gradient blue to black.\nElements: The image should feature a dynamic and modern visual representation of Git and version control. This includes interconnected nodes representing commits, branches diverging and merging, and a central repository. The design should be clean, with a professional aesthetic, and incorporate a cohesive color scheme (e.g., using shades of blue, green, and orange for data differentiation). The overall composition should suggest data flow, connections, and insights.\nText: None. The focus is entirely on the visual representation of the process.",
       "imageRatio": "9:16",
-      "subtitle": "Understanding Git and Version Control",
-      "transition": "slide_up",
-      "voiceover": "Hello and welcome! This module is all about version control and Git, which are fundamental for any software developer."
+      "subtitle": "Mastering Version Control with Practical Examples",
+      "transition": "dissolve",
+      "voiceover": "Hello and welcome! In this module, we're diving into Git – the cornerstone of modern software development. We'll break down essential Git commands and show you how to use them effectively."
     },
     {
-      "content": "Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later. It's like a time machine for your code!",
+      "content": "Git is a distributed version control system that tracks changes to your files. It allows you to manage your project's history, collaborate with others, and revert to previous versions.",
       "slideNumber": 2,
-      "title": "What is Version Control?",
+      "title": "What is Git?",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An infographic illustrating the concept of version control. Image Description: Background: Light grey. Elements: A timeline representing the history of a project, with different versions of files marked along the timeline. Icons representing commits, branches, and merges. The design should be clean, modern, and easy to understand. Text: None.",
+      "imagePrompt": "Prompt: An infographic illustrating the basic Git workflow: working directory, staging area, and repository. No text should be there at all. \nImage Description:\nBackground: Light grey.\nElements: The infographic should visually represent the Git workflow. It should include elements like the working directory (files being edited), the staging area (files ready to commit), and the repository (where commits are stored). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow.\nText: None. The focus is entirely on the visual representation of the process.",
       "imageRatio": "1:1",
-      "transition": "slide_left",
-      "voiceover": "Version control is a system for tracking changes to your files over time. It's like a time machine for your code, allowing you to go back to previous versions."
-    },
-    {
-      "content": "Why is Version Control Important?",
-      "slideNumber": 3,
-      "title": "Why Version Control?",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the benefits of version control. Image Description: Background: Light blue. Elements: Icons representing collaboration, backup, history, and recovery. The icons should be clearly labeled and visually appealing. The overall design should emphasize the advantages of using version control. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "slide_left",
-      "voiceover": "Version control is important for several reasons, including collaboration, tracking changes, and the ability to revert to previous versions."
+      "transition": "fade_in",
+      "voiceover": "Git is a version control system that tracks changes to your files over time. This allows you to manage your project's history, collaborate with others, and revert to previous versions."
     },
     {
       "points": [
-        "Track Changes",
-        "Collaboration",
-        "Backup and Recovery"
+        "git init"
+      ],
+      "slideNumber": 3,
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Let's start with some essential Git commands. First up is 'git init'. This command initializes a new Git repository in your project directory."
+    },
+    {
+      "points": [
+        "git init",
+        "git add"
       ],
       "slideNumber": 4,
-      "title": "Key Benefits",
+      "title": "Essential Git Commands",
       "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "Key benefits of version control include the ability to track changes."
+      "voiceover": "Next, we have 'git add'. This command adds changes in your working directory to the staging area, preparing them for a commit."
     },
     {
       "points": [
-        "Track Changes",
-        "Collaboration",
-        "Backup and Recovery"
+        "git init",
+        "git add",
+        "git commit"
       ],
       "slideNumber": 5,
-      "title": "Key Benefits",
+      "title": "Essential Git Commands",
       "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "Collaboration is another important benefit."
-    },
-    {
-      "points": [
-        "Track Changes",
-        "Collaboration",
-        "Backup and Recovery"
-      ],
-      "slideNumber": 6,
-      "title": "Key Benefits",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "Backup and recovery is also an important part of version control."
-    },
-    {
-      "content": "Git is a distributed version control system that allows you to track changes to your code, collaborate with others, and manage different versions of your project. It is the most popular version control system.",
-      "slideNumber": 7,
-      "title": "Introducing Git",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the Git workflow. Image Description: Background: Dark grey. Elements: A diagram illustrating the Git workflow (e.g., staging area, local repository, remote repository). The diagram should clearly show the flow of changes between these areas. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "slide_left",
-      "voiceover": "Git is a powerful distributed version control system. It helps you track changes, collaborate, and manage different versions of your project."
-    },
-    {
-      "content": "Git commands allow you to interact with your repository and manage your project's history. It is used to create, merge and manage the code.",
-      "slideNumber": 8,
-      "title": "Basic Git Commands",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: An illustration of common Git commands. Image Description: Background: White. Elements: Icons representing common Git commands such as 'commit', 'push', 'pull', 'branch', and 'merge'. Each icon should be accompanied by a brief description of the command's function. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "slide_left",
-      "voiceover": "Let's look at some basic Git commands."
-    },
-    {
-      "points": [
-        "git init",
-        "git add",
-        "git commit"
-      ],
-      "slideNumber": 9,
-      "title": "Essential Commands",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "First command is git init to initialize a local repository."
-    },
-    {
-      "points": [
-        "git init",
-        "git add",
-        "git commit"
-      ],
-      "slideNumber": 10,
-      "title": "Essential Commands",
-      "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "Next is git add to add files to the staging area."
+      "voiceover": "Then, we have 'git commit'. This command records the staged changes as a snapshot in time. It's like saving a version of your project."
     },
     {
       "points": [
         "git init",
         "git add",
         "git commit",
-        "git push",
+        "git status"
+      ],
+      "slideNumber": 6,
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Next we have 'git status'. This command shows the state of your working directory and staging area. It's your go-to command to see what's changed."
+    },
+    {
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status",
+        "git log"
+      ],
+      "slideNumber": 7,
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Then, we have 'git log'. This command displays the commit history of your repository. It shows you the commits, their authors, and their messages."
+    },
+    {
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status",
+        "git log",
         "git pull"
       ],
-      "slideNumber": 11,
-      "title": "Essential Commands",
+      "slideNumber": 8,
+      "title": "Essential Git Commands",
       "type": "unordered_list_slide",
-      "transition": "slide_right",
-      "voiceover": "Then, git commit to save changes to the local repository, git push to upload local repository to the remote repository and git pull to download the changes from the remote repository."
+      "voiceover": "Next we have 'git pull'. This command fetches and merges changes from a remote repository into your current branch. It's how you get the latest updates from others."
     },
     {
-      "code": "git init # Initializes a new Git repository\ngit add . # Stages all changes in the current directory\ngit commit -m \"Initial commit\" # Commits the staged changes with a message\ngit status # Shows the status of the repository",
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status",
+        "git log",
+        "git pull",
+        "git push"
+      ],
+      "slideNumber": 9,
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Finally, we have 'git push'. This command uploads local repository content to a remote repository. It's how you share your work with others."
+    },
+    {
+      "code": "git init",
+      "slideNumber": 10,
+      "title": "Command in Action: git init",
+      "type": "code_slide",
+      "lexer": "bash",
+      "voiceover": "Let's see 'git init' in action. Navigate to your project directory in the terminal and type 'git init'. This creates a new Git repository."
+    },
+    {
+      "code": "git add .",
+      "slideNumber": 11,
+      "title": "Command in Action: git add",
+      "type": "code_slide",
+      "lexer": "bash",
+      "voiceover": "Now, let's stage all the files. Use 'git add .' to stage all changes in the current directory. Or you can specify individual files."
+    },
+    {
+      "code": "git commit -m \"Initial commit\"",
       "slideNumber": 12,
-      "title": "Example: Basic Workflow",
+      "title": "Command in Action: git commit",
       "type": "code_slide",
       "lexer": "bash",
-      "transition": "slide_right",
-      "voiceover": "Here's a basic Git workflow example."
+      "voiceover": "Now, let's commit the changes. Type 'git commit -m \"Your commit message\"'. Replace \"Your commit message\" with a descriptive message about the changes you've made."
     },
     {
-      "content": "Branches allow you to work on different features or bug fixes without affecting the main codebase. Merging integrates those changes back into the main branch.",
+      "code": "git status",
       "slideNumber": 13,
-      "title": "Branches and Merging",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of Git branching and merging. Image Description: Background: Light green. Elements: A diagram illustrating the branching and merging process in Git. This includes the main branch, feature branches, and the merge operation. The diagram should clearly show how changes are integrated. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "slide_left",
-      "voiceover": "Branches and merging are key to collaborative development."
+      "title": "Command in Action: git status",
+      "type": "code_slide",
+      "lexer": "bash",
+      "voiceover": "Use 'git status' to check the status of your repository. This command tells you which files are staged, unstaged, or untracked."
     },
     {
-      "code": "git branch feature-branch # Creates a new branch\ngit checkout feature-branch # Switches to the new branch\n# ... make changes ...\ngit add .\ngit commit -m \"Implemented feature\"\ngit checkout main # Switches back to the main branch\ngit merge feature-branch # Merges the feature branch into main",
+      "code": "git log",
       "slideNumber": 14,
-      "title": "Branching and Merging Example",
+      "title": "Command in Action: git log",
       "type": "code_slide",
       "lexer": "bash",
-      "transition": "slide_right",
-      "voiceover": "Here's how you can create branches and merge them."
+      "voiceover": "Use 'git log' to view the commit history. This shows you all the commits made, along with their messages and authors."
     },
     {
-      "content": "Remote repositories, like GitHub, GitLab, or Bitbucket, store your project's code online, enabling collaboration and backup.",
+      "code": "git pull origin main",
       "slideNumber": 15,
-      "title": "Remote Repositories",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of a remote repository. Image Description: Background: Light blue. Elements: Icons representing GitHub, GitLab, and Bitbucket. The icons should be arranged in a visually appealing way, with a clear emphasis on collaboration and remote storage. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "slide_left",
-      "voiceover": "Remote repositories host your code online, enabling collaboration and backup."
-    },
-    {
-      "code": "git remote add origin <repository_url> # Adds a remote repository\ngit push -u origin main # Pushes the local branch to the remote repository",
-      "slideNumber": 16,
-      "title": "Connecting to Remote Repositories",
+      "title": "Command in Action: git pull",
       "type": "code_slide",
       "lexer": "bash",
-      "transition": "slide_right",
-      "voiceover": "Here's how to connect to a remote repository."
+      "voiceover": "Use 'git pull origin main' to fetch and merge changes from the 'main' branch of the remote repository named 'origin'."
     },
     {
-      "content": "Version control is essential for every software project. Git provides a robust solution for managing your code, collaborating with others, and ensuring the integrity of your work.",
+      "code": "git push origin main",
+      "slideNumber": 16,
+      "title": "Command in Action: git push",
+      "type": "code_slide",
+      "lexer": "bash",
+      "voiceover": "Use 'git push origin main' to push your local commits to the 'main' branch of the remote repository named 'origin'."
+    },
+    {
+      "content": "What command is used to stage all changes in the current directory?",
       "slideNumber": 17,
-      "title": "Conclusion",
+      "title": "Quiz: Git Commands",
       "type": "content_slide",
-      "transition": "slide_left",
-      "voiceover": "In conclusion, version control is essential for every software project and Git is the most popular tool for it."
-    },
-    {
-      "content": "What is the purpose of the \"git commit\" command?",
-      "slideNumber": 18,
-      "title": "Quiz Time",
-      "type": "content_slide",
-      "transition": "slide_down",
-      "voiceover": "Let's test your knowledge with a quick quiz. What does the git commit command do?"
+      "transition": "fade_in",
+      "voiceover": "Let's test your knowledge with a quick quiz. What command do you use to stage all changes in the current directory?"
     },
     {
       "options": [
-        "To add files to the staging area.",
-        "To initialize a new Git repository.",
-        "To save changes to the local repository.",
-        "To download changes from a remote repository."
+        "git commit",
+        "git add .",
+        "git push",
+        "git status"
       ],
-      "question": "What is the purpose of the \"git commit\" command?",
-      "slideNumber": 19,
-      "title": "Question",
+      "question": "What command is used to stage all changes in the current directory?",
+      "slideNumber": 18,
+      "title": "Quiz: Git Commands - Options",
       "type": "quiz_slide",
-      "transition": "slide_down",
-      "voiceover": "Choose the best answer."
+      "voiceover": "Here are your options. Take a moment to consider your answer."
     },
     {
-      "content": "The correct answer is: To save changes to the local repository. Git commit creates a snapshot of your staged changes.",
-      "slideNumber": 20,
-      "title": "Answer and Explanation",
+      "content": "The correct answer is: git add . This command stages all changes in the current directory, preparing them to be committed.",
+      "slideNumber": 19,
+      "title": "Quiz Answer and Explanation",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the 'git commit' process. Image Description: Background: Light grey. Elements: An icon representing a commit action (e.g., a checkmark or a save icon). The icon should be placed next to a representation of the local repository. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "slide_left",
-      "voiceover": "The correct answer is 'To save changes to the local repository.'"
+      "imagePrompt": "Prompt: A visual representation of the 'git add .' command, showing files moving from the working directory to the staging area. No text should be there at all. \nImage Description:\nBackground: Light blue.\nElements: The image should depict the 'git add .' command in action. This includes files from the working directory being moved to the staging area. The design should be modern and professional, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow.\nText: None. The focus is entirely on the visual representation of the process.",
+      "imageRatio": "4:3",
+      "voiceover": "The correct answer is 'git add .'. This command stages all changes in the current directory."
+    },
+    {
+      "content": "Mastering Git commands is essential for effective version control and collaboration. Practice these commands regularly to build your proficiency.",
+      "slideNumber": 20,
+      "title": "Key Takeaways",
+      "type": "content_slide",
+      "voiceover": "In summary, mastering Git commands is crucial for effective version control and collaboration. Practice these commands regularly to build your proficiency."
     }
   ]
 }
