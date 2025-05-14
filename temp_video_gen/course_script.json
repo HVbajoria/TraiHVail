@@ -1,202 +1,165 @@
 {
   "slides": [
     {
-      "content": "Welcome to Git Commands Demystified! In this module, we'll explore essential Git commands with practical examples to boost your version control skills.",
+      "content": "Welcome to the world of Analytical Reasoning! Let's sharpen your logical skills.",
       "slideNumber": 1,
-      "title": "Git Commands Demystified",
+      "title": "Analytical Reasoning: Introduction",
       "type": "title_slide",
-      "imagePrompt": "Prompt: A visually appealing and modern background image representing Git and version control, featuring interconnected nodes, branches, and a central repository. No text. \nImage Description:\nBackground: Dark, gradient blue to black.\nElements: The image should feature a dynamic and modern visual representation of Git and version control. This includes interconnected nodes representing commits, branches diverging and merging, and a central repository. The design should be clean, with a professional aesthetic, and incorporate a cohesive color scheme (e.g., using shades of blue, green, and orange for data differentiation). The overall composition should suggest data flow, connections, and insights.\nText: None. The focus is entirely on the visual representation of the process.",
+      "imagePrompt": "Prompt: A visually appealing and modern background image representing Analytical Reasoning, featuring interconnected nodes, graphs, and a magnifying glass. No text. Image Description: Background: Dark blue. Elements: The image should feature a network of interconnected nodes, symbolizing data points and connections. Include graphs (line, bar) and a magnifying glass to represent analysis and insight. The design should be clean and professional, with a cohesive color scheme (e.g., shades of blue and green). The overall composition should suggest analysis, connections, and insights. Text: None.",
       "imageRatio": "9:16",
-      "subtitle": "Mastering Version Control with Practical Examples",
+      "subtitle": "Mastering Logical Analysis",
       "transition": "dissolve",
-      "voiceover": "Hello and welcome! In this module, we're diving into Git – the cornerstone of modern software development. We'll break down essential Git commands and show you how to use them effectively."
+      "voiceover": "Welcome to the Analytical Reasoning module! This course will help you develop critical thinking and problem-solving skills."
     },
     {
-      "content": "Git is a distributed version control system that tracks changes to your files. It allows you to manage your project's history, collaborate with others, and revert to previous versions.",
+      "content": "Analytical reasoning involves breaking down complex information into manageable parts to understand relationships and draw conclusions.",
       "slideNumber": 2,
-      "title": "What is Git?",
+      "title": "What is Analytical Reasoning?",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An infographic illustrating the basic Git workflow: working directory, staging area, and repository. No text should be there at all. \nImage Description:\nBackground: Light grey.\nElements: The infographic should visually represent the Git workflow. It should include elements like the working directory (files being edited), the staging area (files ready to commit), and the repository (where commits are stored). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow.\nText: None. The focus is entirely on the visual representation of the process.",
+      "imagePrompt": "Prompt: An infographic showing the process of analytical reasoning, including information gathering, analysis, and conclusion. No text should be there at all. Image Description: Background: Light grey. Elements: The infographic should visually represent the process of analytical reasoning. It should include elements like information gathering (e.g., data sources, reports), analysis (e.g., charts, diagrams), and conclusion (e.g., decision-making, recommendations). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None.",
       "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "Git is a version control system that tracks changes to your files over time. This allows you to manage your project's history, collaborate with others, and revert to previous versions."
+      "voiceover": "Analytical reasoning is about breaking down complex information to understand relationships and draw conclusions."
     },
     {
       "points": [
-        "git init"
+        "Identifying patterns and relationships within data.",
+        "Evaluating arguments and identifying assumptions.",
+        "Drawing logical inferences and conclusions."
       ],
       "slideNumber": 3,
-      "title": "Essential Git Commands",
+      "title": "Key Skills in Analytical Reasoning",
       "type": "unordered_list_slide",
-      "voiceover": "Let's start with some essential Git commands. First up is 'git init'. This command initializes a new Git repository in your project directory."
+      "voiceover": "Key skills include identifying patterns, evaluating arguments, and drawing logical inferences."
     },
     {
       "points": [
-        "git init",
-        "git add"
+        "Identifying patterns and relationships within data.",
+        "Evaluating arguments and identifying assumptions.",
+        "Drawing logical inferences and conclusions.",
+        "Problem-solving and decision-making."
       ],
       "slideNumber": 4,
-      "title": "Essential Git Commands",
+      "title": "Key Skills in Analytical Reasoning",
       "type": "unordered_list_slide",
-      "voiceover": "Next, we have 'git add'. This command adds changes in your working directory to the staging area, preparing them for a commit."
+      "voiceover": "Key skills include identifying patterns, evaluating arguments, drawing logical inferences and problem-solving."
     },
     {
       "points": [
-        "git init",
-        "git add",
-        "git commit"
+        "Identifying patterns and relationships within data.",
+        "Evaluating arguments and identifying assumptions.",
+        "Drawing logical inferences and conclusions.",
+        "Problem-solving and decision-making.",
+        "Critical thinking and logical thinking."
       ],
       "slideNumber": 5,
-      "title": "Essential Git Commands",
+      "title": "Key Skills in Analytical Reasoning",
       "type": "unordered_list_slide",
-      "voiceover": "Then, we have 'git commit'. This command records the staged changes as a snapshot in time. It's like saving a version of your project."
+      "voiceover": "Key skills include identifying patterns, evaluating arguments, drawing logical inferences, problem-solving and critical thinking."
     },
     {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status"
-      ],
+      "content": "Start with the given information. Break it down into smaller components. Identify the relationships between these components.",
       "slideNumber": 6,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Next we have 'git status'. This command shows the state of your working directory and staging area. It's your go-to command to see what's changed."
+      "title": "The Analytical Process",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A flowchart illustrating the analytical process, including the steps of information gathering, analysis, and conclusion. No text should be there at all. Image Description: Background: Light blue. Elements: The flowchart should visually represent the analytical process. It should include elements like information gathering (e.g., data sources, reports), analysis (e.g., charts, diagrams), and conclusion (e.g., decision-making, recommendations). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "The analytical process involves breaking down information, identifying relationships, and drawing conclusions."
     },
     {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status",
-        "git log"
-      ],
+      "content": "Consider all possibilities, and eliminate those that don't fit. Formulate a logical conclusion based on the evidence.",
       "slideNumber": 7,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Then, we have 'git log'. This command displays the commit history of your repository. It shows you the commits, their authors, and their messages."
-    },
-    {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status",
-        "git log",
-        "git pull"
-      ],
-      "slideNumber": 8,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Next we have 'git pull'. This command fetches and merges changes from a remote repository into your current branch. It's how you get the latest updates from others."
-    },
-    {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status",
-        "git log",
-        "git pull",
-        "git push"
-      ],
-      "slideNumber": 9,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Finally, we have 'git push'. This command uploads local repository content to a remote repository. It's how you share your work with others."
-    },
-    {
-      "code": "git init",
-      "slideNumber": 10,
-      "title": "Command in Action: git init",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Let's see 'git init' in action. Navigate to your project directory in the terminal and type 'git init'. This creates a new Git repository."
-    },
-    {
-      "code": "git add .",
-      "slideNumber": 11,
-      "title": "Command in Action: git add",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Now, let's stage all the files. Use 'git add .' to stage all changes in the current directory. Or you can specify individual files."
-    },
-    {
-      "code": "git commit -m \"Initial commit\"",
-      "slideNumber": 12,
-      "title": "Command in Action: git commit",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Now, let's commit the changes. Type 'git commit -m \"Your commit message\"'. Replace \"Your commit message\" with a descriptive message about the changes you've made."
-    },
-    {
-      "code": "git status",
-      "slideNumber": 13,
-      "title": "Command in Action: git status",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Use 'git status' to check the status of your repository. This command tells you which files are staged, unstaged, or untracked."
-    },
-    {
-      "code": "git log",
-      "slideNumber": 14,
-      "title": "Command in Action: git log",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Use 'git log' to view the commit history. This shows you all the commits made, along with their messages and authors."
-    },
-    {
-      "code": "git pull origin main",
-      "slideNumber": 15,
-      "title": "Command in Action: git pull",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Use 'git pull origin main' to fetch and merge changes from the 'main' branch of the remote repository named 'origin'."
-    },
-    {
-      "code": "git push origin main",
-      "slideNumber": 16,
-      "title": "Command in Action: git push",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Use 'git push origin main' to push your local commits to the 'main' branch of the remote repository named 'origin'."
-    },
-    {
-      "content": "What command is used to stage all changes in the current directory?",
-      "slideNumber": 17,
-      "title": "Quiz: Git Commands",
+      "title": "The Analytical Process (Cont.)",
       "type": "content_slide",
       "transition": "fade_in",
-      "voiceover": "Let's test your knowledge with a quick quiz. What command do you use to stage all changes in the current directory?"
+      "voiceover": "Consider all possibilities, eliminate inconsistencies, and formulate a logical conclusion."
+    },
+    {
+      "content": "A survey found that 60% of people prefer coffee, 30% prefer tea, and 10% prefer juice. If 200 people were surveyed, how many preferred tea?",
+      "slideNumber": 8,
+      "title": "Example: Survey Analysis",
+      "type": "content_slide",
+      "voiceover": "Here's an example: A survey found that 60% preferred coffee, 30% tea, and 10% juice. If 200 people were surveyed, how many preferred tea?"
     },
     {
       "options": [
-        "git commit",
-        "git add .",
-        "git push",
-        "git status"
+        "30",
+        "60",
+        "90",
+        "120"
       ],
-      "question": "What command is used to stage all changes in the current directory?",
-      "slideNumber": 18,
-      "title": "Quiz: Git Commands - Options",
+      "question": "What is the answer to the survey question?",
+      "slideNumber": 9,
+      "title": "Quiz: Survey Analysis",
       "type": "quiz_slide",
-      "voiceover": "Here are your options. Take a moment to consider your answer."
+      "transition": "fade_in",
+      "voiceover": "Try to solve this problem. Choose the correct option."
     },
     {
-      "content": "The correct answer is: git add . This command stages all changes in the current directory, preparing them to be committed.",
-      "slideNumber": 19,
-      "title": "Quiz Answer and Explanation",
+      "content": "The correct answer is 60. 30% of 200 = 0.30 * 200 = 60.",
+      "slideNumber": 10,
+      "title": "Answer and Explanation",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the 'git add .' command, showing files moving from the working directory to the staging area. No text should be there at all. \nImage Description:\nBackground: Light blue.\nElements: The image should depict the 'git add .' command in action. This includes files from the working directory being moved to the staging area. The design should be modern and professional, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow.\nText: None. The focus is entirely on the visual representation of the process.",
+      "imagePrompt": "Prompt: A simple bar chart showing the preferences from the survey (coffee, tea, juice) with the correct number of tea preferences highlighted. No text should be there at all. Image Description: Background: Light grey. Elements: The image should depict a bar chart representing the survey results. The chart should have three bars corresponding to coffee, tea, and juice preferences. The bar for tea should be highlighted or emphasized to indicate the correct answer. Use a clean and clear design with a color palette that is easy on the eyes (e.g., blues and greens). Text: None.",
       "imageRatio": "4:3",
-      "voiceover": "The correct answer is 'git add .'. This command stages all changes in the current directory."
+      "transition": "fade_in",
+      "voiceover": "The correct answer is 60. Let's see how we got that answer."
     },
     {
-      "content": "Mastering Git commands is essential for effective version control and collaboration. Practice these commands regularly to build your proficiency.",
-      "slideNumber": 20,
+      "content": "Analytical reasoning is essential for making informed decisions in business, science, and everyday life.",
+      "slideNumber": 11,
+      "title": "Why is Analytical Reasoning Important?",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An image representing the application of analytical reasoning in various fields like business, science, and everyday life, with a focus on decision-making. No text should be there at all. Image Description: Background: Light blue. Elements: The image should depict the application of analytical reasoning in various fields like business, science, and everyday life. It should include elements like charts, graphs, and decision-making icons (e.g., lightbulb, checkmark). The design should be modern and professional, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None.",
+      "imageRatio": "4:3",
+      "transition": "fade_in",
+      "voiceover": "Analytical reasoning is crucial for informed decision-making across various fields."
+    },
+    {
+      "content": "Practice consistently to improve your analytical skills. Start with simple problems and gradually increase the complexity.",
+      "slideNumber": 12,
+      "title": "How to Improve Your Skills",
+      "type": "content_slide",
+      "voiceover": "Practice regularly to improve your analytical skills. Start with simple problems and gradually increase complexity."
+    },
+    {
+      "content": "Use logical puzzles, case studies, and data analysis exercises.",
+      "slideNumber": 13,
+      "title": "Practice Methods",
+      "type": "content_slide",
+      "transition": "fade_in",
+      "voiceover": "Use logical puzzles, case studies, and data analysis exercises."
+    },
+    {
+      "content": "Understanding the problem, gathering information, analyzing data and drawing conclusions.",
+      "slideNumber": 14,
       "title": "Key Takeaways",
       "type": "content_slide",
-      "voiceover": "In summary, mastering Git commands is crucial for effective version control and collaboration. Practice these commands regularly to build your proficiency."
+      "voiceover": "In summary: Understand the problem, gather information, analyze, and draw conclusions."
+    },
+    {
+      "chartType": "bar",
+      "data": [
+        {
+          "label": "Option A",
+          "value": 25
+        },
+        {
+          "label": "Option B",
+          "value": 40
+        },
+        {
+          "label": "Option C",
+          "value": 35
+        }
+      ],
+      "slideNumber": 15,
+      "title": "Data Analysis: Results",
+      "type": "chart_slide",
+      "voiceover": "This bar chart shows the results of a survey, illustrating the distribution of responses across three different options.",
+      "xLabel": "Options",
+      "yLabel": "Percentage"
     }
   ]
 }
