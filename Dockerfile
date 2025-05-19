@@ -1,51 +1,45 @@
-# Use the official Node.js 20 image as the base image
-FROM --platform=linux/arm64 node:20
+# Use the official Node.js 20 slim image as the base
+FROM --platform=linux/amd64 node:20-slim
 
-# Update and install build dependencies and sudo
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libffi-dev \
-    libssl-dev \
-    zlib1g-dev \
-    bzip2 \
-    xz-utils \
-    wget \
-    imagemagick \
-    sudo && \
+# Install Python 3.9, pip, and necessary build dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3.9 \
+        python3.9-distutils \
+        wget \
+        build-essential \
+        libffi-dev \
+        libssl-dev \
+        zlib1g-dev \
+        bzip2 \
+        xz-utils \
+        sudo \
+        imagemagick && \
+    # Install pip for Python 3.9
+    wget https://bootstrap.pypa.io/get-pip.py && \
+    python3.9 get-pip.py && \
+    rm get-pip.py && \
+    # Symlink python and pip commands
+    ln -sf /usr/bin/python3.9 /usr/bin/python3 && \
+    ln -sf /usr/local/bin/pip /usr/local/bin/pip3 && \
+    # Cleanup
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Download and build Python 3.9.22 from source
-RUN wget https://www.python.org/ftp/python/3.9.22/Python-3.9.22.tgz && \
-    tar xzf Python-3.9.22.tgz && \
-    cd Python-3.9.22 && \
-    ./configure --enable-optimizations && \
-    make && make install && \
-    cd .. && rm -rf Python-3.9.22 Python-3.9.22.tgz
+# Verify installations
+RUN node -v && npm -v && python3 --version && pip3 --version
 
-RUN pip3 install --upgrade pip
-
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install Node.js dependencies
-RUN npm install
-
-# Copy Python requirements file
+# Copy Python requirements and install
 COPY requirements.txt ./
-
-# Install Python dependencies
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-
-
-# Copy the rest of the application code
+# Copy application code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Install Node.js dependencies and build assets
+RUN npm install && npm run build
 
-# Start the application
+# Default command
 CMD ["npm", "start"]
