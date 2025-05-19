@@ -1,5 +1,7 @@
 # Use the official Node.js 20 image as the base image
-FROM  node:20
+# Build using the command: docker build --platform=linux/amd64 -t traihvailpro .  
+
+FROM node:20
 
 # Update and install build dependencies and sudo
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -19,13 +21,13 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1
     sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
     rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 
-# Install pre-built Python 3.9
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    python3.9 \
-    python3.9-slim \
-    python3-pip && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+# Download and build Python 3.9.22 from source
+RUN wget https://www.python.org/ftp/python/3.9.22/Python-3.9.22.tgz && \
+    tar xzf Python-3.9.22.tgz && \
+    cd Python-3.9.22 && \
+    ./configure --enable-optimizations && \
+    make && make install && \
+    cd .. && rm -rf Python-3.9.22 Python-3.9.22.tgz
 
 RUN pip3 install --upgrade pip
 
