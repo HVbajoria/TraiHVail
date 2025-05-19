@@ -1,45 +1,54 @@
-# Use the official Node.js 20 slim image as the base
-FROM --platform=linux/amd64 node:20-slim
+# Use the official Node.js 20 image as the base image
+FROM  node:20
 
-# Install Python 3.9, pip, and necessary build dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        python3.9 \
-        python3.9-distutils \
-        wget \
-        build-essential \
-        libffi-dev \
-        libssl-dev \
-        zlib1g-dev \
-        bzip2 \
-        xz-utils \
-        sudo \
-        imagemagick && \
-    # Install pip for Python 3.9
-    wget https://bootstrap.pypa.io/get-pip.py && \
-    python3.9 get-pip.py && \
-    rm get-pip.py && \
-    # Symlink python and pip commands
-    ln -sf /usr/bin/python3.9 /usr/bin/python3 && \
-    ln -sf /usr/local/bin/pip /usr/local/bin/pip3 && \
-    # Cleanup
+# Update and install build dependencies and sudo
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    zlib1g-dev \
+    bzip2 \
+    xz-utils \
+    wget \
+    imagemagick \
+    sudo && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Verify installations
-RUN node -v && npm -v && python3 --version && pip3 --version
+# Download and install libssl1.1
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
+    sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
+    rm libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 
-# Set working directory
+# Install pre-built Python 3.9
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3.9 \
+    python3.9-slim \
+    python3-pip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --upgrade pip
+
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy Python requirements and install
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install Node.js dependencies
+RUN npm install
+
+# Copy Python requirements file
 COPY requirements.txt ./
+
+# Install Python dependencies
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy the rest of the application code
 COPY . .
 
-# Install Node.js dependencies and build assets
-RUN npm install && npm run build
+# Build the application
+RUN npm run build
 
-# Default command
+# Start the application
 CMD ["npm", "start"]
