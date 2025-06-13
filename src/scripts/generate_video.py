@@ -34,7 +34,7 @@ try:
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
     # Configure voice - Use environment variables or defaults
     speech_config.speech_synthesis_language = os.getenv('SPEECH_LANGUAGE', "en-IN")
-    speech_config.speech_synthesis_voice_name = os.getenv('SPEECH_VOICE', "en-IN-ArjunNeural")
+    speech_config.speech_synthesis_voice_name = os.getenv('SPEECH_VOICE', "de-DE-Florian:DragonHDLatestNeural")
     logging.info(f"Azure Speech configured for region: {speech_region}, language: {speech_config.speech_synthesis_language}, voice: {speech_config.speech_synthesis_voice_name}")
 except Exception as e:
     logging.error(f"Failed to configure Azure Speech SDK: {e}")
@@ -419,6 +419,7 @@ def process_slide(slide_data, template, output_dir):
 
     audio_clip = AudioFileClip(audio_path)
     clip_duration = audio_clip.duration
+
     slide_clip = ImageClip(image_path).set_duration(clip_duration)
     video_clip = slide_clip.set_audio(audio_clip)
 

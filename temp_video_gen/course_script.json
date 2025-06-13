@@ -1,165 +1,176 @@
 {
   "slides": [
     {
-      "content": "Welcome to the world of Analytical Reasoning! Let's sharpen your logical skills.",
+      "content": "Welcome to 'Beyond the Basics': Mastering Advanced Git Features.",
       "slideNumber": 1,
-      "title": "Analytical Reasoning: Introduction",
+      "title": "Beyond the Basics: Advanced Git",
       "type": "title_slide",
-      "imagePrompt": "Prompt: A visually appealing and modern background image representing Analytical Reasoning, featuring interconnected nodes, graphs, and a magnifying glass. No text. Image Description: Background: Dark blue. Elements: The image should feature a network of interconnected nodes, symbolizing data points and connections. Include graphs (line, bar) and a magnifying glass to represent analysis and insight. The design should be clean and professional, with a cohesive color scheme (e.g., shades of blue and green). The overall composition should suggest analysis, connections, and insights. Text: None.",
+      "imagePrompt": "Prompt: A visually appealing and modern background image representing advanced Git workflows, featuring interconnected nodes and branches. No text. Image Description: Background: Dark grey. Elements: The image should feature a dynamic and modern visual representation of advanced Git workflows. This includes interconnected nodes, branches, and a clear indication of merging and rebasing processes. The visualizations should be clean, with a professional aesthetic, and incorporate a cohesive color scheme (e.g., using shades of blue, green, and orange for data differentiation). The overall composition should suggest data flow, connections, and insights. Text: None. The focus is entirely on the visual representation of data.",
       "imageRatio": "9:16",
-      "subtitle": "Mastering Logical Analysis",
+      "subtitle": "Efficient Workflows for Developers",
       "transition": "dissolve",
-      "voiceover": "Welcome to the Analytical Reasoning module! This course will help you develop critical thinking and problem-solving skills."
+      "voiceover": "Hello and welcome to 'Beyond the Basics: Advanced Git'. This module will explore advanced Git features to help you streamline your workflows."
     },
     {
-      "content": "Analytical reasoning involves breaking down complex information into manageable parts to understand relationships and draw conclusions.",
+      "content": "Git is a powerful tool, but understanding its advanced features can significantly boost your productivity.",
       "slideNumber": 2,
-      "title": "What is Analytical Reasoning?",
+      "title": "Why Advanced Git?",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An infographic showing the process of analytical reasoning, including information gathering, analysis, and conclusion. No text should be there at all. Image Description: Background: Light grey. Elements: The infographic should visually represent the process of analytical reasoning. It should include elements like information gathering (e.g., data sources, reports), analysis (e.g., charts, diagrams), and conclusion (e.g., decision-making, recommendations). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None.",
+      "imagePrompt": "Prompt: An infographic showing the benefits of using advanced Git features, such as improved collaboration, reduced merge conflicts, and faster development cycles. No text should be there at all. Image Description: Background: Light blue. Elements: The infographic should visually represent the benefits of using advanced Git features. It should include elements like improved collaboration (e.g., team icons), reduced merge conflicts (e.g., conflict icons), and faster development cycles (e.g., speed indicators). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
       "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "Analytical reasoning is about breaking down complex information to understand relationships and draw conclusions."
+      "voiceover": "Advanced Git features can help you improve collaboration, resolve conflicts more efficiently, and speed up your development cycles."
     },
     {
       "points": [
-        "Identifying patterns and relationships within data.",
-        "Evaluating arguments and identifying assumptions.",
-        "Drawing logical inferences and conclusions."
+        "Interactive Rebase",
+        "Stashing",
+        "Reflog"
       ],
       "slideNumber": 3,
-      "title": "Key Skills in Analytical Reasoning",
+      "title": "Key Advanced Features",
       "type": "unordered_list_slide",
-      "voiceover": "Key skills include identifying patterns, evaluating arguments, and drawing logical inferences."
+      "voiceover": "Let's start by exploring some of the key advanced features in Git, including interactive rebase, stashing, and the reflog."
     },
     {
       "points": [
-        "Identifying patterns and relationships within data.",
-        "Evaluating arguments and identifying assumptions.",
-        "Drawing logical inferences and conclusions.",
-        "Problem-solving and decision-making."
+        "Interactive Rebase",
+        "Stashing"
       ],
       "slideNumber": 4,
-      "title": "Key Skills in Analytical Reasoning",
+      "title": "Key Advanced Features",
       "type": "unordered_list_slide",
-      "voiceover": "Key skills include identifying patterns, evaluating arguments, drawing logical inferences and problem-solving."
+      "voiceover": "We will be covering interactive rebase and stashing in this module."
     },
     {
       "points": [
-        "Identifying patterns and relationships within data.",
-        "Evaluating arguments and identifying assumptions.",
-        "Drawing logical inferences and conclusions.",
-        "Problem-solving and decision-making.",
-        "Critical thinking and logical thinking."
+        "Interactive Rebase",
+        "Stashing",
+        "Reflog"
       ],
       "slideNumber": 5,
-      "title": "Key Skills in Analytical Reasoning",
+      "title": "Key Advanced Features",
       "type": "unordered_list_slide",
-      "voiceover": "Key skills include identifying patterns, evaluating arguments, drawing logical inferences, problem-solving and critical thinking."
+      "voiceover": "Finally, we will also discuss the reflog."
     },
     {
-      "content": "Start with the given information. Break it down into smaller components. Identify the relationships between these components.",
+      "content": "Interactive rebase allows you to rewrite your commit history. You can reorder, edit, squash, and drop commits.",
       "slideNumber": 6,
-      "title": "The Analytical Process",
+      "title": "Interactive Rebase: Rewriting History",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A flowchart illustrating the analytical process, including the steps of information gathering, analysis, and conclusion. No text should be there at all. Image Description: Background: Light blue. Elements: The flowchart should visually represent the analytical process. It should include elements like information gathering (e.g., data sources, reports), analysis (e.g., charts, diagrams), and conclusion (e.g., decision-making, recommendations). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None.",
+      "imagePrompt": "Prompt: A visual representation of an interactive rebase operation, showing how commits are reordered, edited, and squashed. No text. Image Description: Background: White. Elements: The image should depict an interactive rebase operation. It should include elements like commit nodes, branch lines, and arrows showing how commits are reordered, edited, and squashed. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
       "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "The analytical process involves breaking down information, identifying relationships, and drawing conclusions."
+      "voiceover": "Interactive rebase gives you the power to rewrite your commit history, allowing you to reorder, edit, squash, and even drop commits."
     },
     {
-      "content": "Consider all possibilities, and eliminate those that don't fit. Formulate a logical conclusion based on the evidence.",
+      "code": "git rebase -i HEAD~3\n# This command opens an editor with a list of your last 3 commits.",
       "slideNumber": 7,
-      "title": "The Analytical Process (Cont.)",
+      "title": "Interactive Rebase: The Command",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "dissolve",
+      "voiceover": "The command 'git rebase -i HEAD~3' opens an editor where you can modify your commit history."
+    },
+    {
+      "content": "Stashing allows you to temporarily save changes you've made to your working directory, so you can switch branches or work on something else.",
+      "slideNumber": 8,
+      "title": "Stashing: Temporary Storage",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An illustration of the stashing process in Git, showing changes being temporarily stored and then reapplied. No text. Image Description: Background: Light grey. Elements: The image should depict the stashing process. It should include elements like a working directory, a stash area, and arrows showing how changes are temporarily stored and then reapplied. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Stashing is a way to temporarily save your changes when you need to switch branches or work on something else without committing your current work."
+    },
+    {
+      "code": "git stash save \"My changes\"\ngit stash list\ngit stash apply",
+      "slideNumber": 9,
+      "title": "Stashing: Commands",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "dissolve",
+      "voiceover": "Here are the basic commands for stashing and unstashing your changes."
+    },
+    {
+      "content": "The reflog is a log of all the changes to the HEAD of your repository. It's a safety net for lost commits.",
+      "slideNumber": 10,
+      "title": "Reflog: The Safety Net",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A visual representation of the Git reflog, showing a timeline of HEAD movements and commit hashes. No text. Image Description: Background: Dark blue. Elements: The image should depict the reflog. It should include elements like a timeline, commit hashes, and arrows showing the movements of the HEAD. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "The reflog is a log of every change to your repository's HEAD, which is a safety net for recovering lost commits."
+    },
+    {
+      "code": "git reflog\ngit reset --hard <commit_hash>",
+      "slideNumber": 11,
+      "title": "Reflog: Commands",
+      "type": "code_slide",
+      "lexer": "bash",
+      "transition": "dissolve",
+      "voiceover": "Use 'git reflog' to view the reflog and 'git reset --hard <commit_hash>' to restore to a specific commit."
+    },
+    {
+      "content": "What command is used to temporarily save changes in Git?",
+      "slideNumber": 12,
+      "title": "Quiz: Stashing",
       "type": "content_slide",
       "transition": "fade_in",
-      "voiceover": "Consider all possibilities, eliminate inconsistencies, and formulate a logical conclusion."
-    },
-    {
-      "content": "A survey found that 60% of people prefer coffee, 30% prefer tea, and 10% prefer juice. If 200 people were surveyed, how many preferred tea?",
-      "slideNumber": 8,
-      "title": "Example: Survey Analysis",
-      "type": "content_slide",
-      "voiceover": "Here's an example: A survey found that 60% preferred coffee, 30% tea, and 10% juice. If 200 people were surveyed, how many preferred tea?"
+      "voiceover": "Let's test your knowledge with a quick quiz. What command is used to temporarily save changes in Git?"
     },
     {
       "options": [
-        "30",
-        "60",
-        "90",
-        "120"
+        "git commit",
+        "git stash",
+        "git push",
+        "git checkout"
       ],
-      "question": "What is the answer to the survey question?",
-      "slideNumber": 9,
-      "title": "Quiz: Survey Analysis",
+      "question": "What command is used to temporarily save changes in Git?",
+      "slideNumber": 13,
+      "title": "Quiz: Stashing - Options",
       "type": "quiz_slide",
       "transition": "fade_in",
-      "voiceover": "Try to solve this problem. Choose the correct option."
+      "voiceover": "Here are your options for the quiz."
     },
     {
-      "content": "The correct answer is 60. 30% of 200 = 0.30 * 200 = 60.",
-      "slideNumber": 10,
-      "title": "Answer and Explanation",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A simple bar chart showing the preferences from the survey (coffee, tea, juice) with the correct number of tea preferences highlighted. No text should be there at all. Image Description: Background: Light grey. Elements: The image should depict a bar chart representing the survey results. The chart should have three bars corresponding to coffee, tea, and juice preferences. The bar for tea should be highlighted or emphasized to indicate the correct answer. Use a clean and clear design with a color palette that is easy on the eyes (e.g., blues and greens). Text: None.",
-      "imageRatio": "4:3",
-      "transition": "fade_in",
-      "voiceover": "The correct answer is 60. Let's see how we got that answer."
-    },
-    {
-      "content": "Analytical reasoning is essential for making informed decisions in business, science, and everyday life.",
-      "slideNumber": 11,
-      "title": "Why is Analytical Reasoning Important?",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: An image representing the application of analytical reasoning in various fields like business, science, and everyday life, with a focus on decision-making. No text should be there at all. Image Description: Background: Light blue. Elements: The image should depict the application of analytical reasoning in various fields like business, science, and everyday life. It should include elements like charts, graphs, and decision-making icons (e.g., lightbulb, checkmark). The design should be modern and professional, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None.",
-      "imageRatio": "4:3",
-      "transition": "fade_in",
-      "voiceover": "Analytical reasoning is crucial for informed decision-making across various fields."
-    },
-    {
-      "content": "Practice consistently to improve your analytical skills. Start with simple problems and gradually increase the complexity.",
-      "slideNumber": 12,
-      "title": "How to Improve Your Skills",
-      "type": "content_slide",
-      "voiceover": "Practice regularly to improve your analytical skills. Start with simple problems and gradually increase complexity."
-    },
-    {
-      "content": "Use logical puzzles, case studies, and data analysis exercises.",
-      "slideNumber": 13,
-      "title": "Practice Methods",
-      "type": "content_slide",
-      "transition": "fade_in",
-      "voiceover": "Use logical puzzles, case studies, and data analysis exercises."
-    },
-    {
-      "content": "Understanding the problem, gathering information, analyzing data and drawing conclusions.",
+      "content": "The correct answer is 'git stash'. This command allows you to save changes to your working directory.",
       "slideNumber": 14,
+      "title": "Quiz: Answer and Explanation",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An illustration showing the 'git stash' command in action, with changes being saved and then reapplied. No text. Image Description: Background: Light blue. Elements: The image should depict the 'git stash' command in action. It should include elements like a working directory, a stash area, and arrows showing how changes are saved and then reapplied. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
+      "imageRatio": "4:3",
+      "transition": "fade_in",
+      "voiceover": "The correct answer is 'git stash'. This command is used to temporarily save your changes so you can switch branches or work on something else."
+    },
+    {
+      "content": "Advanced Git features provide powerful tools for managing your workflow. Use them wisely!",
+      "slideNumber": 15,
       "title": "Key Takeaways",
       "type": "content_slide",
-      "voiceover": "In summary: Understand the problem, gather information, analyze, and draw conclusions."
+      "transition": "fade_in",
+      "voiceover": "In summary, interactive rebase, stashing, and the reflog are all powerful tools for managing your Git workflow more efficiently."
     },
     {
       "chartType": "bar",
       "data": [
         {
-          "label": "Option A",
-          "value": 25
+          "label": "Collaboration",
+          "value": 85
         },
         {
-          "label": "Option B",
-          "value": 40
+          "label": "Conflict Resolution",
+          "value": 70
         },
         {
-          "label": "Option C",
-          "value": 35
+          "label": "Development Speed",
+          "value": 90
         }
       ],
-      "slideNumber": 15,
-      "title": "Data Analysis: Results",
+      "slideNumber": 16,
+      "title": "Impact of Advanced Git",
       "type": "chart_slide",
-      "voiceover": "This bar chart shows the results of a survey, illustrating the distribution of responses across three different options.",
-      "xLabel": "Options",
-      "yLabel": "Percentage"
+      "xLabel": "Area",
+      "yLabel": "Improvement (%)"
     }
   ]
 }
