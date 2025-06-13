@@ -420,6 +420,14 @@ def process_slide(slide_data, template, output_dir):
     audio_clip = AudioFileClip(audio_path)
     clip_duration = audio_clip.duration
 
+    clip_duration += 2
+
+    # Adjust duration based on slide_type
+    if slide_type == "quiz_slide":
+        clip_duration += 10  # Add 10 seconds for quiz slides
+    elif slide_type == "code_slide":
+        clip_duration += 8  # Add 8 seconds for code slides
+
     slide_clip = ImageClip(image_path).set_duration(clip_duration)
     video_clip = slide_clip.set_audio(audio_clip)
 
@@ -574,7 +582,11 @@ def main(script_input_path, video_output_path, assets_dir):
     output_path =  video_output_path
     
     logging.info(f"Writing final video to {video_output_path}...")
-    final_video.write_videofile(output_path, fps=24, logger=None)
+    # Ensure fps is not None and assign a default value if necessary
+    fps = 24
+    if fps is None:
+        fps = 24  # Default FPS value
+    final_video.write_videofile(output_path, fps=fps, logger=None)
     logging.info("Final video written successfully!")
 
     # Remove the temp_assets folder if present

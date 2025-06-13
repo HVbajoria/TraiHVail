@@ -1,176 +1,229 @@
 {
   "slides": [
     {
-      "content": "Welcome to 'Beyond the Basics': Mastering Advanced Git Features.",
+      "content": "Welcome to the \"Beyond the Basics\" module, where we'll explore advanced Git features to streamline your workflows and boost your productivity.",
       "slideNumber": 1,
-      "title": "Beyond the Basics: Advanced Git",
+      "title": "Beyond the Basics",
       "type": "title_slide",
-      "imagePrompt": "Prompt: A visually appealing and modern background image representing advanced Git workflows, featuring interconnected nodes and branches. No text. Image Description: Background: Dark grey. Elements: The image should feature a dynamic and modern visual representation of advanced Git workflows. This includes interconnected nodes, branches, and a clear indication of merging and rebasing processes. The visualizations should be clean, with a professional aesthetic, and incorporate a cohesive color scheme (e.g., using shades of blue, green, and orange for data differentiation). The overall composition should suggest data flow, connections, and insights. Text: None. The focus is entirely on the visual representation of data.",
+      "imagePrompt": "Prompt: A visually engaging image representing advanced Git concepts, featuring interconnected nodes, branches, and a central hub. No text. Image Description: Background: Dark, gradient blue. Elements: Interconnected nodes representing commits, branches, and merges. A central hub symbolizing the repository. Arrows indicating the flow of commits and merges. The design should be modern and abstract, with a focus on connectivity and data flow. Text: None.",
       "imageRatio": "9:16",
-      "subtitle": "Efficient Workflows for Developers",
+      "subtitle": "Advanced Git for Efficient Workflows",
       "transition": "dissolve",
-      "voiceover": "Hello and welcome to 'Beyond the Basics: Advanced Git'. This module will explore advanced Git features to help you streamline your workflows."
+      "voiceover": "Hello and welcome to the \"Beyond the Basics\" module. Here, we will dive into advanced Git features that will empower you to manage your projects more effectively."
     },
     {
-      "content": "Git is a powerful tool, but understanding its advanced features can significantly boost your productivity.",
+      "content": "Branching and merging are fundamental Git operations. Understanding these concepts is crucial for collaborative development.",
       "slideNumber": 2,
-      "title": "Why Advanced Git?",
+      "title": "Branching and Merging",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An infographic showing the benefits of using advanced Git features, such as improved collaboration, reduced merge conflicts, and faster development cycles. No text should be there at all. Image Description: Background: Light blue. Elements: The infographic should visually represent the benefits of using advanced Git features. It should include elements like improved collaboration (e.g., team icons), reduced merge conflicts (e.g., conflict icons), and faster development cycles (e.g., speed indicators). The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
+      "imagePrompt": "Prompt: A diagram illustrating Git branching and merging, showing the main branch, feature branches, and merge points. No text. Image Description: Background: White. Elements: A main branch (e.g., 'main' or 'master'). Feature branches branching off the main branch. Arrows indicating commits and merges. Merge points where feature branches are integrated back into the main branch. The diagram should be clear and easy to follow. Text: None.",
       "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "Advanced Git features can help you improve collaboration, resolve conflicts more efficiently, and speed up your development cycles."
+      "voiceover": "Branching and merging are at the core of Git's power, enabling parallel development and seamless integration of changes."
     },
     {
-      "points": [
-        "Interactive Rebase",
-        "Stashing",
-        "Reflog"
-      ],
+      "content": "Create a new branch to isolate your work. This allows you to develop features without affecting the main codebase.",
       "slideNumber": 3,
-      "title": "Key Advanced Features",
-      "type": "unordered_list_slide",
-      "voiceover": "Let's start by exploring some of the key advanced features in Git, including interactive rebase, stashing, and the reflog."
+      "title": "Creating Branches",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An image depicting a developer creating a new branch in Git, with the command prompt and a visual representation of the branch being created. No text. Image Description: Background: Light gray. Elements: A command prompt window showing the 'git branch' command being executed. A visual representation of a new branch being created, diverging from the main branch. The image should convey the action of creating a new branch clearly. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "When you create a new branch, you are essentially creating an independent line of development."
     },
     {
-      "points": [
-        "Interactive Rebase",
-        "Stashing"
-      ],
+      "content": "Use the `git branch <branch-name>` command to create a new branch.",
       "slideNumber": 4,
-      "title": "Key Advanced Features",
-      "type": "unordered_list_slide",
-      "voiceover": "We will be covering interactive rebase and stashing in this module."
+      "title": "Creating Branches",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A code snippet showcasing the 'git branch' command used to create a new branch. No text. Image Description: Background: Dark, code-friendly background. Elements: A code snippet highlighting the 'git branch' command, with an example branch name. The code should be clearly visible and easy to read. Text: None.",
+      "imageRatio": "9:16",
+      "transition": "fade_in",
+      "voiceover": "The command `git branch <branch-name>` is your gateway to creating a new branch in Git."
     },
     {
-      "points": [
-        "Interactive Rebase",
-        "Stashing",
-        "Reflog"
-      ],
+      "content": "Switch to a different branch to work on a specific feature or bug fix.",
       "slideNumber": 5,
-      "title": "Key Advanced Features",
-      "type": "unordered_list_slide",
-      "voiceover": "Finally, we will also discuss the reflog."
+      "title": "Switching Branches",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An image showing a developer switching between branches in Git, with the command prompt and a visual representation of the branch switching. No text. Image Description: Background: Light gray. Elements: A command prompt window showing the 'git checkout' command being executed. A visual representation of the branch switching, showing the active branch changing. The image should clearly represent the action of switching branches. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "You can switch between branches to move between different lines of development."
     },
     {
-      "content": "Interactive rebase allows you to rewrite your commit history. You can reorder, edit, squash, and drop commits.",
+      "content": "Use the `git checkout <branch-name>` command to switch to an existing branch.",
       "slideNumber": 6,
-      "title": "Interactive Rebase: Rewriting History",
+      "title": "Switching Branches",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of an interactive rebase operation, showing how commits are reordered, edited, and squashed. No text. Image Description: Background: White. Elements: The image should depict an interactive rebase operation. It should include elements like commit nodes, branch lines, and arrows showing how commits are reordered, edited, and squashed. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
-      "imageRatio": "1:1",
+      "imagePrompt": "Prompt: A code snippet showcasing the 'git checkout' command used to switch to an existing branch. No text. Image Description: Background: Dark, code-friendly background. Elements: A code snippet highlighting the 'git checkout' command, with an example branch name. The code should be clearly visible and easy to read. Text: None.",
+      "imageRatio": "9:16",
       "transition": "fade_in",
-      "voiceover": "Interactive rebase gives you the power to rewrite your commit history, allowing you to reorder, edit, squash, and even drop commits."
+      "voiceover": "The command `git checkout <branch-name>` is used to switch between branches."
     },
     {
-      "code": "git rebase -i HEAD~3\n# This command opens an editor with a list of your last 3 commits.",
+      "content": "Combine changes from different branches into one.",
       "slideNumber": 7,
-      "title": "Interactive Rebase: The Command",
-      "type": "code_slide",
-      "lexer": "bash",
-      "transition": "dissolve",
-      "voiceover": "The command 'git rebase -i HEAD~3' opens an editor where you can modify your commit history."
+      "title": "Merging Branches",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A diagram illustrating the merge process in Git, showing two branches converging into one. No text. Image Description: Background: White. Elements: Two branches converging into one. Arrows indicating the merge process. The diagram should be clear and easy to understand. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Merging integrates changes from one branch into another, bringing different lines of development together."
     },
     {
-      "content": "Stashing allows you to temporarily save changes you've made to your working directory, so you can switch branches or work on something else.",
+      "content": "Use the `git merge <branch-name>` command to merge a branch into the current branch.",
       "slideNumber": 8,
-      "title": "Stashing: Temporary Storage",
+      "title": "Merging Branches",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An illustration of the stashing process in Git, showing changes being temporarily stored and then reapplied. No text. Image Description: Background: Light grey. Elements: The image should depict the stashing process. It should include elements like a working directory, a stash area, and arrows showing how changes are temporarily stored and then reapplied. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
-      "imageRatio": "1:1",
+      "imagePrompt": "Prompt: A code snippet showcasing the 'git merge' command used to merge a branch into the current branch. No text. Image Description: Background: Dark, code-friendly background. Elements: A code snippet highlighting the 'git merge' command, with an example branch name. The code should be clearly visible and easy to read. Text: None.",
+      "imageRatio": "9:16",
       "transition": "fade_in",
-      "voiceover": "Stashing is a way to temporarily save your changes when you need to switch branches or work on something else without committing your current work."
+      "voiceover": "To merge a branch, use the `git merge <branch-name>` command."
     },
     {
-      "code": "git stash save \"My changes\"\ngit stash list\ngit stash apply",
+      "content": "Resolve conflicts that arise when Git cannot automatically merge changes. This often happens when two branches have modified the same lines of a file.",
       "slideNumber": 9,
-      "title": "Stashing: Commands",
-      "type": "code_slide",
-      "lexer": "bash",
-      "transition": "dissolve",
-      "voiceover": "Here are the basic commands for stashing and unstashing your changes."
-    },
-    {
-      "content": "The reflog is a log of all the changes to the HEAD of your repository. It's a safety net for lost commits.",
-      "slideNumber": 10,
-      "title": "Reflog: The Safety Net",
+      "title": "Resolving Conflicts",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the Git reflog, showing a timeline of HEAD movements and commit hashes. No text. Image Description: Background: Dark blue. Elements: The image should depict the reflog. It should include elements like a timeline, commit hashes, and arrows showing the movements of the HEAD. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
+      "imagePrompt": "Prompt: An image showing a code editor with conflict markers, highlighting the areas that need to be resolved. No text. Image Description: Background: Light gray. Elements: A code editor window with conflict markers (e.g., <<<<<<<, =======, >>>>>>>). The image should clearly indicate the areas that need manual conflict resolution. Text: None.",
       "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "The reflog is a log of every change to your repository's HEAD, which is a safety net for recovering lost commits."
+      "voiceover": "When Git encounters conflicting changes, you'll need to manually resolve them."
     },
     {
-      "code": "git reflog\ngit reset --hard <commit_hash>",
-      "slideNumber": 11,
-      "title": "Reflog: Commands",
-      "type": "code_slide",
-      "lexer": "bash",
-      "transition": "dissolve",
-      "voiceover": "Use 'git reflog' to view the reflog and 'git reset --hard <commit_hash>' to restore to a specific commit."
-    },
-    {
-      "content": "What command is used to temporarily save changes in Git?",
-      "slideNumber": 12,
-      "title": "Quiz: Stashing",
+      "content": "Edit the conflicted files to choose the changes you want to keep, and then commit the changes.",
+      "slideNumber": 10,
+      "title": "Resolving Conflicts",
       "type": "content_slide",
+      "imagePrompt": "Prompt: A code editor showing a resolved conflict, with the conflict markers removed and the code cleaned up. No text. Image Description: Background: Light gray. Elements: A code editor window showing the resolved conflict. The conflict markers should be removed, and the code should be cleaned up, reflecting the merged changes. Text: None.",
+      "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "Let's test your knowledge with a quick quiz. What command is used to temporarily save changes in Git?"
+      "voiceover": "Carefully review the conflicts, choose the correct changes, and commit the result."
+    },
+    {
+      "content": "Stash allows you to temporarily save changes that you don't want to commit immediately.",
+      "slideNumber": 11,
+      "title": "Stashing Changes",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An image representing the Git stash, showing changes being temporarily stored away. No text. Image Description: Background: Dark, gradient blue. Elements: A visual representation of a stash, perhaps a box or container, holding code changes. Arrows indicating changes being moved into and out of the stash. The design should be clean and modern. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Stashing allows you to temporarily save your changes without committing them."
+    },
+    {
+      "content": "Use `git stash push` to save changes, and `git stash pop` to reapply them later.",
+      "slideNumber": 12,
+      "title": "Stashing Changes",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A code snippet showcasing the 'git stash push' and 'git stash pop' commands. No text. Image Description: Background: Dark, code-friendly background. Elements: A code snippet highlighting the 'git stash push' and 'git stash pop' commands. The code should be clearly visible and easy to read. Text: None.",
+      "imageRatio": "9:16",
+      "transition": "fade_in",
+      "voiceover": "Use `git stash push` to save your changes, and `git stash pop` to bring them back."
+    },
+    {
+      "content": "Rebasing integrates changes from one branch into another by moving or combining a sequence of commits to a new base commit.",
+      "slideNumber": 13,
+      "title": "Rebasing",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A diagram illustrating Git rebasing, showing commits being moved to a new base. No text. Image Description: Background: White. Elements: Two branches, with commits being moved from one branch to another. Arrows indicating the rebase process. The diagram should be clear and easy to understand. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Rebasing rewrites the commit history by moving or combining a sequence of commits to a new base commit."
+    },
+    {
+      "content": "Use `git rebase <base-branch>` to rebase your current branch onto another branch.",
+      "slideNumber": 14,
+      "title": "Rebasing",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A code snippet showcasing the 'git rebase' command. No text. Image Description: Background: Dark, code-friendly background. Elements: A code snippet highlighting the 'git rebase' command. The code should be clearly visible and easy to read. Text: None.",
+      "imageRatio": "9:16",
+      "transition": "fade_in",
+      "voiceover": "Use `git rebase <base-branch>` to rebase your branch."
+    },
+    {
+      "content": "Git hooks allow you to trigger custom scripts before or after certain Git events.",
+      "slideNumber": 15,
+      "title": "Git Hooks",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An image representing Git hooks, showing a series of events triggering custom scripts. No text. Image Description: Background: Light gray. Elements: A diagram representing Git events (e.g., commit, push) triggering custom scripts. Arrows indicating the flow of events. The design should be clear and easy to understand. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Git hooks enable you to automate tasks and customize your Git workflow."
+    },
+    {
+      "content": "Common hooks include `pre-commit`, `pre-push`, and `post-merge`.",
+      "slideNumber": 16,
+      "title": "Git Hooks",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: Icons representing common Git hooks, such as pre-commit, pre-push, and post-merge. No text. Image Description: Background: Light gray. Elements: Icons representing pre-commit, pre-push, and post-merge hooks. The icons should be simple and easily recognizable. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Common Git hooks include pre-commit, pre-push, and post-merge."
+    },
+    {
+      "content": "Use `git log` to view commit history. This command is essential for understanding the evolution of your project.",
+      "slideNumber": 17,
+      "title": "Viewing History",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An image showing the output of 'git log', displaying the commit history. No text. Image Description: Background: Dark, code-friendly background. Elements: A terminal window displaying the output of 'git log', showing commit messages, authors, and timestamps. The output should be clearly visible. Text: None.",
+      "imageRatio": "9:16",
+      "transition": "fade_in",
+      "voiceover": "The `git log` command is your primary tool for understanding your project's history."
+    },
+    {
+      "content": "Use `git log --graph --oneline --all` to view a more detailed and graphical representation of your commit history.",
+      "slideNumber": 18,
+      "title": "Viewing History",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A code snippet showcasing the 'git log' command with various options for viewing the commit history. No text. Image Description: Background: Dark, code-friendly background. Elements: A code snippet highlighting the 'git log --graph --oneline --all' command. The code should be clearly visible and easy to read. Text: None.",
+      "imageRatio": "9:16",
+      "transition": "fade_in",
+      "voiceover": "Use `git log` with options to view a detailed and graphical representation of your commit history."
+    },
+    {
+      "content": "Let's test your knowledge of Git's advanced features.",
+      "slideNumber": 19,
+      "title": "Quiz Time!",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: An image representing a quiz, with a question mark and multiple-choice options. No text. Image Description: Background: Light blue. Elements: A question mark and multiple-choice options. The design should be clean and modern. Text: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Now, let's check your understanding with a quick quiz."
     },
     {
       "options": [
-        "git commit",
-        "git stash",
+        "git checkout <branch-name>",
+        "git merge <branch-name>",
         "git push",
-        "git checkout"
+        "git commit"
       ],
-      "question": "What command is used to temporarily save changes in Git?",
-      "slideNumber": 13,
-      "title": "Quiz: Stashing - Options",
+      "question": "Which command is used to merge changes from one branch into the current branch?",
+      "slideNumber": 20,
+      "title": "Question 1",
       "type": "quiz_slide",
       "transition": "fade_in",
-      "voiceover": "Here are your options for the quiz."
+      "voiceover": "Here's the first question."
     },
     {
-      "content": "The correct answer is 'git stash'. This command allows you to save changes to your working directory.",
-      "slideNumber": 14,
-      "title": "Quiz: Answer and Explanation",
+      "content": "The correct answer is: git merge <branch-name>. This command integrates changes from the specified branch into the current branch.",
+      "slideNumber": 21,
+      "title": "Answer and Explanation",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An illustration showing the 'git stash' command in action, with changes being saved and then reapplied. No text. Image Description: Background: Light blue. Elements: The image should depict the 'git stash' command in action. It should include elements like a working directory, a stash area, and arrows showing how changes are saved and then reapplied. The design should be clean and modern, using a color palette that is easy on the eyes (e.g., blues and greens). The flow should be logical and easy to follow. Text: None. The focus is entirely on the visual representation of the process.",
+      "imagePrompt": "Prompt: An image representing the merge process, with two branches merging into one. No text. Image Description: Background: White. Elements: Two branches converging into one. Arrows indicating the merge process. The diagram should be clear and easy to understand. Text: None.",
       "imageRatio": "4:3",
       "transition": "fade_in",
-      "voiceover": "The correct answer is 'git stash'. This command is used to temporarily save your changes so you can switch branches or work on something else."
+      "voiceover": "The correct answer is `git merge <branch-name>`."
     },
     {
-      "content": "Advanced Git features provide powerful tools for managing your workflow. Use them wisely!",
-      "slideNumber": 15,
-      "title": "Key Takeaways",
+      "content": "Congratulations! You've completed the \"Beyond the Basics\" module. Keep practicing these advanced Git features to improve your workflow.",
+      "slideNumber": 22,
+      "title": "Conclusion",
       "type": "content_slide",
-      "transition": "fade_in",
-      "voiceover": "In summary, interactive rebase, stashing, and the reflog are all powerful tools for managing your Git workflow more efficiently."
-    },
-    {
-      "chartType": "bar",
-      "data": [
-        {
-          "label": "Collaboration",
-          "value": 85
-        },
-        {
-          "label": "Conflict Resolution",
-          "value": 70
-        },
-        {
-          "label": "Development Speed",
-          "value": 90
-        }
-      ],
-      "slideNumber": 16,
-      "title": "Impact of Advanced Git",
-      "type": "chart_slide",
-      "xLabel": "Area",
-      "yLabel": "Improvement (%)"
+      "imagePrompt": "Prompt: A visually engaging image representing the successful completion of the module, with a checkmark and a celebratory design. No text. Image Description: Background: Dark, gradient blue. Elements: A checkmark and a celebratory design. The design should be clean and modern. Text: None.",
+      "imageRatio": "9:16",
+      "transition": "dissolve",
+      "voiceover": "You've reached the end of the \"Beyond the Basics\" module. Keep practicing these advanced Git features to improve your workflow."
     }
   ]
 }
