@@ -211,7 +211,7 @@ def generate_chart_image(slide_data, chart_path, template):
 def generate_slide_image(slide_data, template, output_path):
     """
     Generate slide image using Wand instead of OpenCV.
-    Reads the slide’s data and applies configurations from template.
+    Reads the slide's data and applies configurations from template.
     """
     slide_type = slide_data.get("type", "content_slide")
     config = template.get(slide_type, template.get("content_slide"))
@@ -364,6 +364,7 @@ def generate_slide_image(slide_data, template, output_path):
 
             img.format = 'png'
             img.save(filename=output_path)
+            # print(f"Slide image generated at {output_path}")
 
 def generate_audio(text, filename):
     try:
@@ -404,11 +405,11 @@ def process_slide(slide_data, template, output_dir):
             logging.info(f"Image for slide {slide_number} already exists. Skipping generation.")
         else:
             logging.info(f"Generating image for slide {slide_number} with prompt: '{image_prompt}' and ratio: {image_ratio}")
-            command = ["node", "src/ai/flows/generate-image.js", "--generate-image", f"'{image_prompt}'", image_ratio, str(slide_number)]
-            print(command)
+            command = ["node", "--experimental-modules", "src/ai/flows/generate-image.js", "--generate-image", f"'{image_prompt}'", image_ratio, str(slide_number)]
+            #print(command)
             try:
                 subprocess.run(command, check=True, capture_output=True, text=True)
-                logging.info(f"Successfully generated image for slide {slide_number}.")
+                #print(f"Successfully generated image for slide {slide_number}.")
             except subprocess.CalledProcessError as e:
                 logging.error(f"Error generating image for slide {slide_number}: {e.stderr}")
 
@@ -424,9 +425,9 @@ def process_slide(slide_data, template, output_dir):
 
     # Adjust duration based on slide_type
     if slide_type == "quiz_slide":
-        clip_duration += 10  # Add 10 seconds for quiz slides
+        clip_duration += 6  # Add 10 seconds for quiz slides
     elif slide_type == "code_slide":
-        clip_duration += 8  # Add 8 seconds for code slides
+        clip_duration += 5  # Add 8 seconds for code slides
 
     slide_clip = ImageClip(image_path).set_duration(clip_duration)
     video_clip = slide_clip.set_audio(audio_clip)
@@ -454,7 +455,7 @@ def process_slide(slide_data, template, output_dir):
                 approx_text_height = 100
 
                 # Debugging: Print slide_data to verify the content key
-                print("slide_data:", slide_data)
+                #print("slide_data:", slide_data)
 
                 from PIL import Image
 
@@ -465,7 +466,7 @@ def process_slide(slide_data, template, output_dir):
                         line_spacing = text_conf.get("line_spacing", fontsize + 5)
                         
                         # Debugging: Print the key and its calculated height
-                        print(f"Processing key: {key}, fontsize: {fontsize}, line_spacing: {line_spacing}")
+                        #print(f"Processing key: {key}, fontsize: {fontsize}, line_spacing: {line_spacing}")
                         
                         if isinstance(slide_data[key], list):
                             # Join the list into a single string with newline separators
@@ -485,16 +486,13 @@ def process_slide(slide_data, template, output_dir):
                                     with Image.open(line) as img:
                                         image_height = img.height
                                         approx_text_height += image_height
-                                        print(f"Adding image height for {line}: {image_height}")
+                                        #print(f"Adding image height for {line}: {image_height}")
                                 except FileNotFoundError:
-                                    print(f"Image file not found: {line}")
+                                    #print(f"Image file not found: {line}")
                                     raise
                             else:
                                 # Add height for text
                                 approx_text_height += line_spacing + 20
-
-                # Debugging: Print the final calculated height
-                print("Final approx_text_height:", approx_text_height)
               
                 image_y_pos = approx_text_height + 60 # Position below approximate text content
                 gen_image_clip = ImageClip(generated_image_path).set_duration(clip_duration).resize(width=slide_clip.w * 0.6).set_position(('center', image_y_pos)) # Resize and center horizontally
@@ -559,7 +557,7 @@ def main(script_input_path, video_output_path, assets_dir):
 
         transition = slide.get("transition", "slide_left")
         type_slide = slide.get("type", "content_slide")
-        print(f"Adding slide {i+1} with transition: {transition}")
+        # print(f"Adding slide {i+1} with transition: {transition}")
         transitions.append(transition)
         slide_type.append(type_slide)
         clips.append(clip)
@@ -605,7 +603,7 @@ def main(script_input_path, video_output_path, assets_dir):
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Usage: python generate_video.py <input_json_path> <output_video_path> <assets_dir_path>")
+        # print("Usage: python generate_video.py <input_json_path> <output_video_path> <assets_dir_path>")
         sys.exit(1)
 
     input_json = sys.argv[1]

@@ -514,7 +514,7 @@ export default function Home() {
         setVideoUrl(null); 
         setVideoError(null);
 
-        const estimatedDuration = Math.max(10, generatedSlides.length * 4); 
+        const estimatedDuration = Math.max(10, generatedSlides.length * 12); 
         setVideoGenerationDuration(estimatedDuration);
         isGeneratingVideoRef.current = true;
 

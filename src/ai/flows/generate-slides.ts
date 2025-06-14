@@ -111,7 +111,7 @@ const systemInstruction = `## Objective:
                                         2. Content Slides: 
                                         - Explains core concepts in a structured way, includes descriptions, and may incorporate images or diagrams.
                                         - These slides should be informative and provide a clear understanding of the topic while being concise.
-                                        - ImagePrompt includes a detailed, effective and accurate prompt to generate a relevant and related image that can be used to explain the concept in the content slide in an effective way. It should have very minimal text which should be mentioned seprately in the prompt clearly. It should have prompt, background, elements and text that needs to be included mentioned clearly.
+                                        - ImagePrompt includes a detailed, effective and accurate prompt to generate a relevant and related image that can be used to explain the concept in the content slide in an effective way. It should define clearly each and everything that would be required to explain the content in detail. It should have prompt, background, elements and text that needs to be included mentioned clearly.
                                         - ImageRatio: 9:16 / 1:1 / 3:4
                                         - Transition: Use \`fade_in\` to introduce each concept smoothly.
 
