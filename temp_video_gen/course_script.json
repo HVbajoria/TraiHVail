@@ -1,172 +1,261 @@
 {
   "slides": [
     {
-      "content": "Welcome to \"Beyond the Basics,\" where we'll explore advanced Git features to supercharge your workflow.",
+      "content": "Welcome to Git Commands Demystified! This module will cover essential Git commands with practical examples to help you master version control.",
       "slideNumber": 1,
-      "title": "Beyond the Basics: Advanced Git",
+      "title": "Git Commands Demystified",
       "type": "title_slide",
-      "imagePrompt": "Prompt: Create a visually appealing and modern background image representing advanced Git concepts, featuring interconnected nodes and branching diagrams. No text. Image Description: Background: Dark, slightly blurred background with a gradient of dark blues and purples. Elements: Interconnected nodes representing repositories, branches, and commits. Dynamic branching diagrams with arrows indicating merges, rebases, and other advanced operations. Use a color scheme of light blues, greens, and oranges for visual clarity. Visuals should convey complexity and interconnectedness. Text: None.",
+      "imagePrompt": "Prompt: A dynamic image representing Git and version control, featuring a network of interconnected nodes and branches. \nImage Description:\nBackground: Dark, modern background with a subtle gradient.\nElements: The image should feature interconnected nodes and branches, visually representing the Git repository structure. Include icons or visual cues indicating commits, merges, and branches. The color scheme should be professional and modern, using shades of blue, green, and gray. The overall composition should suggest a flow of data and versioning.\nText: None.",
       "imageRatio": "9:16",
-      "subtitle": "Efficient Workflows with Advanced Git Features",
+      "subtitle": "Mastering Version Control with Practical Examples",
       "transition": "dissolve",
-      "voiceover": "Hello and welcome! In this module, we'll go beyond the basics of Git and explore advanced features that will make your workflow more efficient and powerful."
+      "voiceover": "Hello and welcome! In this module, we'll demystify essential Git commands, providing clear explanations and practical examples to enhance your version control skills."
     },
     {
-      "content": "Git is a powerful tool for version control, but mastering advanced features can significantly boost productivity. This module covers rebasing, interactive staging, reflog, and more.",
+      "content": "Git is a distributed version control system that tracks changes to your files. It allows you to manage different versions of your project, collaborate with others, and revert to previous states.",
       "slideNumber": 2,
-      "title": "Why Go Beyond the Basics?",
+      "title": "What is Git?",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An illustration showing a developer working with Git, highlighting efficiency and collaboration. No text. Image Description: Background: Clean, uncluttered workspace. Elements: A developer at a computer, with Git commands and a visual representation of a Git repository on the screen (branches, commits, etc.). The developer should look focused and efficient. The image should convey collaboration and teamwork. Use a modern, professional design. Text: None.",
+      "imagePrompt": "Prompt: A visual representation of Git's core concept: tracking changes and managing versions. \nImage Description:\nBackground: Light background.\nElements: The image should show files with different versions, branches, and a timeline. It should include icons representing commits, merges, and branching. The design should be clean and informative, with a clear visual flow. Use a simple color palette to make it easy to understand.\nText: None.",
       "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "While you may know the basics, advanced Git features are essential for efficient workflows and effective collaboration."
+      "voiceover": "Git is a powerful tool for tracking changes in your projects. It allows you to manage different versions, collaborate with others, and easily revert to previous states."
     },
     {
-      "content": "Rebasing rewrites the commit history, integrating changes from one branch into another. It creates a cleaner, more linear history compared to merging.",
+      "points": [
+        "git init"
+      ],
       "slideNumber": 3,
-      "title": "Rebasing: A Cleaner History",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A diagram illustrating Git rebasing, showing how commits are moved to create a linear history. No text. Image Description: Background: Light background. Elements: Two branches (e.g., 'main' and 'feature') with commits. Arrows showing commits being moved from the 'feature' branch onto the 'main' branch, creating a linear history. Use different colors for each branch and commit for clarity. The diagram should clearly depict the movement of commits. Text: None.",
-      "imageRatio": "3:4",
-      "transition": "fade_in",
-      "voiceover": "Rebasing is a powerful technique that rewrites your commit history, creating a cleaner, more linear project history."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Let's dive into some essential Git commands. First up is git init, used for initializing a new Git repository in your project directory."
     },
     {
-      "content": "Use `git rebase <base>` to rebase your current branch onto `<base>`. This moves your branch's commits to the new base, updating the history.",
+      "points": [
+        "git init",
+        "git add"
+      ],
       "slideNumber": 4,
-      "title": "Rebase Command",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A command line interface showing a Git rebase command being executed. No text. Image Description: Background: Dark terminal window. Elements: The command `git rebase origin/main` being typed and executed. The output should show commits being replayed or applied. The terminal should look clean and modern. Use a readable font and highlight the command in a different color. Text: None.",
-      "imageRatio": "3:4",
-      "transition": "fade_in",
-      "voiceover": "The basic command for rebasing is `git rebase <base>`, where `<base>` is the branch you want to rebase onto."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Next, we have git add, which stages changes for the next commit."
     },
     {
-      "content": "Interactive staging allows you to selectively stage parts of changes within a file, using `git add -p`. This is useful for committing only relevant changes.",
+      "points": [
+        "git init",
+        "git add",
+        "git commit"
+      ],
       "slideNumber": 5,
-      "title": "Interactive Staging: Selective Commits",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: An illustration of interactive staging with Git, showing a file with changes and the ability to select which parts to stage. No text. Image Description: Background: A code editor interface. Elements: A file with highlighted changes. Boxes or sections that indicate the possibility to stage parts of the changes. Arrows pointing to the changes. The interface should be clean and modern. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "Interactive staging lets you selectively stage parts of changes, giving you precise control over your commits."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Then, git commit, used to save the staged changes with a descriptive message."
     },
     {
-      "content": "Use `git add -p <file>` to interactively stage changes in a file. Git will prompt you to stage hunks of code.",
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status"
+      ],
       "slideNumber": 6,
-      "title": "Interactive Staging Command",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A command line interface showing the `git add -p <file>` command being executed, with prompts for interactive staging. No text. Image Description: Background: Dark terminal window. Elements: The command `git add -p my_file.txt` being typed and executed. The output should show hunks of code and prompts for staging (y/n/q/a/d). The terminal should look clean and modern. Use a readable font and highlight the command in a different color. Text: None.",
-      "imageRatio": "3:4",
-      "transition": "fade_in",
-      "voiceover": "The command `git add -p <file>` is your gateway to interactive staging."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Git status shows you the state of your working directory and staging area."
     },
     {
-      "content": "The reflog is a log of all changes to the repository's HEAD, even those not part of a branch. It's a safety net for lost commits.",
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status",
+        "git log"
+      ],
       "slideNumber": 7,
-      "title": "The Reflog: Your Safety Net",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: An illustration showing the Git reflog, highlighting the ability to recover lost commits. No text. Image Description: Background: A visual representation of a Git repository. Elements: A timeline showing commits and branch movements. A pointer to the HEAD. Arrows indicating how to recover lost commits using the reflog. The reflog should be clearly labeled and stand out. Use a color scheme that is easy on the eyes. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "The reflog is a log of all the changes to your repository's HEAD, acting as a safety net for lost commits."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Git log displays the commit history of your repository."
     },
     {
-      "content": "Use `git reflog` to view the reflog. Use `git reset --hard <commit>` to restore a commit from the reflog.",
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status",
+        "git log",
+        "git branch"
+      ],
       "slideNumber": 8,
-      "title": "Reflog Commands",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A command line interface showing the `git reflog` command being used and the output, followed by a `git reset --hard` command. No text. Image Description: Background: Dark terminal window. Elements: The command `git reflog` is typed and executed, showing the reflog output. Followed by the command `git reset --hard <commit-hash>`. The terminal should look clean and modern. Use a readable font and highlight the commands in a different color. Text: None.",
-      "imageRatio": "3:4",
-      "transition": "fade_in",
-      "voiceover": "To view the reflog, use `git reflog`. To restore a commit, use `git reset --hard <commit-hash>` using the commit hash from the reflog."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Git branch is used for managing branches in your repository."
     },
     {
-      "content": "Git aliases are custom commands that make your workflow more efficient. Create them using `git config --global alias.<alias> '<command>'`.",
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status",
+        "git log",
+        "git branch",
+        "git checkout"
+      ],
       "slideNumber": 9,
-      "title": "Git Aliases: Custom Commands",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of Git aliases, showing how a short alias can replace a longer Git command. No text. Image Description: Background: Clean, uncluttered workspace. Elements: A short alias (e.g., 'co') pointing to a longer Git command (e.g., 'git checkout'). The relationship should be clear and easy to understand. Use a simple, modern design. Text: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "Git aliases let you create custom shortcuts for frequently used commands, streamlining your workflow."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Git checkout is used to switch between branches or restore working tree files."
     },
     {
-      "content": "Example: `git config --global alias.co 'checkout'` creates an alias 'co' for 'checkout'. Then, `git co <branch>` is equivalent to `git checkout <branch>`.",
+      "points": [
+        "git init",
+        "git add",
+        "git commit",
+        "git status",
+        "git log",
+        "git branch",
+        "git checkout",
+        "git merge"
+      ],
       "slideNumber": 10,
-      "title": "Creating Git Aliases",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A command line interface showing the creation and use of a Git alias. No text. Image Description: Background: Dark terminal window. Elements: The command `git config --global alias.co 'checkout'` being executed. Followed by the command `git co my-branch` being executed. The terminal should look clean and modern. Use a readable font and highlight the commands in a different color. Text: None.",
-      "imageRatio": "3:4",
-      "transition": "fade_in",
-      "voiceover": "Create aliases using `git config --global alias.<alias> '<command>'`. For example, `git config --global alias.co 'checkout'`."
+      "title": "Essential Git Commands",
+      "type": "unordered_list_slide",
+      "voiceover": "Git merge is used to integrate changes from other branches into the current branch."
     },
     {
-      "content": "Use `git stash` to temporarily save changes that you don't want to commit immediately. This is useful for switching branches or working on something else.",
+      "content": "Initializes a new Git repository in the current directory.",
       "slideNumber": 11,
-      "title": "Git Stash: Temporary Storage",
+      "title": "git init",
       "type": "content_slide",
-      "imagePrompt": "Prompt: An illustration of Git stash, showing how changes are temporarily stored and can be retrieved later. No text. Image Description: Background: A visual representation of a Git repository. Elements: A stash area where uncommitted changes are stored. Arrows showing how changes are moved to and from the stash. The stash area should be clearly labeled. Use a color scheme that is easy on the eyes. Text: None.",
+      "imagePrompt": "Prompt: A visual representation of the git init command. \nImage Description:\nBackground: Clean, light background.\nElements: Show a folder icon with the command 'git init' being typed in the terminal. The folder icon should then transform to represent a .git directory. Use a simple, clear design with a focus on visual clarity.\nText: None.",
       "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "Git stash allows you to temporarily save changes that you don't want to commit immediately."
+      "voiceover": "The git init command sets up a new Git repository. It creates a hidden .git directory in your project, which stores all the necessary metadata."
     },
     {
-      "content": "Commands: `git stash push` to save changes, `git stash pop` to apply the last stashed changes, `git stash list` to view stashes.",
+      "content": "Stages changes for the next commit. You can stage specific files or all changes.",
       "slideNumber": 12,
-      "title": "Stash Commands",
+      "title": "git add",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A command line interface showing the basic Git stash commands. No text. Image Description: Background: Dark terminal window. Elements: The commands `git stash push`, `git stash pop`, and `git stash list` being executed. The terminal should look clean and modern. Use a readable font and highlight the commands in a different color. Text: None.",
-      "imageRatio": "3:4",
+      "imagePrompt": "Prompt: A visual representation of the git add command. \nImage Description:\nBackground: Light background.\nElements: The image should show files being moved from the working directory to the staging area. Show the command 'git add .' being typed in the terminal. Use a clear and intuitive design, with visual cues indicating the movement of files.\nText: None.",
+      "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "Use `git stash push` to save changes, `git stash pop` to apply the last stashed changes, and `git stash list` to view your stashes."
+      "voiceover": "The git add command adds changes to the staging area, preparing them to be committed."
     },
     {
-      "content": "Choose the best option.",
+      "content": "Saves the staged changes with a descriptive message. The message should explain the changes made.",
       "slideNumber": 13,
-      "title": "Quiz: Rebasing vs. Merging",
+      "title": "git commit",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A visual representation of the git commit command. \nImage Description:\nBackground: Light background.\nElements: Show the staging area being committed to the local repository. Show the command 'git commit -m \"Your commit message\"' being typed in the terminal. Use a clear and intuitive design, with visual cues indicating the commit process.\nText: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "The git commit command saves the staged changes to the local repository. Always include a clear and concise commit message."
+    },
+    {
+      "content": "Shows the state of your working directory and staging area. It displays which files have been modified, staged, or are untracked.",
+      "slideNumber": 14,
+      "title": "git status",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A visual representation of the git status command. \nImage Description:\nBackground: Light background.\nElements: Show a file status report indicating modified, staged, and untracked files. Show the command 'git status' being typed in the terminal. Use a clear and easy-to-read format.\nText: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "The git status command provides a snapshot of your repository's current state, showing which files are modified, staged, or untracked."
+    },
+    {
+      "content": "Displays the commit history of your repository, including commit messages, authors, and timestamps.",
+      "slideNumber": 15,
+      "title": "git log",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A visual representation of the git log command. \nImage Description:\nBackground: Light background.\nElements: Show a list of commit entries, each with a commit hash, author, date, and message. Show the command 'git log' being typed in the terminal. Use a clear and easy-to-read format.\nText: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "The git log command displays the commit history, allowing you to review changes and understand the evolution of your project."
+    },
+    {
+      "content": "Manages branches in your repository. You can create, list, and delete branches.",
+      "slideNumber": 16,
+      "title": "git branch",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A visual representation of the git branch command. \nImage Description:\nBackground: Light background.\nElements: Show a branching diagram with different branches (e.g., main, develop, feature). Show the command 'git branch' being typed in the terminal. Use different colors for branches to differentiate them visually.\nText: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Git branch allows you to create, list, and delete branches. Branches enable parallel development and experimentation."
+    },
+    {
+      "content": "Switches between branches or restores working tree files. It updates your working directory to match the specified branch or commit.",
+      "slideNumber": 17,
+      "title": "git checkout",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A visual representation of the git checkout command. \nImage Description:\nBackground: Light background.\nElements: Show the working directory switching between different branches. Show the command 'git checkout <branch-name>' being typed in the terminal. Use visual cues to indicate the change in active branch.\nText: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Git checkout switches between branches, allowing you to work on different features or versions of your project."
+    },
+    {
+      "content": "Integrates changes from other branches into the current branch. This combines the changes from different branches.",
+      "slideNumber": 18,
+      "title": "git merge",
+      "type": "content_slide",
+      "imagePrompt": "Prompt: A visual representation of the git merge command. \nImage Description:\nBackground: Light background.\nElements: Show two branches merging into one. Show the command 'git merge <branch-name>' being typed in the terminal. Use visual cues to indicate the merging of changes.\nText: None.",
+      "imageRatio": "1:1",
+      "transition": "fade_in",
+      "voiceover": "Git merge integrates changes from one branch into another, combining the work done in different branches."
+    },
+    {
+      "code": "git init\ngit add .\ngit commit -m \"Initial commit\"\ngit branch feature-branch\ngit checkout feature-branch",
+      "slideNumber": 19,
+      "title": "Workflow Example: Basic Git Commands",
+      "type": "code_slide",
+      "lexer": "bash",
+      "voiceover": "Let's walk through a basic Git workflow, starting with initializing a repository and creating a feature branch."
+    },
+    {
+      "code": "git add .\ngit commit -m \"Added new feature\"\ngit checkout main\ngit merge feature-branch",
+      "slideNumber": 20,
+      "title": "Workflow Example: Basic Git Commands - Continued",
+      "type": "code_slide",
+      "lexer": "bash",
+      "voiceover": "Now, we add a new feature, commit it, switch back to the main branch, and merge the changes."
+    },
+    {
+      "content": "Which command is used to save changes to the local repository?",
+      "slideNumber": 21,
+      "title": "Quiz: Git Commands",
       "type": "content_slide",
       "transition": "fade_in",
-      "voiceover": "Let's test your knowledge. Choose the best option."
+      "voiceover": "Let's test your understanding with a quick quiz. Which command is used to save changes to the local repository?"
     },
     {
       "options": [
-        "Creates a new merge commit.",
-        "Rewrites the commit history.",
-        "Is always preferred.",
-        "Is only used for feature branches."
+        "git add",
+        "git commit",
+        "git push",
+        "git status"
       ],
-      "question": "Which of the following best describes Git rebasing?",
-      "slideNumber": 14,
-      "title": "Question: Rebasing vs. Merging",
+      "question": "Which command is used to save changes to the local repository?",
+      "slideNumber": 22,
+      "title": "Quiz: Git Commands - Question",
       "type": "quiz_slide",
-      "voiceover": "Here's the question."
+      "transition": "fade_in",
+      "voiceover": "Here are your options. Take a moment to consider them."
     },
     {
-      "content": "The correct answer is: Rewrites the commit history. Rebasing moves or combines a sequence of commits to a new base commit.",
-      "slideNumber": 15,
+      "content": "The correct answer is git commit. This command saves the staged changes with a descriptive message.",
+      "slideNumber": 23,
       "title": "Answer and Explanation",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A diagram showing the difference between merging and rebasing. No text. Image Description: Background: Light background. Elements: Two branches (e.g., 'main' and 'feature') with commits. On one side, show a merge operation creating a merge commit. On the other side, show a rebase operation creating a linear history. Use different colors for each branch and commit for clarity. The diagram should clearly depict the difference. Text: None.",
-      "imageRatio": "3:4",
+      "imagePrompt": "Prompt: A visual representation of the git commit command. \nImage Description:\nBackground: Light background.\nElements: Show the git commit command being executed, with the changes being saved to the local repository. Use a checkmark to indicate the successful commit. Keep the design clear and concise.\nText: None.",
+      "imageRatio": "1:1",
       "transition": "fade_in",
-      "voiceover": "The correct answer is 'Rewrites the commit history.' Rebasing is a powerful feature that can create a cleaner commit history, making it easier to understand the evolution of your project."
+      "voiceover": "The correct answer is git commit. Git commit saves the staged changes to the local repository, along with a descriptive message."
     },
     {
-      "content": "Rebasing, interactive staging, reflog, and Git aliases are powerful tools for efficient workflows.",
-      "slideNumber": 16,
+      "content": "Git commands are essential for version control, collaboration, and project management. Practice these commands regularly to improve your workflow.",
+      "slideNumber": 24,
       "title": "Key Takeaways",
       "type": "content_slide",
       "transition": "fade_in",
-      "voiceover": "In summary, rebasing, interactive staging, the reflog, and Git aliases are powerful tools for efficient workflows."
-    },
-    {
-      "content": "Using advanced Git commands can streamline your workflow and improve collaboration.",
-      "slideNumber": 17,
-      "title": "Key Takeaways",
-      "type": "content_slide",
-      "transition": "fade_in",
-      "voiceover": "By mastering these advanced Git features, you'll significantly improve your productivity and streamline your workflow."
+      "voiceover": "In summary, mastering Git commands is crucial for effective version control and collaboration. Practice these commands regularly."
     }
   ]
 }

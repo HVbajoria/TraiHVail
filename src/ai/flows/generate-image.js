@@ -30,7 +30,7 @@ async function main(imagePrompt, imageRatio, slideNumber) {
   const params = `?api-version=${apiVersion}`;
   const generationsUrl = `${endpoint}${generationsPath}${params}`;
 
-  if (imageRatio !== "1x1")
+  if (imageRatio == "1x1")
     imageRatio = "1024x1024";
   else
     imageRatio = "1536x1024";
