@@ -49,8 +49,11 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY . .
 
+RUN rm -rf node_modules
+RUN rm package-lock.json
+RUN npm cache clean --force
+RUN npm install
 # Build the application
-RUN npm run build
-
+RUN NODE_OPTIONS=--max-old-space-size=8192 npm run build
 # Start the application
 CMD ["npm", "start"]
