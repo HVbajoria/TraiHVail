@@ -36,15 +36,27 @@ export async function generateVideoAction(input: { slides: SlidesOutput['slides'
     const assetsDir = path.join(tempDir, 'temp_assets'); // Directory for Python script assets
 
     try {
-        // 1. Ensure temp directory exists
+
+        // 1. Check if the video exists already
+        try {
+            await fs.access(videoOutputPath);
+            console.log(`Video already exists at ${videoOutputPath}. Returning existing video.`);
+            const videoBuffer = await fs.readFile(videoOutputPath);
+            const videoBase64 = videoBuffer.toString('base64');
+            const videoDataUri = `data:video/mp4;base64,${videoBase64}`;
+            return { success: true, videoUrl: videoDataUri };
+        } catch (err) {
+            console.log("Video does not exist, proceeding to generate.");
+        }
+        // 2. Ensure temp directory exists
         await fs.mkdir(tempDir, { recursive: true });
         await fs.mkdir(assetsDir, { recursive: true }); // Ensure assets dir also exists
 
-        // 2. Write the slides data to a JSON file for the Python script
+        // 3. Write the slides data to a JSON file for the Python script
         await fs.writeFile(scriptInputPath, JSON.stringify({ slides: slidesData }, null, 2));
         console.log(`Slides data written to ${scriptInputPath}`);
 
-        // 3. Execute the Python script
+        // 4. Execute the Python script
         // Make sure Python environment has necessary libraries (moviepy, wand, azure-cognitiveservices-speech, etc.)
         // Ensure SPEECH_KEY and SPEECH_REGION are set as environment variables for the Python script
         console.log(`Executing Python script: ${pythonScriptPath}`);
@@ -80,7 +92,7 @@ export async function generateVideoAction(input: { slides: SlidesOutput['slides'
              }
         }
 
-        // 4. Check if the video file was created
+        // 5. Check if the video file was created
         try {
             await fs.access(videoOutputPath);
             console.log(`Video file generated successfully at ${videoOutputPath}`);
@@ -88,14 +100,14 @@ export async function generateVideoAction(input: { slides: SlidesOutput['slides'
             throw new Error(`Video file not found after script execution. Path: ${videoOutputPath}. Stdout: ${stdout}`);
         }
 
-        // 5. Convert video to Base64 Data URI to send to client
+        // 6. Convert video to Base64 Data URI to send to client
         // Note: This can be very memory intensive for large videos!
         // Consider serving the file statically or using cloud storage for production.
         const videoBuffer = await fs.readFile(videoOutputPath);
         const videoBase64 = videoBuffer.toString('base64');
         const videoDataUri = `data:video/mp4;base64,${videoBase64}`;
 
-        // 6. Clean up temporary files (optional, depends on deployment)
+        // 7. Clean up temporary files (optional, depends on deployment)
         // Consider doing this asynchronously or via a separate cleanup task
         // await fs.rm(tempDir, { recursive: true, force: true });
 
