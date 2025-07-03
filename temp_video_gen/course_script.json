@@ -1,261 +1,151 @@
 {
   "slides": [
     {
-      "content": "Welcome to Git Commands Demystified! This module will cover essential Git commands with practical examples to help you master version control.",
+      "content": "Welcome to Visual Analogy: Decoding Relationships",
       "slideNumber": 1,
-      "title": "Git Commands Demystified",
+      "title": "Introduction to Visual Analogy",
       "type": "title_slide",
-      "imagePrompt": "Prompt: A dynamic image representing Git and version control, featuring a network of interconnected nodes and branches. \nImage Description:\nBackground: Dark, modern background with a subtle gradient.\nElements: The image should feature interconnected nodes and branches, visually representing the Git repository structure. Include icons or visual cues indicating commits, merges, and branches. The color scheme should be professional and modern, using shades of blue, green, and gray. The overall composition should suggest a flow of data and versioning.\nText: None.",
+      "imagePrompt": "A visually appealing image with two pairs of shapes. The first pair (a circle to a square) is complete, and the second pair (a triangle to ?) is incomplete, visually highlighting the problem to be solved.",
       "imageRatio": "9:16",
-      "subtitle": "Mastering Version Control with Practical Examples",
-      "transition": "dissolve",
-      "voiceover": "Hello and welcome! In this module, we'll demystify essential Git commands, providing clear explanations and practical examples to enhance your version control skills."
+      "voiceover": "Welcome to Visual Analogy! We'll explore how to solve problems by understanding relationships between visual elements."
     },
     {
-      "content": "Git is a distributed version control system that tracks changes to your files. It allows you to manage different versions of your project, collaborate with others, and revert to previous states.",
+      "content": "Visual analogies test your ability to recognize patterns and relationships between objects or figures. They follow the format: A is to B as C is to D.",
       "slideNumber": 2,
-      "title": "What is Git?",
+      "title": "What is Visual Analogy?",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of Git's core concept: tracking changes and managing versions. \nImage Description:\nBackground: Light background.\nElements: The image should show files with different versions, branches, and a timeline. It should include icons representing commits, merges, and branching. The design should be clean and informative, with a clear visual flow. Use a simple color palette to make it easy to understand.\nText: None.",
+      "imagePrompt": "A clear diagram showing 'A is to B as C is to D', with simple shapes (e.g., squares, circles) replacing A, B, C, and D to show how to find the missing element.",
       "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "Git is a powerful tool for tracking changes in your projects. It allows you to manage different versions, collaborate with others, and easily revert to previous states."
+      "voiceover": "Visual analogies are about pattern recognition. You're looking for the link between the first pair and applying that to the second."
     },
     {
-      "points": [
-        "git init"
-      ],
+      "content": "Consider this: A car is to road as a plane is to...? The relationship: car travels on a road. The answer: sky.",
       "slideNumber": 3,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Let's dive into some essential Git commands. First up is git init, used for initializing a new Git repository in your project directory."
+      "title": "Real-World Example",
+      "type": "content_slide",
+      "imagePrompt": "An illustration of the car and plane analogy, with the first pair (car, road) and the second pair (plane, cloud/sky), clearly showing the relationship.",
+      "imageRatio": "9:16",
+      "voiceover": "Let's look at an example. The relationship is travel location."
     },
     {
-      "points": [
-        "git init",
-        "git add"
-      ],
+      "content": "This skill is critical for pattern recognition, problem-solving, and logical reasoning, useful in various fields such as coding, business, and engineering.",
       "slideNumber": 4,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Next, we have git add, which stages changes for the next commit."
+      "title": "Importance of Visual Analogy",
+      "type": "content_slide",
+      "imagePrompt": "An image with icons representing different fields: a computer (coding), a bar graph (business), and gears (engineering), all interconnected.",
+      "imageRatio": "1:1",
+      "voiceover": "Visual analogy skills are foundational for logical thinking, essential in numerous disciplines."
     },
     {
-      "points": [
-        "git init",
-        "git add",
-        "git commit"
-      ],
+      "content": "1. Identify the relationship between the first pair.\n2. Apply that relationship to the second pair to find the missing element.\n3. Consider aspects like shape, size, color, position, and transformation.",
       "slideNumber": 5,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Then, git commit, used to save the staged changes with a descriptive message."
+      "title": "How to Solve Visual Analogies",
+      "type": "content_slide",
+      "imagePrompt": "A step-by-step visual guide. Step 1: Two shapes showing a relationship (e.g., size change). Step 2: Apply the same change to a new shape. Step 3: Resulting shape.",
+      "imageRatio": "9:16",
+      "voiceover": "Here’s how you approach these problems: Identify the relationship, then apply it."
     },
     {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status"
-      ],
+      "content": "Observe changes in shapes (rotation, size, position).\nFocus on the number of shapes, lines, or other features.\nConsider the symmetry and any transformations.",
       "slideNumber": 6,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Git status shows you the state of your working directory and staging area."
+      "title": "Key Elements to Consider",
+      "type": "content_slide",
+      "imagePrompt": "Illustrations highlighting various elements: a rotating shape, a shape getting larger, and a shape being mirrored.",
+      "imageRatio": "9:16",
+      "voiceover": "Think about all the different changes that could be applied."
     },
     {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status",
-        "git log"
-      ],
+      "content": "Identify the rule: The first shape becomes the second shape by adding a circle. Apply the rule: The square becomes a square with a circle inside.",
       "slideNumber": 7,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Git log displays the commit history of your repository."
+      "title": "Example 1: Shape Transformation",
+      "type": "content_slide",
+      "imagePrompt": "An example of shape transformation where a square becomes a square with a circle inside (A to B) to illustrate the rule.",
+      "imageRatio": "1:1",
+      "voiceover": "Here's an example. We are identifying a rule and applying the rule."
     },
     {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status",
-        "git log",
-        "git branch"
-      ],
+      "content": "The answer: The circle becomes a circle with a small circle inside.",
       "slideNumber": 8,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Git branch is used for managing branches in your repository."
+      "title": "Example 1: Solution",
+      "type": "content_slide",
+      "imagePrompt": "The completed analogy: A circle is to a circle with a small circle inside.",
+      "imageRatio": "9:16",
+      "voiceover": "Applying this rule to solve the analogy."
     },
     {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status",
-        "git log",
-        "git branch",
-        "git checkout"
-      ],
+      "content": "A is to B, what is the relationship?",
       "slideNumber": 9,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Git checkout is used to switch between branches or restore working tree files."
-    },
-    {
-      "points": [
-        "git init",
-        "git add",
-        "git commit",
-        "git status",
-        "git log",
-        "git branch",
-        "git checkout",
-        "git merge"
-      ],
-      "slideNumber": 10,
-      "title": "Essential Git Commands",
-      "type": "unordered_list_slide",
-      "voiceover": "Git merge is used to integrate changes from other branches into the current branch."
-    },
-    {
-      "content": "Initializes a new Git repository in the current directory.",
-      "slideNumber": 11,
-      "title": "git init",
+      "title": "Quiz: Shape and Position",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git init command. \nImage Description:\nBackground: Clean, light background.\nElements: Show a folder icon with the command 'git init' being typed in the terminal. The folder icon should then transform to represent a .git directory. Use a simple, clear design with a focus on visual clarity.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "The git init command sets up a new Git repository. It creates a hidden .git directory in your project, which stores all the necessary metadata."
-    },
-    {
-      "content": "Stages changes for the next commit. You can stage specific files or all changes.",
-      "slideNumber": 12,
-      "title": "git add",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git add command. \nImage Description:\nBackground: Light background.\nElements: The image should show files being moved from the working directory to the staging area. Show the command 'git add .' being typed in the terminal. Use a clear and intuitive design, with visual cues indicating the movement of files.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "The git add command adds changes to the staging area, preparing them to be committed."
-    },
-    {
-      "content": "Saves the staged changes with a descriptive message. The message should explain the changes made.",
-      "slideNumber": 13,
-      "title": "git commit",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git commit command. \nImage Description:\nBackground: Light background.\nElements: Show the staging area being committed to the local repository. Show the command 'git commit -m \"Your commit message\"' being typed in the terminal. Use a clear and intuitive design, with visual cues indicating the commit process.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "The git commit command saves the staged changes to the local repository. Always include a clear and concise commit message."
-    },
-    {
-      "content": "Shows the state of your working directory and staging area. It displays which files have been modified, staged, or are untracked.",
-      "slideNumber": 14,
-      "title": "git status",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git status command. \nImage Description:\nBackground: Light background.\nElements: Show a file status report indicating modified, staged, and untracked files. Show the command 'git status' being typed in the terminal. Use a clear and easy-to-read format.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "The git status command provides a snapshot of your repository's current state, showing which files are modified, staged, or untracked."
-    },
-    {
-      "content": "Displays the commit history of your repository, including commit messages, authors, and timestamps.",
-      "slideNumber": 15,
-      "title": "git log",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git log command. \nImage Description:\nBackground: Light background.\nElements: Show a list of commit entries, each with a commit hash, author, date, and message. Show the command 'git log' being typed in the terminal. Use a clear and easy-to-read format.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "The git log command displays the commit history, allowing you to review changes and understand the evolution of your project."
-    },
-    {
-      "content": "Manages branches in your repository. You can create, list, and delete branches.",
-      "slideNumber": 16,
-      "title": "git branch",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git branch command. \nImage Description:\nBackground: Light background.\nElements: Show a branching diagram with different branches (e.g., main, develop, feature). Show the command 'git branch' being typed in the terminal. Use different colors for branches to differentiate them visually.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "Git branch allows you to create, list, and delete branches. Branches enable parallel development and experimentation."
-    },
-    {
-      "content": "Switches between branches or restores working tree files. It updates your working directory to match the specified branch or commit.",
-      "slideNumber": 17,
-      "title": "git checkout",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git checkout command. \nImage Description:\nBackground: Light background.\nElements: Show the working directory switching between different branches. Show the command 'git checkout <branch-name>' being typed in the terminal. Use visual cues to indicate the change in active branch.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "Git checkout switches between branches, allowing you to work on different features or versions of your project."
-    },
-    {
-      "content": "Integrates changes from other branches into the current branch. This combines the changes from different branches.",
-      "slideNumber": 18,
-      "title": "git merge",
-      "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git merge command. \nImage Description:\nBackground: Light background.\nElements: Show two branches merging into one. Show the command 'git merge <branch-name>' being typed in the terminal. Use visual cues to indicate the merging of changes.\nText: None.",
-      "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "Git merge integrates changes from one branch into another, combining the work done in different branches."
-    },
-    {
-      "code": "git init\ngit add .\ngit commit -m \"Initial commit\"\ngit branch feature-branch\ngit checkout feature-branch",
-      "slideNumber": 19,
-      "title": "Workflow Example: Basic Git Commands",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Let's walk through a basic Git workflow, starting with initializing a repository and creating a feature branch."
-    },
-    {
-      "code": "git add .\ngit commit -m \"Added new feature\"\ngit checkout main\ngit merge feature-branch",
-      "slideNumber": 20,
-      "title": "Workflow Example: Basic Git Commands - Continued",
-      "type": "code_slide",
-      "lexer": "bash",
-      "voiceover": "Now, we add a new feature, commit it, switch back to the main branch, and merge the changes."
-    },
-    {
-      "content": "Which command is used to save changes to the local repository?",
-      "slideNumber": 21,
-      "title": "Quiz: Git Commands",
-      "type": "content_slide",
-      "transition": "fade_in",
-      "voiceover": "Let's test your understanding with a quick quiz. Which command is used to save changes to the local repository?"
+      "imagePrompt": "A is a small square. B is a small square within a larger square. The question is, what is the second pair?",
+      "imageRatio": "9:16",
+      "voiceover": "Now let's test your understanding with a quick quiz."
     },
     {
       "options": [
-        "git add",
-        "git commit",
-        "git push",
-        "git status"
+        "A small triangle inside a big triangle.",
+        "A small square outside a big square.",
+        "Two small squares next to each other.",
+        "A large circle inside a small square."
       ],
-      "question": "Which command is used to save changes to the local repository?",
-      "slideNumber": 22,
-      "title": "Quiz: Git Commands - Question",
+      "question": "If A is to B, what completes the analogy?",
+      "slideNumber": 10,
+      "title": "Quiz: Shape and Position",
       "type": "quiz_slide",
-      "transition": "fade_in",
-      "voiceover": "Here are your options. Take a moment to consider them."
+      "imagePrompt": "The quiz layout showing the first pair: small square to large square. Then the question: what is to ?, with answer options below as pictures.",
+      "imageRatio": "3:4",
+      "voiceover": "Pick the answer that fits the relationship."
     },
     {
-      "content": "The correct answer is git commit. This command saves the staged changes with a descriptive message.",
-      "slideNumber": 23,
-      "title": "Answer and Explanation",
+      "content": "Answer: Option A is correct. The relationship involves containment (small shape inside a larger shape) and similar figures.",
+      "slideNumber": 11,
+      "title": "Answer & Explanation",
       "type": "content_slide",
-      "imagePrompt": "Prompt: A visual representation of the git commit command. \nImage Description:\nBackground: Light background.\nElements: Show the git commit command being executed, with the changes being saved to the local repository. Use a checkmark to indicate the successful commit. Keep the design clear and concise.\nText: None.",
+      "imagePrompt": "The correct answer, the small triangle inside a large triangle, is shown with the explanation.",
+      "imageRatio": "9:16",
+      "voiceover": "Option A is the correct answer. The relationship is containment."
+    },
+    {
+      "content": "This involves changing the shape to another. In the first one, the square is changed to a circle. Thus, square changes to circle.",
+      "slideNumber": 12,
+      "title": "Quiz: Shape Transformation",
+      "type": "content_slide",
+      "imagePrompt": "An image showing a square changing into a circle to guide the learner on what to expect in the question.",
       "imageRatio": "1:1",
-      "transition": "fade_in",
-      "voiceover": "The correct answer is git commit. Git commit saves the staged changes to the local repository, along with a descriptive message."
+      "voiceover": "Next quiz: Shape transformation"
     },
     {
-      "content": "Git commands are essential for version control, collaboration, and project management. Practice these commands regularly to improve your workflow.",
-      "slideNumber": 24,
-      "title": "Key Takeaways",
+      "options": [
+        "A small triangle",
+        "A large triangle",
+        "A square",
+        "A circle"
+      ],
+      "question": "If A is to B, what completes the analogy?",
+      "slideNumber": 13,
+      "title": "Quiz: Shape Transformation",
+      "type": "quiz_slide",
+      "imagePrompt": "First pair is a square to circle, the question is: triangle is to ?",
+      "imageRatio": "3:4",
+      "voiceover": "Choose the correct shape to complete the analogy."
+    },
+    {
+      "content": "The answer is D: The transformation that was done in the first pair must be done in the second one. Square becomes circle, so the triangle becomes circle.",
+      "slideNumber": 14,
+      "title": "Answer & Explanation",
       "type": "content_slide",
-      "transition": "fade_in",
-      "voiceover": "In summary, mastering Git commands is crucial for effective version control and collaboration. Practice these commands regularly."
+      "imagePrompt": "Showing the correct answer.",
+      "imageRatio": "9:16",
+      "voiceover": "The correct answer is D, circle."
+    },
+    {
+      "content": "Visual analogies are crucial in areas like pattern recognition and logical reasoning. Keep practicing!",
+      "slideNumber": 15,
+      "title": "Conclusion",
+      "type": "content_slide",
+      "imagePrompt": "An image showing diverse shapes coming together to highlight pattern recognition and logical reasoning.",
+      "imageRatio": "1:1",
+      "voiceover": "You've now mastered the basics of Visual Analogy."
     }
   ]
 }

@@ -38,16 +38,16 @@ export async function generateVideoAction(input: { slides: SlidesOutput['slides'
     try {
 
         // 1. Check if the video exists already
-        try {
-            await fs.access(videoOutputPath);
-            console.log(`Video already exists at ${videoOutputPath}. Returning existing video.`);
-            const videoBuffer = await fs.readFile(videoOutputPath);
-            const videoBase64 = videoBuffer.toString('base64');
-            const videoDataUri = `data:video/mp4;base64,${videoBase64}`;
-            return { success: true, videoUrl: videoDataUri };
-        } catch (err) {
-            console.log("Video does not exist, proceeding to generate.");
-        }
+        // try {
+        //     await fs.access(videoOutputPath);
+        //     console.log(`Video already exists at ${videoOutputPath}. Returning existing video.`);
+        //     const videoBuffer = await fs.readFile(videoOutputPath);
+        //     const videoBase64 = videoBuffer.toString('base64');
+        //     const videoDataUri = `data:video/mp4;base64,${videoBase64}`;
+        //     return { success: true, videoUrl: videoDataUri };
+        // } catch (err) {
+        //     console.log("Video does not exist, proceeding to generate.");
+        // }
         // 2. Ensure temp directory exists
         await fs.mkdir(tempDir, { recursive: true });
         await fs.mkdir(assetsDir, { recursive: true }); // Ensure assets dir also exists

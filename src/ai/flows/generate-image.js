@@ -3,7 +3,7 @@ import axios from "axios";
 import path from "node:path";
 
 async function saveAllBase64Images(responseData, slideNumber) {
-  const filename = `temp_video_gen/temp_assets/gemini-native-image_slide${slideNumber}.png`;
+  const filename = `temp_video_gen/temp_assets/gemini-native-image_slide${slideNumber}.jpeg`;
   const arr = responseData["data"];
   for (let i = 0; i < arr.length; ++i) {
     const b64 = arr[i]["b64_json"];
@@ -39,8 +39,8 @@ async function main(imagePrompt, imageRatio, slideNumber) {
     "prompt": imagePrompt,
     "n": 1,
     "size": imageRatio,
-    "quality": "medium",
-    "output_format": "png"
+    "quality": "high",
+    "output_format": "jpeg"
   };
   const generationResponse = await axios.post(generationsUrl, generationBody, { headers : {
     'Api-Key': subscriptionKey,
@@ -52,26 +52,61 @@ async function main(imagePrompt, imageRatio, slideNumber) {
 
 // Check if this script is being run directly
 if (process.argv[2] === '--generate-image') {
-  const imagePrompt = `Generate an image based on the given prompt while adhering to the specified visual and textual guidelines.
+  const imagePrompt = `Generate a visually compelling, accurate, and educational image based on the input string provided in `+ process.argv[3] +`. This image will be used in professional course slides, so precision, clarity, and aesthetics are critical. Follow all the instructions below carefully and strictly.
 
-  - The image should be visually appealing and prioritize clarity in its theme. Ensure a dark blue or white background to enhance the color contrast and visibility.
-  - Maintain a coherent and visible color theme throughout the image.
-  - All included text must be correctly spelled and grammatically accurate, even for short labels or descriptions. Also make sure to add any text that should be included in the image.
-  
-  # Steps
-  1. Analyze the given prompt string and determine the primary themes, objects, or concepts specified.
-  2. Interpret and select visual elements to align with the prompt's theme. Ensure the design maintains elegance and clarity.
-  3. Use either a dark blue or white background to enhance the design's visual impact.
-  4. Ensure visual harmony by implementing a consistent and visible color theme.
-  
-  # Output Format
-  - A visually generated image.
-  - Dark blue or white backgrounds only.
-  - All the text that is relevant to the prompt should be included in the image.
-    
-  # The given prompt is: ` + process.argv[3] + `
-  
-  Note: The design should primarily interpret the prompt's theme into visuals, providing all the neccessary content. Avoid extensive text or content unrelated to the prompt.`;
+---
+
+### Visual & Design Guidelines
+
+1. Prompt Interpretation
+
+   * Analyze the content of `+ process.argv[3] +` in full.
+   * Identify and visually represent its main themes, concepts, and objects.
+   * Ensure the image translates the essence of the topic clearly and accurately.
+
+2. Background Requirements
+
+   * Use only a dark blue or white background—whichever enhances contrast and readability of content in the image.
+   * Avoid gradients or other background effects.
+
+3. Visual Clarity & Elegance
+
+   * Maintain a clean, organized layout with clear spacing and visual hierarchy.
+   * Use icons, illustrations, or diagrams to reinforce the theme of `+ process.argv[3] +`.
+
+4. Color Palette
+
+   * Apply a consistent, harmonious color scheme that complements the theme.
+   * Avoid clutter or visual noise. Prioritize simplicity and clarity.
+
+5. Textual Content
+
+   * Include all relevant text, labels, headers, or short definitions derived from `+ process.argv[3] +`.
+   * Ensure text is:
+
+     * Correctly spelled
+     * Grammatically accurate
+     * Legible, using appropriate contrast and font size
+   * Avoid unnecessary or excessive text.
+
+---
+
+### Execution Steps (internal to model)
+
+1. Parse the full input string from `+ process.argv[3] +`.
+2. Visually translate it into an educational illustration or diagram, maintaining thematic integrity.
+3. Choose either a dark blue or white background for optimal presentation.
+4. Apply a clean, consistent design suited for academic slide decks.
+5. Include key terms and text labels that are essential to understanding the image topic.
+
+---
+
+### Output Format
+
+* A single, high-resolution image designed for immediate use in slides or course content.
+* Use of white or dark blue background only.
+* All relevant labeled text from `+ process.argv[3] +` must be included.
+* Visually aligned to clarity, instructional value, and modern design standards.`;
 
   const imageRatio = process.argv[4];
   const slideNumber = process.argv[5];

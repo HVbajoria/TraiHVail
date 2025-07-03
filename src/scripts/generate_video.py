@@ -393,7 +393,7 @@ def process_slide(slide_data, template, output_dir):
     image_path = os.path.join(output_dir, f"slide_{slide_number}.png")
     audio_path = os.path.join(output_dir, f"audio_{slide_number}.mp3")
 
-    generated_image_path = os.path.join(output_dir, f"gemini-native-image_slide{slide_number}.png")
+    generated_image_path = os.path.join(output_dir, f"gemini-native-image_slide{slide_number}.jpeg")
 
     # Check if imagePrompt and imageRatio are present for image generation
     image_prompt = slide_data.get("imagePrompt")
@@ -480,7 +480,7 @@ def process_slide(slide_data, template, output_dir):
 
                         # Calculate the approximate text height
                         for line in text_content.split("\n"):
-                            if line.endswith(".png"):  # Check if the line contains an image reference
+                            if line.endswith(".jpeg"):  # Check if the line contains an image reference
                                 try:
                                     # Open the image and get its height
                                     with Image.open(line) as img:
