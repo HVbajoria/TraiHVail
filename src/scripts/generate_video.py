@@ -581,9 +581,9 @@ def main(script_input_path, video_output_path, assets_dir):
     
     logging.info(f"Writing final video to {video_output_path}...")
     # Ensure fps is not None and assign a default value if necessary
-    fps = 24
+    fps = 10
     if fps is None:
-        fps = 24  # Default FPS value
+        fps = 10  # Default FPS value
     final_video.write_videofile(output_path, fps=fps, logger=None)
     logging.info("Final video written successfully!")
 
